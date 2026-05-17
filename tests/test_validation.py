@@ -6,7 +6,6 @@ the pipeline must recover σ̂ with small bias under noise.
 
 from __future__ import annotations
 
-import numpy as np
 import pytest
 
 from pulse_ep_decay import recover_sigma, run_sigma_recovery
