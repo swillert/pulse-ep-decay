@@ -5,14 +5,14 @@ from __future__ import annotations
 
 def test_public_api_imports() -> None:
     from pulse_ep_decay import (
-        __version__,
-        DecayFitResult,
         DEFAULT_AMPLITUDE,
         DEFAULT_BASELINE,
+        DecayFitResult,
         FocalityResult,
         GeodesicMethod,
         MeshHeatSolver,
         RecoveryResult,
+        __version__,
         build_adjacency_matrix,
         compute_focality,
         dijkstra_distances,
