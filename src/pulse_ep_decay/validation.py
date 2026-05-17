@@ -12,8 +12,9 @@ acceptance test for the decay package.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Callable, Iterable, Literal
+from collections.abc import Callable, Iterable
+from dataclasses import dataclass
+from typing import Literal
 
 import numpy as np
 
