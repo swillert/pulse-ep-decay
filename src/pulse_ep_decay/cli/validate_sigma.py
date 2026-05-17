@@ -140,7 +140,16 @@ def main(argv: list[str] | None = None) -> int:
         biases.setdefault((r.sigma_true_mm, r.noise_level), []).append(r.bias_mm)
     with agg_path.open("w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["sigma_true_mm", "noise_level", "n_valid", "mean_bias_mm", "median_bias_mm", "std_bias_mm"])
+        writer.writerow(
+            [
+                "sigma_true_mm",
+                "noise_level",
+                "n_valid",
+                "mean_bias_mm",
+                "median_bias_mm",
+                "std_bias_mm",
+            ]
+        )
         for (sigma0, noise), arr in sorted(biases.items()):
             a = np.array(arr)
             writer.writerow(
