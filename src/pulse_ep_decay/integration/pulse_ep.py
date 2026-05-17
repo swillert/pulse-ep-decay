@@ -73,7 +73,7 @@ def iter_pacemaps(
     *,
     require_atrium: bool = True,
     require_part: bool = True,
-    session: "Session | None" = None,
+    session: Session | None = None,
 ) -> Iterator[tuple[EPMapModel, EPMapAttributes, MeshArrays]]:
     """Iterate over all pace-mapping EPMaps in the connected pulse-ep DB.
 
@@ -92,7 +92,7 @@ def iter_pacemaps(
     """
     from sqlalchemy import Boolean
 
-    def _scan(s: "Session") -> Iterator[tuple[EPMapModel, EPMapAttributes, MeshArrays]]:
+    def _scan(s: Session) -> Iterator[tuple[EPMapModel, EPMapAttributes, MeshArrays]]:
         q = (
             s.query(EPMapModel, EPMapAttributes)
             .join(EPMapAttributes, EPMapAttributes.map_id == EPMapModel.id)
@@ -119,7 +119,7 @@ def iter_pacemaps(
 
 
 def compute_cs_distance(
-    session: "Session",
+    session: Session,
     map_id: int,
     point_xyz: np.ndarray,
 ) -> dict | None:
