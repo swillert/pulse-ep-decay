@@ -26,9 +26,7 @@ def test_max_at_origin() -> None:
 def test_missing_fraction_respected() -> None:
     rng = np.random.default_rng(0)
     d = np.linspace(0.0, 60.0, 1000)
-    scores = generate_synthetic_field(
-        d, sigma_true_mm=10.0, missing_fraction=0.10, rng=rng
-    )
+    scores = generate_synthetic_field(d, sigma_true_mm=10.0, missing_fraction=0.10, rng=rng)
     missing = int(np.isnan(scores).sum())
     # 10 % of 1000 reachable vertices should be NaN — allow small jitter.
     assert 80 <= missing <= 120
@@ -38,8 +36,12 @@ def test_score_range_clipped() -> None:
     rng = np.random.default_rng(0)
     d = np.linspace(0.0, 60.0, 500)
     scores = generate_synthetic_field(
-        d, sigma_true_mm=8.0, noise_level=0.3, rng=rng,
-        amplitude=DEFAULT_AMPLITUDE, baseline=DEFAULT_BASELINE,
+        d,
+        sigma_true_mm=8.0,
+        noise_level=0.3,
+        rng=rng,
+        amplitude=DEFAULT_AMPLITUDE,
+        baseline=DEFAULT_BASELINE,
     )
     finite = scores[np.isfinite(scores)]
     assert finite.min() >= 50.0
