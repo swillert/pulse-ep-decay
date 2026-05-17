@@ -41,9 +41,9 @@ __all__ = [
 class MeshArrays(NamedTuple):
     """Plain array bundle extracted from an :class:`EPMapModel`."""
 
-    vertices: np.ndarray   # (N, 3) mm
+    vertices: np.ndarray  # (N, 3) mm
     triangles: np.ndarray  # (M, 3) int
-    scores: np.ndarray     # (N,) %  — abs(act_bip[:, 0]) by pulse-ep convention
+    scores: np.ndarray  # (N,) %  — abs(act_bip[:, 0]) by pulse-ep convention
 
 
 def from_epmap(epmap: EPMapModel) -> MeshArrays:
