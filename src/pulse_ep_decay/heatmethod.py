@@ -53,8 +53,7 @@ def heat_distances(
         import potpourri3d as pp3d
     except ImportError as exc:
         raise ImportError(
-            "potpourri3d is required for the Heat Method. "
-            "Install with: pip install potpourri3d"
+            "potpourri3d is required for the Heat Method. Install with: pip install potpourri3d"
         ) from exc
 
     verts = np.asarray(vertices, dtype=np.float64)
@@ -82,8 +81,7 @@ class MeshHeatSolver:
             import potpourri3d as pp3d
         except ImportError as exc:
             raise ImportError(
-                "potpourri3d is required for the Heat Method. "
-                "Install with: pip install potpourri3d"
+                "potpourri3d is required for the Heat Method. Install with: pip install potpourri3d"
             ) from exc
         self._solver = pp3d.MeshHeatMethodDistanceSolver(
             np.asarray(vertices, dtype=np.float64),
