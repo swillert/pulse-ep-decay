@@ -1,27 +1,83 @@
-"""pulse-ep-decay — geodesic spatial-resolution analysis for cardiac mesh data.
+"""pulse-ep-decay — geodesic spatial-resolution analysis for cardiac meshes.
 
-Public API:
+Companion to the CMPB method paper. The scientific kernel takes plain
+NumPy arrays and has no dependency on the pulse-ep platform; the
+:mod:`pulse_ep_decay.integration.pulse_ep` adapter is an optional bridge
+to the CARTO database (install with ``pip install pulse-ep-decay[pulse-ep]``).
+
+Public API::
 
     from pulse_ep_decay import (
-        geodesic_distances_dijkstra,   # baseline edge-graph distances
-        geodesic_distances_heat,       # exact distances via Heat Method
-        fit_gaussian_decay,            # σ-fit on a radial score profile
-        DecayFitResult,                # dataclass with σ̂, R², residuals
-        generate_synthetic_field,      # for validation
-        recover_sigma,                 # end-to-end σ-recovery on a mesh
+        # geodesic distances on a triangle mesh
+        build_adjacency_matrix,
+        dijkstra_distances,
+        heat_distances,
+        MeshHeatSolver,
+
+        # Gaussian decay model
+        DecayFitResult,
+        fit_gaussian_decay,
+        gaussian_decay,
+
+        # synthetic field generation
+        generate_synthetic_field,
+
+        # focality / multifocality check
+        FocalityResult,
+        compute_focality,
+
+        # end-to-end σ-extraction and validation
+        recover_sigma,
+        run_sigma_recovery,
+        RecoveryResult,
     )
-
-The optional adapter to the pulse-ep platform lives at
-``pulse_ep_decay.integration.pulse_ep`` and is only importable when
-``pulse-ep`` is installed (``pip install pulse-ep-decay[pulse-ep]``).
-
-See the README and ``pulse_ep_decay/validation/`` for the σ-recovery
-experiments that back the accompanying method paper.
 """
 
 from __future__ import annotations
 
 __version__ = "0.1.0"
-__all__: list[str] = [
-    # Filled in once the modules are implemented.
+
+from pulse_ep_decay.geodesic import build_adjacency_matrix, dijkstra_distances
+from pulse_ep_decay.heatmethod import MeshHeatSolver, heat_distances
+from pulse_ep_decay.decay_fit import (
+    DecayFitResult,
+    fit_gaussian_decay,
+    gaussian_decay,
+)
+from pulse_ep_decay.synthetic import (
+    DEFAULT_AMPLITUDE,
+    DEFAULT_BASELINE,
+    generate_synthetic_field,
+)
+from pulse_ep_decay.focality import FocalityResult, compute_focality
+from pulse_ep_decay.validation import (
+    GeodesicMethod,
+    RecoveryResult,
+    recover_sigma,
+    run_sigma_recovery,
+)
+
+__all__ = [
+    "__version__",
+    # geodesic
+    "build_adjacency_matrix",
+    "dijkstra_distances",
+    "heat_distances",
+    "MeshHeatSolver",
+    # decay fit
+    "DecayFitResult",
+    "fit_gaussian_decay",
+    "gaussian_decay",
+    # synthetic
+    "generate_synthetic_field",
+    "DEFAULT_AMPLITUDE",
+    "DEFAULT_BASELINE",
+    # focality
+    "FocalityResult",
+    "compute_focality",
+    # validation
+    "GeodesicMethod",
+    "RecoveryResult",
+    "recover_sigma",
+    "run_sigma_recovery",
 ]
