@@ -37,19 +37,19 @@ from __future__ import annotations
 
 __version__ = "0.1.0"
 
-from pulse_ep_decay.geodesic import build_adjacency_matrix, dijkstra_distances
-from pulse_ep_decay.heatmethod import MeshHeatSolver, heat_distances
 from pulse_ep_decay.decay_fit import (
     DecayFitResult,
     fit_gaussian_decay,
     gaussian_decay,
 )
+from pulse_ep_decay.focality import FocalityResult, compute_focality
+from pulse_ep_decay.geodesic import build_adjacency_matrix, dijkstra_distances
+from pulse_ep_decay.heatmethod import MeshHeatSolver, heat_distances
 from pulse_ep_decay.synthetic import (
     DEFAULT_AMPLITUDE,
     DEFAULT_BASELINE,
     generate_synthetic_field,
 )
-from pulse_ep_decay.focality import FocalityResult, compute_focality
 from pulse_ep_decay.validation import (
     GeodesicMethod,
     RecoveryResult,
