@@ -42,7 +42,12 @@ ruff:
   stage: test
   <<: *python_setup
   script:
-    - pip install -e ".[dev]"
+    # The GitLab runner host CPU does not advertise the x86-64-v2 baseline that
+    # NumPy 2.x and SciPy 1.16+ binary wheels are built against. Pin those
+    # packages here so CI gets compatible wheels; local installs on modern
+    # CPUs still pick the latest via pyproject's wider range.
+    - 'printf "numpy<2\nscipy<1.16\n" > /tmp/ci-constraints.txt'
+    - PIP_CONSTRAINT=/tmp/ci-constraints.txt pip install -e ".[dev]"
     - pytest -v --maxfail=5
   coverage: '/^TOTAL.*?(\d+\%)$/'
 
