@@ -55,10 +55,10 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     parser.add_argument("--method", choices=["heat", "dijkstra"], default="heat")
-    parser.add_argument("--sigma", type=float, nargs="+",
-                        default=[3.0, 5.0, 8.0, 10.0, 15.0, 20.0, 25.0, 30.0])
-    parser.add_argument("--noise", type=float, nargs="+",
-                        default=[0.0, 0.05, 0.10, 0.15])
+    parser.add_argument(
+        "--sigma", type=float, nargs="+", default=[3.0, 5.0, 8.0, 10.0, 15.0, 20.0, 25.0, 30.0]
+    )
+    parser.add_argument("--noise", type=float, nargs="+", default=[0.0, 0.05, 0.10, 0.15])
     parser.add_argument("--trials", type=int, default=20)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--out", type=Path, default=Path("./validation_full"))
@@ -109,7 +109,14 @@ def main(argv: list[str] | None = None) -> int:
     with bias_path.open("w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
-            ["sigma_true_mm", "noise_level", "n_valid", "mean_bias_mm", "median_bias_mm", "std_bias_mm"]
+            [
+                "sigma_true_mm",
+                "noise_level",
+                "n_valid",
+                "mean_bias_mm",
+                "median_bias_mm",
+                "std_bias_mm",
+            ]
         )
         for (sigma0, noise), arr in sorted(bias_buckets.items()):
             a = np.array(arr)
