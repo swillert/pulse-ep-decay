@@ -17,8 +17,8 @@ __all__ = [
 ]
 
 # Defaults match the clinical pace-mapping score distribution.
-DEFAULT_BASELINE: float = 65.0    # %
-DEFAULT_AMPLITUDE: float = 35.0   # percentage points above baseline
+DEFAULT_BASELINE: float = 65.0  # %
+DEFAULT_AMPLITUDE: float = 35.0  # percentage points above baseline
 
 
 def generate_synthetic_field(
@@ -75,7 +75,7 @@ def generate_synthetic_field(
     reachable = np.isfinite(d)
     d_r = d[reachable]
 
-    s = amplitude * np.exp(-(d_r ** 2) / (2.0 * sigma_true_mm ** 2)) + baseline
+    s = amplitude * np.exp(-(d_r**2) / (2.0 * sigma_true_mm**2)) + baseline
 
     if noise_level > 0:
         noise_std = noise_level * amplitude
