@@ -1,0 +1,63 @@
+cff-version: 1.2.0
+message: "If you use pulse-ep-decay in your research, please cite it as below."
+title: "pulse-ep-decay: Geodesic spatial-resolution analysis for intracardiac pace-mapping"
+abstract: >-
+  Python package for quantifying the spatial resolution of scalar fields
+  (e.g., pace-mapping matching scores) on triangulated atrial surface meshes.
+  Geodesic distances are computed with the Heat Method (Crane et al. 2017),
+  and a Gaussian-decay model is fit to the radial score profile; the resulting
+  width parameter sigma serves as a physical-unit (millimetre) resolution
+  measure. Includes a synthetic validation framework that recovers known
+  sigma from generated score fields and reports bias statistics. The
+  scientific kernel works on any triangulated mesh and scalar field; an
+  optional adapter integrates with the pulse-ep CARTO platform.
+authors:
+  - family-names: Willert
+    given-names: Sven
+    email: sw@willert.net
+    affiliation: "University Hospital Schleswig-Holstein, Kiel, Germany"
+version: 0.1.0
+date-released: "2026-05-17"
+license: MIT
+repository-code: "https://gitlab.willert.net/sw/pulse-ep-decay"
+keywords:
+  - electrophysiology
+  - pace-mapping
+  - geodesic-distance
+  - heat-method
+  - mesh-analysis
+  - spatial-resolution
+  - cardiology
+  - gaussian-decay
+references:
+  - type: software
+    title: "pulse-ep: An open-source platform for programmatic access to CARTO electroanatomical mapping data"
+    repository-code: "https://gitlab.willert.net/sw/pulse-ep"
+    authors:
+      - family-names: Willert
+        given-names: Sven
+  - type: article
+    title: "The Heat Method for Distance Computation"
+    authors:
+      - family-names: Crane
+        given-names: Keenan
+      - family-names: Weischedel
+        given-names: Clarisse
+      - family-names: Wardetzky
+        given-names: Max
+    journal: "Communications of the ACM"
+    year: 2017
+    volume: "60"
+    issue: "11"
+    doi: "10.1145/3131280"
+preferred-citation:
+  type: article
+  title: >-
+    A geodesic decay framework for quantifying the spatial resolution of
+    intracardiac pace-mapping scores on atrial surface meshes
+  authors:
+    - family-names: Willert
+      given-names: Sven
+  journal: "Computer Methods and Programs in Biomedicine"
+  year: 2026
+  status: "submitted"
