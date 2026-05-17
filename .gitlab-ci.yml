@@ -1,0 +1,59 @@
+# GitLab CI for pulse-ep-decay
+#
+# Stages: lint -> test (Python matrix 3.10 / 3.11 / 3.12)
+#
+# Each job creates an isolated venv, installs pulse-ep-decay in editable mode
+# with the [dev] extra, and runs ruff + pytest. The pip wheel cache is
+# persisted across runs as a job-level cache keyed on the lockfile-equivalent
+# pyproject.toml.
+
+stages:
+  - lint
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+  PYTHONDONTWRITEBYTECODE: "1"
+
+.python_setup: &python_setup
+  before_script:
+    - python -V
+    - python -m venv .venv
+    - . .venv/bin/activate
+    - pip install --upgrade pip wheel
+  cache:
+    key:
+      files:
+        - pyproject.toml
+    paths:
+      - .pip-cache/
+      - .venv/
+
+ruff:
+  stage: lint
+  image: python:3.12-slim
+  <<: *python_setup
+  script:
+    - pip install "ruff>=0.6,<1"
+    - ruff check .
+    - ruff format --check .
+
+.test_template: &test_template
+  stage: test
+  <<: *python_setup
+  script:
+    - pip install -e ".[dev]"
+    - pytest -v --maxfail=5
+  coverage: '/^TOTAL.*?(\d+\%)$/'
+
+test:py3.10:
+  image: python:3.10
+  <<: *test_template
+
+test:py3.11:
+  image: python:3.11
+  <<: *test_template
+
+test:py3.12:
+  image: python:3.12
+  <<: *test_template
