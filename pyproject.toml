@@ -39,10 +39,10 @@ classifiers = [
 # Array-first core: no dependency on pulse-ep. Users can analyse any
 # triangulated mesh + scalar field with the scientific kernel alone.
 dependencies = [
-    "numpy>=2.2,<3",
-    "scipy>=1.15,<2",
+    "numpy>=1.26,<3",
+    "scipy>=1.11,<2",
     "potpourri3d>=1.0,<2",  # Heat Method via geometry-central
-    "matplotlib>=3.10,<4",
+    "matplotlib>=3.8,<4",
 ]
 
 [project.optional-dependencies]
