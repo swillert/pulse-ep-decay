@@ -15,7 +15,9 @@ def test_single_focal_blob_is_concentrated(synthetic_sphere) -> None:
     """One Gaussian peak on a sphere is one focal cluster."""
     vertices, triangles = synthetic_sphere
     d = dijkstra_distances(
-        vertices, triangles, origin_idx=0,
+        vertices,
+        triangles,
+        origin_idx=0,
         adjacency=build_adjacency_matrix(vertices, triangles),
     )
     scores = generate_synthetic_field(d, sigma_true_mm=5.0, noise_level=0.0)
