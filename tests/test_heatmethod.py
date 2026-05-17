@@ -18,9 +18,7 @@ def test_heat_distances_on_sphere(synthetic_sphere) -> None:
     vertices, triangles = synthetic_sphere
     R = 25.0  # fixture radius
     origin_idx = 0
-    antipode = int(
-        np.argmin(np.linalg.norm(vertices - (-vertices[origin_idx]), axis=1))
-    )
+    antipode = int(np.argmin(np.linalg.norm(vertices - (-vertices[origin_idx]), axis=1)))
     d = heat_distances(vertices, triangles, origin_idx=origin_idx)
     expected = np.pi * R
     assert d[origin_idx] == pytest.approx(0.0, abs=1e-6)
