@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import sys
 from pathlib import Path
 
 import numpy as np
@@ -29,7 +28,7 @@ def _iter_meshes(args):
         from pulse_ep.core.database import get_db_session
         from pulse_ep.core.models import EPMapModel
     except ImportError as exc:
-        raise SystemExit(f"ERROR: {exc}")
+        raise SystemExit(f"ERROR: {exc}") from exc
     with get_db_session() as s:
         rows = s.query(EPMapModel).all()
         for r in rows:
