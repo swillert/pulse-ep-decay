@@ -25,11 +25,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--mesh", type=Path, required=True, help="NPZ with vertices/triangles")
     parser.add_argument(
-        "--origin", type=int, default=None,
+        "--origin",
+        type=int,
+        default=None,
         help="Origin vertex index (default: vertex closest to centroid)",
     )
     parser.add_argument(
-        "--sigma-true", type=float, default=8.0,
+        "--sigma-true",
+        type=float,
+        default=8.0,
         help="σ₀ for the synthetic Gaussian field used to drive the σ-fit comparison",
     )
     parser.add_argument("--seed", type=int, default=42)
@@ -72,8 +76,7 @@ def main(argv: list[str] | None = None) -> int:
         else "Heat fit failed"
     )
     print(
-        f"σ̂ fitted on Dijkstra distances: "
-        f"{fit_dijk.sigma_mm:.2f} mm  (R²={fit_dijk.r_squared:.3f})"
+        f"σ̂ fitted on Dijkstra distances: {fit_dijk.sigma_mm:.2f} mm  (R²={fit_dijk.r_squared:.3f})"
         if fit_dijk
         else "Dijkstra fit failed"
     )
