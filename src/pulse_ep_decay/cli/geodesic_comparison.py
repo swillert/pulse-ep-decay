@@ -14,8 +14,8 @@ from pathlib import Path
 import numpy as np
 
 from pulse_ep_decay import fit_gaussian_decay, generate_synthetic_field
-from pulse_ep_decay.heatmethod import heat_distances
 from pulse_ep_decay.geodesic import build_adjacency_matrix, dijkstra_distances
+from pulse_ep_decay.heatmethod import heat_distances
 
 
 def main(argv: list[str] | None = None) -> int:
