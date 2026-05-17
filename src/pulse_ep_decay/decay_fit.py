@@ -30,7 +30,7 @@ __all__ = [
 
 def gaussian_decay(d: np.ndarray, A: float, sigma: float, B: float) -> np.ndarray:
     """Gaussian-decay model ``A * exp(-d^2 / (2 sigma^2)) + B``."""
-    return A * np.exp(-(d ** 2) / (2.0 * sigma ** 2)) + B
+    return A * np.exp(-(d**2) / (2.0 * sigma**2)) + B
 
 
 @dataclass(frozen=True)
@@ -65,9 +65,7 @@ class DecayFitResult:
 
     def predict(self, distances: np.ndarray) -> np.ndarray:
         """Model prediction at arbitrary distances."""
-        return gaussian_decay(
-            np.asarray(distances), self.amplitude, self.sigma_mm, self.baseline
-        )
+        return gaussian_decay(np.asarray(distances), self.amplitude, self.sigma_mm, self.baseline)
 
 
 def fit_gaussian_decay(
@@ -159,7 +157,7 @@ def fit_gaussian_decay(
 
     A_hat, sigma_hat, B_hat = popt
     residuals = s_fit - gaussian_decay(d_fit, *popt)
-    ss_res = float(np.sum(residuals ** 2))
+    ss_res = float(np.sum(residuals**2))
     ss_tot = float(np.sum((s_fit - np.mean(s_fit)) ** 2))
     r_squared = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
 
