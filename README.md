@@ -61,8 +61,10 @@ and scores from a pulse-ep database (`from_epmap`, `iter_pacemaps`).
 
 ## Reproduction
 
-`reproduction/` contains the scripts and archived result files behind every
-data-derived table and figure of the paper and its supplement. See
+`reproduction/` contains the scripts behind every data-derived table and
+figure of the paper and its supplement, and the archived result files needed
+to regenerate all data-derived tables, Figs. 4 and 7, and Supplementary
+Figs. S1–S6. See
 [reproduction/README.md](reproduction/README.md). The clinical meshes and
 score maps are not public (data protection); figures of clinical maps cannot
 be regenerated from this repository.
