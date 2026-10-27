@@ -1,0 +1,60 @@
+map_id,map_name,atrium,part,ref_catheters,n_vertices,n_points,n_points_with_geodesic,origin_idx,origin_score,focality_pct,n_clusters,is_multifocal,origin_x,origin_y,origin_z,max_geodesic_dist,geodesic_method,cs_distance_mm,n_points_with_cs
+1,1-3-LA ICPM Anterior,LA,anterior wall,2,13082,73,73,3665,95.7,74.2,4,False,41.12,22.78,93.14,90.7,heat,,0
+2,1-4-LA ICPM Posterior,LA,posterior wall,2,13082,69,69,11145,90.4,97.3,8,False,22.50,21.89,58.82,95.9,heat,,0
+3,2-RA ICPM Posterior,RA,posterior wall,2,1549,54,54,1210,95.0,94.9,5,False,15.16,-9.33,86.23,91.7,heat,,0
+4,2-1-RA ICPM Lateral,RA,lateral wall,2,1657,48,48,74,92.1,49.4,13,True,47.20,-2.93,87.19,88.9,heat,,0
+5,1-1-LA IC Pattern Posterior ANNOTI,LA,posterior wall,2,12551,27,27,7063,95.0,97.6,5,False,-17.07,-53.74,87.66,100.9,heat,,0
+6,1-1-1-LA IC Pattern Anterior ANNOTIE,LA,anterior wall,2,12551,11,11,4157,86.0,99.3,6,False,-29.22,-25.30,128.20,102.7,heat,,0
+7,2-1-RA IC Pattern Posterior ANNOTI,RA,posterior wall,2,14322,12,12,4899,68.0,99.9,3,False,-68.31,-53.57,116.86,102.1,heat,,0
+8,2-1-1-RA IC Pattern Lateral ANNOTIER,RA,lateral wall,2,14322,45,45,8410,91.5,98.5,8,False,-91.49,-49.48,146.83,114.9,heat,,0
+9,1-1-LA IC Pattern Posterior,LA,posterior wall,2,13929,7,7,9054,84.0,87.1,5,False,-35.04,-97.93,93.75,124.2,heat,,0
+10,1-1-LA IC Pattern Posterior,LA,posterior wall,2,10604,58,58,4729,92.7,92.8,9,False,33.23,-64.88,86.36,108.5,heat,,0
+11,1-1-1-LA IC Pattern Anterior,LA,anterior wall,2,10604,42,42,4873,98.0,99.6,3,False,38.23,-37.84,124.48,101.7,heat,,0
+12,2-2-RA IC Pattern Posterior,RA,posterior wall,2,10439,94,94,397,95.0,73.0,11,False,-3.77,-85.68,117.77,108.7,heat,,0
+13,2-2-1-RA IC Pattern Lateral,RA,lateral wall,2,10439,45,45,7381,98.0,54.8,20,True,-35.11,-53.75,138.50,111.5,heat,,0
+14,1-1-LA IC Pattern Posterior,LA,posterior wall,2,17421,33,33,1245,100.0,99.8,3,False,30.79,2.12,132.99,112.0,heat,,0
+15,1-1-1-LA IC Pattern Anterior,LA,anterior wall,2,17421,19,19,1212,85.0,99.7,7,False,67.90,13.60,116.36,136.7,heat,,0
+16,2-1-RA IC Pattern Posterior,RA,posterior wall,2,9496,88,88,8992,97.0,97.5,4,False,-15.33,14.55,130.21,84.6,heat,,0
+17,2-1-2-RA IC Pattern Lateral,RA,lateral wall,2,9230,135,135,8932,75.0,58.5,11,True,-32.57,12.41,146.60,100.1,heat,,0
+18,1-1-LA IC Pattern Posterior,LA,posterior wall,2,16065,37,37,14101,95.0,98.0,7,False,22.49,-73.82,79.86,110.2,heat,,0
+19,1-1-1-LA IC Pattern Anterior,LA,anterior wall,2,16065,28,28,0,82.0,99.9,5,False,-25.29,-37.28,78.10,116.8,heat,,0
+20,2-1-RA IC Pattern Posterior,RA,posterior wall,2,21565,82,82,18787,88.0,61.9,36,True,-23.86,-41.99,116.09,120.6,heat,,0
+21,2-1-1-RA IC Pattern Lateral,RA,lateral wall,2,21565,61,61,9909,97.0,99.6,5,False,-42.42,-56.89,152.55,123.2,heat,,0
+22,1-1-1-LA IC Pattern Posterior ANNOTI,LA,posterior wall,2,11320,44,44,2379,92.3,95.5,6,False,-1.10,-38.89,71.04,95.3,heat,,0
+23,1-1-1-1-LA IC Pattern Anterior ANNOTIE,LA,anterior wall,2,11320,74,74,3274,94.0,64.7,10,True,10.10,-17.77,105.45,107.3,heat,,0
+24,2-1-1-1-RA IC Pattern Posterior ANNOTI,RA,posterior wall,2,10681,20,20,1243,92.1,99.9,4,False,-51.53,-38.95,92.92,101.6,heat,,0
+25,2-1-1-1-1-1-RA IC Pattern Lateral ANNOTIER,RA,lateral wall,2,10681,87,87,5006,90.1,90.7,11,False,-53.94,-30.46,116.26,97.2,heat,,0
+26,3-RA IC Pattern Posterior,RA,posterior wall,2,3857,35,35,3534,94.2,74.7,16,False,-66.29,-33.45,109.46,102.6,heat,,0
+27,3-1-RA IC Pattern Lateral,RA,lateral wall,2,3952,56,56,639,96.8,98.0,3,False,-33.03,-45.97,176.73,116.7,heat,,0
+28,4-1-LA IC Pattern Posterior,LA,posterior wall,2,6812,43,43,6795,97.6,98.9,7,False,-6.84,-36.15,98.53,88.3,heat,,0
+29,4-1-1-LA IC Pattern Anterior,LA,anterior wall,2,6812,42,42,2349,93.0,76.1,20,False,-11.49,-18.38,132.11,91.1,heat,,0
+31,1-1-1-LA IC PM Posterior 1,LA,posterior wall,1,14605,21,21,14579,80.0,71.2,22,False,4.07,-9.40,86.02,90.3,heat,27.85,21
+32,1-1-1-1-LA IC PM Posterior 2,LA,posterior wall,1,14605,25,25,10978,89.9,98.5,6,False,26.95,-28.19,90.21,92.1,heat,14.77,25
+33,1-1-1-1-1-LA IC PM Anterior,LA,anterior wall,1,14605,9,9,6441,85.4,83.8,10,False,8.29,3.56,124.85,107.5,heat,50.43,9
+34,2-RA  IC PM Posterior,RA,posterior wall,1,3186,35,35,1430,94.9,75.0,14,False,-11.84,-45.59,130.28,118.3,heat,62.59,35
+35,2-1-RA IC PM Lateral,RA,lateral wall,1,3234,33,33,3091,98.9,99.4,2,False,-36.96,-14.10,123.17,76.0,heat,75.34,33
+51,1-3-LA IC Pattern Post,LA,posterior wall,1,17358,8,8,2166,95.0,99.9,2,False,32.19,0.67,130.04,128.7,heat,34.47,8
+52,1-3-1-LA IC Pattern ANT,LA,anterior wall,1,17358,25,25,4234,97.8,89.9,5,False,-0.73,-34.00,152.12,107.1,heat,44.16,25
+53,3-RA IC PAttern Matching Post,RA,posterior wall,1,3039,79,79,874,96.8,77.0,5,False,2.45,-40.69,141.61,110.8,heat,46.39,79
+54,3-1-RA IC PAttern Matching Lat,RA,lateral wall,1,3591,102,102,3291,98.0,83.9,5,False,-66.82,-37.08,150.18,96.0,heat,89.44,102
+62,1-3-LA Post Pace Pattern,LA,posterior wall,1,19290,34,34,16417,87.7,99.2,5,False,29.86,-21.73,89.45,126.3,heat,17.25,34
+63,1-4-La Ant Pace Pattern,LA,anterior wall,1,18836,68,68,10403,98.5,99.3,4,False,12.10,10.38,117.07,96.9,heat,52.12,68
+64,2-RA Post Pace Pattern,RA,posterior wall,1,4194,66,66,3442,98.2,94.0,8,False,-37.98,-0.52,134.28,91.3,heat,91.57,66
+65,2-1-RA Ant Pace Pattern,RA,lateral wall,1,4326,52,52,3302,99.0,91.3,5,False,-46.20,-20.57,157.82,88.7,heat,104.72,52
+75,1-1-1-IC Pattern Pace LA Posterior,LA,posterior wall,1,43385,36,36,42831,98.0,100.0,1,False,5.26,18.82,80.36,113.7,heat,29.27,36
+76,1-1-1-1-IC Pattern Pace LA Anterior,LA,anterior wall,1,43386,65,65,14562,99.0,74.8,4,False,17.50,60.71,124.42,116.7,heat,66.19,65
+77,2-IC Pattern Pace RA Post,RA,posterior wall,1,4615,23,23,3736,97.9,98.5,6,False,-44.41,40.26,106.75,89.8,heat,70.03,23
+78,2-1-IC Pattern Pace RA aNTERIOR,RA,lateral wall,1,4806,16,16,150,97.0,98.8,5,False,-44.13,-3.17,132.69,150.7,heat,93.79,16
+86,1-3-IC Pace Map LA Post,LA,posterior wall,1,42282,52,52,39630,100.0,95.1,6,False,17.64,-14.79,114.52,111.7,heat,29.93,52
+87,1-3-1-IC Pace Map LA Ant,LA,anterior wall,1,16448,77,77,14604,99.0,89.2,15,False,64.02,-5.13,189.85,1.1,heat,49.31,77
+88,2-IC Pace Map Ra Post,RA,posterior wall,1,5611,127,127,2318,96.7,89.0,10,False,-48.22,-0.55,161.47,102.0,heat,66.13,127
+89,2-1-IC Pace Map Ra Lateral,RA,lateral wall,1,6120,53,53,3388,100.0,49.7,4,True,-53.97,4.31,221.20,123.7,heat,92.54,53
+102,1-2-1-LA Post,LA,posterior wall,1,13756,49,49,2281,97.0,95.8,16,False,42.11,-9.37,124.31,1.0,heat,47.71,49
+103,1-2-1-1-LA Ant Pace,LA,anterior wall,1,13756,76,76,2281,92.0,98.6,8,False,42.11,-9.37,124.31,1.0,heat,70.29,76
+104,3-RA Post Pace Pattern,RA,posterior wall,1,3488,18,18,6,85.0,99.8,4,False,-28.20,12.95,127.62,108.3,heat,42.99,18
+117,1-3-LA post IC Pattern,LA,posterior wall,1,15764,53,53,15691,96.0,95.2,11,False,-2.53,-33.61,87.59,95.1,heat,30.69,53
+139,1-1-LA post IC Pattern,LA,posterior wall,1,11804,100,100,11599,93.7,87.6,9,False,17.09,-1.74,87.98,109.7,heat,37.44,100
+140,1-1-1-LA ant IC Pattern,LA,anterior wall,1,11804,73,73,7721,85.9,93.1,11,False,45.22,2.92,131.41,114.4,heat,62.34,73
+141,1-1-1-1-LA ant IC Pattern2,LA,anterior wall,1,11804,104,104,7806,98.2,92.5,10,False,31.36,15.92,128.59,104.4,heat,51.63,104
+144,2-1-RA post IC Pattern,RA,posterior wall,1,11486,81,81,10499,98.6,99.5,4,False,-4.68,-19.84,105.02,114.1,heat,73.36,81
+145,2-1-1-RA lat IC pattern,RA,lateral wall,1,11479,71,71,10154,99.0,76.7,8,False,-13.03,-53.12,146.42,148.6,heat,98.44,71

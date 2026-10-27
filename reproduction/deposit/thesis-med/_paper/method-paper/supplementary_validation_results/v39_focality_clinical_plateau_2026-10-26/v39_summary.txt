@@ -1,0 +1,36 @@
+v39 focality index on the 55 clinical maps — summary
+=======================================================
+n = 55 maps, 16 patients
+
+A. Reproduction of the platform value (face rule, p95): max |F_face_p95*100 - F_platform_pct| = 12.85; n multifocal (F<0.70): face 6, edge 6, platform 6
+
+B. Distribution of F (edge rule) by percentile: median [IQR], min; n(F<0.70); n(F<0.5)
+  p90: F median 0.97 [0.87; 1.00] min 0.49  n(F<0.70)=7  n(F<0.5)=1  n(F<0.9)=17  components median 3 max 10  |H| median 1467
+  p95: F median 0.97 [0.83; 1.00] min 0.49  n(F<0.70)=6  n(F<0.5)=2  n(F<0.9)=18  components median 3 max 13  |H| median 995
+  p98: F median 0.94 [0.74; 1.00] min 0.43  n(F<0.70)=13  n(F<0.5)=3  n(F<0.9)=25  components median 3 max 9  |H| median 377
+  p99: F median 0.94 [0.78; 1.00] min 0.36  n(F<0.70)=12  n(F<0.5)=2  n(F<0.9)=25  components median 3 max 10  |H| median 189
+
+C. Threshold sensitivity (edge rule, p95): n flagged at F < T
+  T=0.50: 2  T=0.60: 3  T=0.70: 6  T=0.80: 13  T=0.90: 18
+
+D. Relation to R2 and sigma (edge rule, p95)
+  Spearman rho(F, R2) = 0.079 (p=0.566); rho(F, sigma) = 0.076 (p=0.582); rho(F, n_points) = -0.480
+  crosstab rows R2>=0.7 (False/True) x cols F>=0.70 (False/True):
+F_edge_p95  False  True 
+r2                      
+False           2     11
+True            4     38
+
+E. Maps flagged multifocal (F_edge_p95 < 0.70):
+  map   4 double lateral wall   F 0.49 (7 comps) sigma  10.6 R2 0.43 farthest comp 66.8 mm secondary(>15 mm) True n_points 48
+  map  89 single lateral wall   F 0.50 (3 comps) sigma  35.8 R2 0.81 farthest comp 33.6 mm secondary(>15 mm) True n_points 53
+  map  17 double lateral wall   F 0.59 (3 comps) sigma   5.8 R2 0.60 farthest comp 49.7 mm secondary(>15 mm) True n_points 135
+  map  20 double posterior wall F 0.62 (13 comps) sigma  35.7 R2 0.91 farthest comp 76.3 mm secondary(>15 mm) True n_points 82
+  map  13 double lateral wall   F 0.62 (3 comps) sigma   2.1 R2 0.97 farthest comp 12.5 mm secondary(>15 mm) False n_points 45
+  map  23 double anterior wall  F 0.65 (3 comps) sigma   6.8 R2 0.91 farthest comp 30.0 mm secondary(>15 mm) True n_points 74
+
+F. Secondary high-score region > 15 mm (geodesic) from the origin, p95: n = 36 of 55; among them F<0.70: 5
+
+G. By reference (edge p95): median F, n(F<0.70), n(secondary)
+  double n=28 median F 0.98  n(F<0.70)=5  n(secondary)=16  n(R2<0.7)=6
+  single n=27 median F 0.94  n(F<0.70)=1  n(secondary)=20  n(R2<0.7)=7

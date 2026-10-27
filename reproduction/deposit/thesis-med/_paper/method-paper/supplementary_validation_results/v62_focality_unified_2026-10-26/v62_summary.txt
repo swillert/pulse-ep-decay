@@ -1,0 +1,5 @@
+v62 focality index with the package helper (unified contract) — comparison with v50
+  sphere: rows 1680; F identical (incl. NaN) in 1671; changed 9; F NaN v50 5 -> v62 13; sigma max |diff| 0.01
+    changed rows: flat iid amp 0.25 A=-1.07 F 0.492->nan; flat iid amp 0.05 A=-0.16 F 0.009->nan; flat iid amp 0.10 A=-0.85 F 0.002->nan; flat iid amp 0.10 A=-0.24 F 0.001->nan; flat iid amp 0.25 A=-0.17 F 0.136->nan; flat iid amp 0.05 A=-8.06 F 0.040->nan; flat iid amp 0.25 A=14.79 F 0.002->0.0021231422505307; flat iid amp 0.05 A=-0.07 F 0.680->nan; flat iid amp 0.25 A=-2.31 F 0.829->nan
+  clinical: rows 55; F identical (incl. NaN) in 55; changed 0; F NaN v50 0 -> v62 0; sigma max |diff| 2e-06
+  meshes: 2520 rows, no A <= 0 -> unchanged (F NaN 1)

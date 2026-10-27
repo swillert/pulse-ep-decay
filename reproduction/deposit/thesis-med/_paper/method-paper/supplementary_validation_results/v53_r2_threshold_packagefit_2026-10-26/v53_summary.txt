@@ -1,0 +1,61 @@
+v37 threshold / focality synthetic test (icosphere R=25 mm, 2562 vertices, 20 trials)
+
+A. R^2 by field kind and noise (median, 5th pct) and misclassification against threshold T
+  focal     noise 0.05  R2 median 0.999 p5 0.998  n=60  misclass T=0.5:  0% T=0.6:  0% T=0.7:  0% T=0.8:  0% T=0.9:  0%
+  focal     noise 0.10  R2 median 0.996 p5 0.992  n=60  misclass T=0.5:  0% T=0.6:  0% T=0.7:  0% T=0.8:  0% T=0.9:  0%
+  focal     noise 0.15  R2 median 0.992 p5 0.983  n=60  misclass T=0.5:  0% T=0.6:  0% T=0.7:  0% T=0.8:  0% T=0.9:  0%
+  focal     noise 0.25  R2 median 0.975 p5 0.937  n=60  misclass T=0.5:  0% T=0.6:  0% T=0.7:  0% T=0.8:  0% T=0.9:  2%
+  flat      noise 0.05  R2 median 0.216 p5 0.054  n=20  misclass T=0.5:  5% T=0.6:  5% T=0.7:  0% T=0.8:  0% T=0.9:  0%
+  flat      noise 0.10  R2 median 0.405 p5 0.088  n=20  misclass T=0.5: 35% T=0.6: 25% T=0.7: 10% T=0.8:  5% T=0.9:  0%
+  flat      noise 0.15  R2 median 0.416 p5 0.072  n=20  misclass T=0.5: 40% T=0.6: 35% T=0.7: 15% T=0.8: 15% T=0.9:  0%
+  flat      noise 0.25  R2 median 0.223 p5 0.036  n=20  misclass T=0.5: 25% T=0.6: 15% T=0.7: 10% T=0.8:  0% T=0.9:  0%
+  ring      noise 0.05  R2 median 0.871 p5 0.852  n=20  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9:  0%
+  ring      noise 0.10  R2 median 0.871 p5 0.855  n=20  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9: 15%
+  ring      noise 0.15  R2 median 0.864 p5 0.848  n=20  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9:  0%
+  ring      noise 0.25  R2 median 0.851 p5 0.805  n=20  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8: 95% T=0.9:  5%
+  two-peak  noise 0.05  R2 median 0.987 p5 0.968  n=180  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9:100%
+  two-peak  noise 0.10  R2 median 0.983 p5 0.961  n=180  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9:100%
+  two-peak  noise 0.15  R2 median 0.976 p5 0.949  n=180  misclass T=0.5:100% T=0.6:100% T=0.7:100% T=0.8:100% T=0.9:100%
+  two-peak  noise 0.25  R2 median 0.952 p5 0.887  n=180  misclass T=0.5: 99% T=0.6: 99% T=0.7: 99% T=0.8: 99% T=0.9: 92%
+
+  (focal: misclassified = R2 < T; others: misclassified = R2 >= T, i.e. accepted as focal)
+
+B. Focality index F for two-peak fields (median, p90 over trials) and fraction F < 0.70
+  D=15 mm ratio 0.5 noise 0.05  F median 0.99 p10 0.98  F<0.70 in   0%   R2 median 1.00
+  D=15 mm ratio 0.5 noise 0.10  F median 0.96 p10 0.90  F<0.70 in   0%   R2 median 0.99
+  D=15 mm ratio 0.5 noise 0.25  F median 0.48 p10 0.41  F<0.70 in 100%   R2 median 0.96
+  D=15 mm ratio 0.8 noise 0.05  F median 1.00 p10 0.99  F<0.70 in   0%   R2 median 0.99
+  D=15 mm ratio 0.8 noise 0.10  F median 0.99 p10 0.97  F<0.70 in   0%   R2 median 0.99
+  D=15 mm ratio 0.8 noise 0.25  F median 0.52 p10 0.38  F<0.70 in  80%   R2 median 0.96
+  D=15 mm ratio 1.0 noise 0.05  F median 1.00 p10 0.99  F<0.70 in   0%   R2 median 0.99
+  D=15 mm ratio 1.0 noise 0.10  F median 0.98 p10 0.97  F<0.70 in   0%   R2 median 0.98
+  D=15 mm ratio 1.0 noise 0.25  F median 0.71 p10 0.38  F<0.70 in  50%   R2 median 0.97
+  D=25 mm ratio 0.5 noise 0.05  F median 0.77 p10 0.74  F<0.70 in   0%   R2 median 0.99
+  D=25 mm ratio 0.5 noise 0.10  F median 0.74 p10 0.70  F<0.70 in  10%   R2 median 0.99
+  D=25 mm ratio 0.5 noise 0.25  F median 0.48 p10 0.42  F<0.70 in 100%   R2 median 0.96
+  D=25 mm ratio 0.8 noise 0.05  F median 0.58 p10 0.56  F<0.70 in 100%   R2 median 0.98
+  D=25 mm ratio 0.8 noise 0.10  F median 0.58 p10 0.56  F<0.70 in 100%   R2 median 0.97
+  D=25 mm ratio 0.8 noise 0.25  F median 0.41 p10 0.35  F<0.70 in 100%   R2 median 0.94
+  D=25 mm ratio 1.0 noise 0.05  F median 0.51 p10 0.50  F<0.70 in 100%   R2 median 0.97
+  D=25 mm ratio 1.0 noise 0.10  F median 0.51 p10 0.50  F<0.70 in 100%   R2 median 0.96
+  D=25 mm ratio 1.0 noise 0.25  F median 0.40 p10 0.36  F<0.70 in 100%   R2 median 0.94
+  D=40 mm ratio 0.5 noise 0.05  F median 0.76 p10 0.74  F<0.70 in   0%   R2 median 0.99
+  D=40 mm ratio 0.5 noise 0.10  F median 0.75 p10 0.69  F<0.70 in  20%   R2 median 0.99
+  D=40 mm ratio 0.5 noise 0.25  F median 0.48 p10 0.43  F<0.70 in 100%   R2 median 0.96
+  D=40 mm ratio 0.8 noise 0.05  F median 0.58 p10 0.56  F<0.70 in 100%   R2 median 0.99
+  D=40 mm ratio 0.8 noise 0.10  F median 0.59 p10 0.55  F<0.70 in 100%   R2 median 0.98
+  D=40 mm ratio 0.8 noise 0.25  F median 0.42 p10 0.37  F<0.70 in 100%   R2 median 0.94
+  D=40 mm ratio 1.0 noise 0.05  F median 0.51 p10 0.50  F<0.70 in 100%   R2 median 0.98
+  D=40 mm ratio 1.0 noise 0.10  F median 0.51 p10 0.50  F<0.70 in 100%   R2 median 0.97
+  D=40 mm ratio 1.0 noise 0.25  F median 0.40 p10 0.37  F<0.70 in 100%   R2 median 0.94
+
+C. F for single-peak focal and flat fields (median, p10)
+  focal  noise 0.05  F median 0.98 p10 0.83  F<0.70 in   0%
+  focal  noise 0.10  F median 0.93 p10 0.61  F<0.70 in  32%
+  focal  noise 0.25  F median 0.60 p10 0.32  F<0.70 in  80%
+  flat   noise 0.05  F median 0.02 p10 0.02  F<0.70 in 100%
+  flat   noise 0.10  F median 0.02 p10 0.02  F<0.70 in 100%
+  flat   noise 0.25  F median 0.02 p10 0.02  F<0.70 in 100%
+  ring   noise 0.05  F median 1.00 p10 1.00  F<0.70 in   0%
+  ring   noise 0.10  F median 0.99 p10 0.55  F<0.70 in  35%
+  ring   noise 0.25  F median 0.39 p10 0.28  F<0.70 in 100%

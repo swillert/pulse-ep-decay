@@ -1,0 +1,9 @@
+v45 mesh roughness and bin width — summary (55 clinical maps)
+============================================================
+
+Taubin smoothing 10 it.: mean vertex displacement median 0.03 mm; geodesic distances within 30 mm change by median -0.0% (per-map medians, IQR -0.0 .. -0.0%); sigma change median -0.00 mm [IQR -0.02; +0.02], |d|>1 mm in 1/55; focal subset (n=35): +0.00 [-0.01; +0.03]
+Taubin smoothing 30 it.: mean vertex displacement median 0.08 mm; geodesic distances within 30 mm change by median -0.0% (per-map medians, IQR -0.1 .. +0.0%); sigma change median -0.00 mm [IQR -0.05; +0.05], |d|>1 mm in 1/55; focal subset (n=35): -0.00 [-0.05; +0.04]
+
+Delta d = 1 mm                          : sigma change vs 2 mm median +0.04 mm [IQR -0.10; +0.54], mean +1.20, |d|>1 mm in 9/55; focal subset -0.01 [-0.14; +0.27]; rho 0.967; R2 median 0.796 (2 mm: 0.821)
+Delta d = 4 mm                          : sigma change vs 2 mm median +0.19 mm [IQR -0.04; +0.84], mean +0.29, |d|>1 mm in 14/55; focal subset +0.28 [+0.03; +0.83]; rho 0.980; R2 median 0.825 (2 mm: 0.821)
+Delta d = 1.5 x mean edge (1.4-4.2 mm)  : sigma change vs 2 mm median -0.00 mm [IQR -0.09; +0.19], mean +0.08, |d|>1 mm in 5/55; focal subset -0.02 [-0.13; +0.04]; rho 0.998; R2 median 0.835 (2 mm: 0.821)

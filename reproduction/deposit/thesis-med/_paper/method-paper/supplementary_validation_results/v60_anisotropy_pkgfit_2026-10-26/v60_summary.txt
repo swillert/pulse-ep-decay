@@ -1,0 +1,34 @@
+v44 anisotropic truth and structured deviations (icosphere R = 25 mm, analytic geodesics, 20 trials) — summary
+====================================================================================================
+
+A. Isotropic fit to an elliptical Gaussian truth: sigma_hat (median over trials) vs sa (major), sb (minor), sqrt(sa sb), (sa+sb)/2
+  gm= 5.0 ratio=1.0 (sa  5.00, sb  5.00, mean  5.00) noise 0.00: sigma_hat median  5.08 [ 5.05;  5.11]  R2 median 1.000 min 0.999  offset median 0.0 mm
+  gm= 5.0 ratio=1.0 (sa  5.00, sb  5.00, mean  5.00) noise 0.10: sigma_hat median  5.12 [ 5.08;  5.18]  R2 median 0.994 min 0.987  offset median 0.9 mm
+  gm= 5.0 ratio=1.5 (sa  6.12, sb  4.08, mean  5.10) noise 0.00: sigma_hat median  5.04 [ 5.00;  5.08]  R2 median 1.000 min 0.999  offset median 0.0 mm
+  gm= 5.0 ratio=1.5 (sa  6.12, sb  4.08, mean  5.10) noise 0.10: sigma_hat median  5.20 [ 5.12;  5.35]  R2 median 0.994 min 0.985  offset median 1.7 mm
+  gm= 5.0 ratio=2.0 (sa  7.07, sb  3.54, mean  5.30) noise 0.00: sigma_hat median  4.95 [ 4.91;  5.00]  R2 median 0.998 min 0.997  offset median 0.0 mm
+  gm= 5.0 ratio=2.0 (sa  7.07, sb  3.54, mean  5.30) noise 0.10: sigma_hat median  5.07 [ 4.95;  5.18]  R2 median 0.991 min 0.987  offset median 1.9 mm
+  gm= 5.0 ratio=3.0 (sa  8.66, sb  2.89, mean  5.77) noise 0.00: sigma_hat median  4.72 [ 4.67;  4.80]  R2 median 0.993 min 0.985  offset median 0.0 mm
+  gm= 5.0 ratio=3.0 (sa  8.66, sb  2.89, mean  5.77) noise 0.10: sigma_hat median  4.87 [ 4.74;  5.01]  R2 median 0.989 min 0.980  offset median 0.0 mm
+  gm= 5.0 ratio=4.0 (sa 10.00, sb  2.50, mean  6.25) noise 0.00: sigma_hat median  4.49 [ 4.42;  4.64]  R2 median 0.984 min 0.977  offset median 0.0 mm
+  gm= 5.0 ratio=4.0 (sa 10.00, sb  2.50, mean  6.25) noise 0.10: sigma_hat median  4.60 [ 4.53;  4.74]  R2 median 0.978 min 0.960  offset median 1.8 mm
+  gm=10.0 ratio=1.0 (sa 10.00, sb 10.00, mean 10.00) noise 0.00: sigma_hat median 10.03 [10.02; 10.04]  R2 median 1.000 min 1.000  offset median 0.0 mm
+  gm=10.0 ratio=1.0 (sa 10.00, sb 10.00, mean 10.00) noise 0.10: sigma_hat median 10.17 [10.10; 10.39]  R2 median 0.997 min 0.994  offset median 1.9 mm
+  gm=10.0 ratio=1.5 (sa 12.25, sb  8.16, mean 10.21) noise 0.00: sigma_hat median  9.91 [ 9.88;  9.94]  R2 median 1.000 min 1.000  offset median 0.0 mm
+  gm=10.0 ratio=1.5 (sa 12.25, sb  8.16, mean 10.21) noise 0.10: sigma_hat median 10.14 [10.06; 10.21]  R2 median 0.997 min 0.993  offset median 2.0 mm
+  gm=10.0 ratio=2.0 (sa 14.14, sb  7.07, mean 10.61) noise 0.00: sigma_hat median  9.66 [ 9.62;  9.71]  R2 median 0.999 min 0.998  offset median 0.0 mm
+  gm=10.0 ratio=2.0 (sa 14.14, sb  7.07, mean 10.61) noise 0.10: sigma_hat median  9.84 [ 9.68;  9.96]  R2 median 0.996 min 0.993  offset median 1.8 mm
+  gm=10.0 ratio=3.0 (sa 17.32, sb  5.77, mean 11.55) noise 0.00: sigma_hat median  9.09 [ 9.03;  9.15]  R2 median 0.994 min 0.991  offset median 0.0 mm
+  gm=10.0 ratio=3.0 (sa 17.32, sb  5.77, mean 11.55) noise 0.10: sigma_hat median  9.29 [ 9.06;  9.37]  R2 median 0.992 min 0.985  offset median 2.0 mm
+  gm=10.0 ratio=4.0 (sa 20.00, sb  5.00, mean 12.50) noise 0.00: sigma_hat median  8.56 [ 8.46;  8.66]  R2 median 0.988 min 0.984  offset median 0.0 mm
+  gm=10.0 ratio=4.0 (sa 20.00, sb  5.00, mean 12.50) noise 0.10: sigma_hat median  8.66 [ 8.54;  8.91]  R2 median 0.984 min 0.973  offset median 3.1 mm
+
+B. Isotropic Gaussian + smooth random field (30 bumps of 8 mm) + 10 % iid noise: R2 and sigma_hat
+  sigma0= 5.0 bump amp 0.00 A: R2 median 0.994 [0.993; 0.996]  frac R2<0.7 0.00  bias median +0.17 [+0.10; +0.22]  bias in R2<0.7 subset n/a  offset median 0.0 mm (p90 2.0)
+  sigma0= 5.0 bump amp 0.10 A: R2 median 0.976 [0.965; 0.980]  frac R2<0.7 0.00  bias median +0.40 [-0.29; +0.89]  bias in R2<0.7 subset n/a  offset median 1.8 mm (p90 2.1)
+  sigma0= 5.0 bump amp 0.25 A: R2 median 0.877 [0.788; 0.931]  frac R2<0.7 0.10  bias median +0.29 [-0.36; +0.44]  bias in R2<0.7 subset -1.03 (n=2)  offset median 1.8 mm (p90 2.1)
+  sigma0= 5.0 bump amp 0.50 A: R2 median 0.910 [0.811; 0.949]  frac R2<0.7 0.20  bias median +3.07 [+1.13; +4.78]  bias in R2<0.7 subset -0.04 (n=4)  offset median 21.6 mm (p90 52.7)
+  sigma0=10.0 bump amp 0.00 A: R2 median 0.997 [0.996; 0.998]  frac R2<0.7 0.00  bias median +0.20 [+0.08; +0.42]  bias in R2<0.7 subset n/a  offset median 2.5 mm (p90 3.6)
+  sigma0=10.0 bump amp 0.10 A: R2 median 0.988 [0.983; 0.993]  frac R2<0.7 0.00  bias median +0.01 [-0.74; +0.35]  bias in R2<0.7 subset n/a  offset median 1.8 mm (p90 2.2)
+  sigma0=10.0 bump amp 0.25 A: R2 median 0.924 [0.898; 0.947]  frac R2<0.7 0.00  bias median +0.08 [-1.07; +0.89]  bias in R2<0.7 subset n/a  offset median 1.9 mm (p90 7.0)
+  sigma0=10.0 bump amp 0.50 A: R2 median 0.923 [0.849; 0.967]  frac R2<0.7 0.00  bias median +0.92 [+0.33; +3.30]  bias in R2<0.7 subset n/a  offset median 11.7 mm (p90 52.6)

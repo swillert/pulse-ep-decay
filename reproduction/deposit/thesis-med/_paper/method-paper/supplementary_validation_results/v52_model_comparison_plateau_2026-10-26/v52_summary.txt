@@ -1,0 +1,9 @@
+v52 clinical model comparison (55 maps, binned profiles, 3-parameter fits)
+max |sigma - S12| = 3.55e-15 mm; max |R2_exp - v43| = 1.11e-16
+R2 Gaussian 0.821 [0.711; 0.927]; R2 exponential 0.839 [0.742; 0.921]; exp higher in 33 maps
+RMSE Gaussian 2.373 [1.645; 3.478]; RMSE exponential 2.340 [1.589; 3.231] score points
+near field (d <= 3 sigma): RMSE Gaussian 1.856 [1.224; 2.496], exponential 1.897 [1.424; 2.698]
+far field (d > 3 sigma): RMSE Gaussian 2.441 [1.450; 3.804], exponential 2.364 [1.456; 3.376]
+dAIC (Gauss - exp) > 2: 29, < -2: 15, undecided 11
+R2>=0.7 maps (n=42): R2 Gaussian 0.852 [0.803; 0.938], exponential 0.867 [0.821; 0.931]
+fitted range: 107.000 [95.000; 115.000] mm (bins 53.000 [48.000; 58.000])

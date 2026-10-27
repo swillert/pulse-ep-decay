@@ -1,0 +1,46 @@
+v58 model diagnostics (review round 4, Q1) — TEST, 2026-10-26 09:22
+==============================================================================
+
+[all55_raw] n = 55 maps, 16 patients (single 8 / double 8 patients)
+  REML full  converged=False  RE var=0.00032  resid var=0.8111  |score|max=0.0758  llf=-72.2629  warnings: Gradient optimization failed, |grad| = 0; Maximum Likelihood optimization failed to converge; MixedLM optimization failed, trying a different optimizer may help; Retrying MixedLM optimization with cg; Retrying MixedLM optimization with lbfgs; The MLE may be on the boundary of the parameter space
+  ML full    converged=True  RE var=0.00343  resid var=0.7342  |score|max=2.23e-05  llf=-69.6718  warnings: The MLE may be on the boundary of the parameter space
+  ML reduced converged=True  RE var=0.08767  resid var=0.7351  |score|max=0.000411  llf=-72.2780  warnings: none
+  profile REML log-lik of gamma=tau2/sigma2: max at gamma=0.0301 (ll -72.2385); ll(0)=-72.2637; ll(0.05)=-72.2512; ll(0.2)=-72.6978; ll(1)=-75.8980
+  profile ML   log-lik of gamma=tau2/sigma2: max at gamma=0.00475 (ll -69.6718); ll(0)=-69.6726; ll(0.05)=-69.7372; ll(0.2)=-70.3917; ll(1)=-74.2792
+  LRT reference from profiled ML maxima: chi2=5.213, p=0.0224
+  OLS coef 0.5842 (ratio 1.79); CR2 SE 0.2512, Satterthwaite df 11.89 -> ratio 95% CI [1.04; 3.10], p=0.0385
+  OLS CR1 (statsmodels default, normal ref): ratio 1.79 [1.10; 2.92], p=0.0187
+  wild cluster bootstrap (restricted, Webb, 9,999): t=2.443, p=0.0318
+  patient-level mean log sigma (raw), 8 vs 8: ratio of geometric means 1.83 [0.87; 3.83], Welch df 12.1, p=0.0998
+  patient-level mean log sigma (region-adjusted), 8 vs 8: ratio of geometric means 1.75 [0.93; 3.29], Welch df 13.2, p=0.0760
+
+[all55_clip30] n = 55 maps, 16 patients (single 8 / double 8 patients)
+  REML full  converged=True  RE var=0.00112  resid var=0.6180  |score|max=0.168  llf=-65.4999  warnings: Maximum Likelihood optimization failed to converge; Retrying MixedLM optimization with lbfgs; The MLE may be on the boundary of the parameter space
+  ML full    converged=True  RE var=0.00431  resid var=0.5586  |score|max=0.000199  llf=-62.2344  warnings: The MLE may be on the boundary of the parameter space
+  ML reduced converged=True  RE var=0.07692  resid var=0.5567  |score|max=1.26e-06  llf=-64.9790  warnings: none
+  profile REML log-lik of gamma=tau2/sigma2: max at gamma=0.0356 (ll -65.4710); ll(0)=-65.5036; ll(0.05)=-65.4773; ll(0.2)=-65.8612; ll(1)=-68.8196
+  profile ML   log-lik of gamma=tau2/sigma2: max at gamma=0.007859 (ll -62.2344); ll(0)=-62.2366; ll(0.05)=-62.2860; ll(0.2)=-62.8714; ll(1)=-66.4929
+  LRT reference from profiled ML maxima: chi2=5.489, p=0.0191
+  OLS coef 0.5274 (ratio 1.69); CR2 SE 0.2203, Satterthwaite df 11.89 -> ratio 95% CI [1.05; 2.74], p=0.0341
+  OLS CR1 (statsmodels default, normal ref): ratio 1.69 [1.10; 2.60], p=0.0157
+  wild cluster bootstrap (restricted, Webb, 9,999): t=2.511, p=0.0313
+  patient-level mean log sigma (raw), 8 vs 8: ratio of geometric means 1.73 [0.88; 3.42], Welch df 12.0, p=0.1027
+  patient-level mean log sigma (region-adjusted), 8 vs 8: ratio of geometric means 1.67 [0.93; 3.01], Welch df 12.9, p=0.0809
+
+[r2ge07_raw] n = 42 maps, 13 patients (single 6 / double 7 patients)
+  REML full  converged=True  RE var=0.06994  resid var=0.7086  |score|max=2.8e-06  llf=-53.4433  warnings: none
+  ML full    converged=True  RE var=0.04513  resid var=0.6374  |score|max=1.88e-05  llf=-51.4664  warnings: none
+  ML reduced converged=True  RE var=0.20538  resid var=0.6534  |score|max=2.83e-06  llf=-55.1298  warnings: none
+  profile REML log-lik of gamma=tau2/sigma2: max at gamma=0.09747 (ll -53.4433); ll(0)=-53.6467; ll(0.05)=-53.4841; ll(0.2)=-53.5560; ll(1)=-55.8452
+  profile ML   log-lik of gamma=tau2/sigma2: max at gamma=0.06967 (ll -51.4664); ll(0)=-51.5967; ll(0.05)=-51.4756; ll(0.2)=-51.6923; ll(1)=-54.6018
+  LRT reference from profiled ML maxima: chi2=7.327, p=0.0068
+  OLS coef 0.8588 (ratio 2.36); CR2 SE 0.2971, Satterthwaite df 9.67 -> ratio 95% CI [1.21; 4.59], p=0.0166
+  OLS CR1 (statsmodels default, normal ref): ratio 2.36 [1.33; 4.18], p=0.0032
+  wild cluster bootstrap (restricted, Webb, 9,999): t=3.099, p=0.0125
+  patient-level mean log sigma (raw), 6 vs 7: ratio of geometric means 2.32 [1.29; 4.17], Welch df 10.5, p=0.0093
+  patient-level mean log sigma (region-adjusted), 6 vs 7: ratio of geometric means 2.36 [1.32; 4.22], Welch df 10.6, p=0.0079
+
+(d) fixed effects at the profiled REML optimum, t(G-2) reference
+  [all55_raw] ICC 0.027; reference ratio 1.79, t(14) [1.04; 3.09] p=0.0366 (z [1.09; 2.95] p=0.0208); LRT chi2 5.21 p=0.0224; CR2 [1.04; 3.10] p=0.0385; wild p=0.0313; patient-level adj 1.75 [0.93; 3.29] p=0.0760
+  [all55_clip30] ICC 0.032; reference ratio 1.70, t(14) [1.05; 2.74] p=0.0322 (z [1.10; 2.63] p=0.0174); LRT chi2 5.49 p=0.0191; CR2 [1.05; 2.74] p=0.0341; wild p=0.0302; patient-level adj 1.67 [0.93; 3.01] p=0.0809
+  [r2ge07_raw] ICC 0.090; reference ratio 2.36, t(11) [1.21; 4.61] p=0.0162 (z [1.30; 4.28] p=0.0046); LRT chi2 7.33 p=0.0068; CR2 [1.21; 4.59] p=0.0166; wild p=0.0124; patient-level adj 2.36 [1.32; 4.22] p=0.0079

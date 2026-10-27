@@ -1,0 +1,5 @@
+{
+ "script": "v36_analytic_geodesic.py",
+ "seed": 20261021,
+ "note": "self-contained; argmax origin, 2 mm bins, Gaussian fit as in the April 2026 submission"
+}

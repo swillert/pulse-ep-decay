@@ -1,98 +1,79 @@
 # pulse-ep-decay
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+Geodesic decay analysis of pace-mapping score maps, a module for
+[pulse-ep](https://github.com/swillert/pulse-ep).
 
-Geodesic spatial-resolution analysis for intracardiac pace-mapping — the
-scientific extension to [pulse-ep](https://gitlab.willert.net/sw/pulse-ep).
+The package measures how fast a pace-mapping score falls off with geodesic
+distance from its maximum on a triangulated atrial surface:
 
-`pulse-ep-decay` quantifies the spatial resolution of a scalar field on a
-triangulated surface mesh. Given a per-vertex score (e.g. pace-mapping
-similarity), it
+1. **Origin**: the vertex with the highest score; on a plateau of equal maxima,
+   the plateau vertex closest to its centre.
+2. **Geodesic distance** from the origin to every vertex with the Heat Method
+   (potpourri3d / geometry-central). Exact geodesics (pygeodesic, MMP) are
+   available for validation.
+3. **Radial profile**: mean score in 2-mm distance bins.
+4. **Gaussian fit** `A · exp(−d² / 2σ²) + B`. The width σ (mm) is the result.
+5. **Flags**: `R² < 0.7` marks an inadequate fit; the focality index
+   `F < 0.70` (share of the half-maximum set connected to the origin) marks a
+   second high-score region and is interpreted only when `R² ≥ 0.7`.
+   Width classes: below range (< 2 mm), in range (2–30 mm), broad (30–50 mm),
+   diffuse (50–100 mm), not identifiable (≥ 100 mm).
 
-1. computes geodesic distances from the score's maximum (the **origin**) to
-   every other vertex using the **Heat Method**
-   ([Crane et al. 2017](https://doi.org/10.1145/3131280)) — exact on the
-   triangle manifold, much cheaper than repeated Dijkstra calls,
-2. fits a **Gaussian decay model** `f(d) = a · exp(−d²/(2σ²)) + c` to the
-   radial profile, and
-3. reports σ̂ as a **physical-unit (mm) resolution measure**.
-
-A built-in **synthetic validation framework** generates score fields with
-known σ₀ on real atrial meshes and recovers σ̂ to characterise bias and
-variance — this is what backs the accompanying method paper.
-
-## Design principle: array-first
-
-The scientific kernel takes **plain NumPy arrays**:
-
-```python
-import numpy as np
-from pulse_ep_decay import recover_sigma
-
-vertices  : np.ndarray  # (N, 3)  triangle-mesh vertices
-triangles : np.ndarray  # (M, 3)  vertex indices
-scores    : np.ndarray  # (N,)    per-vertex scalar field
-
-result = recover_sigma(vertices, triangles, scores)
-print(result.sigma_mm, result.r_squared)
-```
-
-That means you can apply `pulse-ep-decay` to **any** triangulated mesh and
-scalar field — no CARTO, no Postgres, no `pulse-ep` required.
-
-If you already use `pulse-ep` to ingest CARTO studies, the optional adapter
-pulls the same arrays out of an `EPMapModel`:
-
-```python
-# pip install "pulse-ep-decay[pulse-ep]"
-from pulse_ep_decay.integration.pulse_ep import from_epmap
-from pulse_ep_decay import recover_sigma
-
-vertices, triangles, scores = from_epmap(epmap_model)
-result = recover_sigma(vertices, triangles, scores)
-```
+This is the code of the method paper *Geodesic Decay Analysis: Quantifying the
+Spatial Resolution of Intracardiac Pace-Mapping Score Maps on Triangulated
+Atrial Surfaces* (Willert, Maslova, Zaman, Frank, Lian; Computer Methods and
+Programs in Biomedicine, under revision).
 
 ## Installation
 
 ```bash
-# scientific core only
-pip install pulse-ep-decay
-
-# with pulse-ep adapter for CARTO workflows
-pip install "pulse-ep-decay[pulse-ep]"
-
-# all extras (adapter, figures, dev)
-pip install "pulse-ep-decay[all]"
+pip install "pulse-ep-decay @ git+https://github.com/swillert/pulse-ep-decay"
+# extras: [exact] pygeodesic, [pulse-ep] database adapter, [repro] reproduction scripts
 ```
 
-## Quickstart
+## Usage
 
-```bash
-# synthetic σ-recovery on a Gaussian field over a built-in sphere mesh
-pulse-ep-decay-validate-sigma --sigma 6.0 --noise 0.05
+The core takes plain NumPy arrays and does not need pulse-ep:
 
-# Heat Method vs. Dijkstra comparison on your own meshes
-pulse-ep-decay-compare-geodesic --mesh path/to/atrium.npz
+```python
+from pulse_ep_decay import analyse_map, largest_component
+
+V, T, idx = largest_component(vertices, triangles)   # mm, (n, 3) and (m, 3)
+res = analyse_map(scores[idx >= 0], V, T)            # NaN where no score
+res["sigma"], res["width_class"], res["r2"], res["flag_r2"], res["F"], res["flag_F"]
 ```
 
-See `docs/` for the full walkthrough including the validation experiments
-from the method paper.
+`analyse_map` also returns the fitted amplitude and baseline, ΔAIC against an
+exponential fit, and a `status` string that names any unavailable quantity.
 
-## Citation
+With pulse-ep installed, `pulse_ep_decay.integration.pulse_ep` reads meshes
+and scores from a pulse-ep database (`from_epmap`, `iter_pacemaps`).
 
-If you use `pulse-ep-decay` in academic work, please cite the
-[CITATION.cff](CITATION.cff) entry. Until the method paper is accepted,
-the canonical citation is the software itself; once accepted, please
-prefer the journal article.
+## Modules
 
-## License
+| Module | Content |
+|---|---|
+| `mesh` | largest component, Heat-Method and exact geodesic solvers |
+| `profile` | origin rule, 2-mm binning, Gaussian, exponential and generalised fits, synthetic fields |
+| `analysis` | `analyse_map`, `width_class`, `focality_index` |
+| `support` | edge graph, connected components, smoothed maximum |
+| `integration.pulse_ep` | optional pulse-ep adapter |
 
-MIT — see [LICENSE](LICENSE).
+## Reproduction
+
+`reproduction/` contains the scripts and archived result files behind every
+data-derived table and figure of the paper and its supplement. See
+[reproduction/README.md](reproduction/README.md). The clinical meshes and
+score maps are not public (data protection); figures of clinical maps cannot
+be regenerated from this repository.
 
 ## Related
 
-- [pulse-ep](https://gitlab.willert.net/sw/pulse-ep) — the open-source
-  CARTO platform that `pulse-ep-decay` integrates with.
-- [pulse-ultimate](https://gitlab.willert.net/sw/pulse-ultimate) —
-  the predecessor monorepo (frozen archive).
+- pulse-ep: Willert S, Frank D, Lian E. pulse-ep: A Multivendor Database and
+  Analysis Platform for Electroanatomical Mapping Research and AI-Assisted
+  Workflows. SSRN preprint, 2026. https://doi.org/10.2139/ssrn.7499672
+- pulse-ep-timeref: activation-timing reference analysis (separate package).
+
+## Licence
+
+MIT. See [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).

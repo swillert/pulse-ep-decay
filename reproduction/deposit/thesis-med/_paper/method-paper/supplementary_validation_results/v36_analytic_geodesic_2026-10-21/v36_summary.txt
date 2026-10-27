@@ -1,0 +1,72 @@
+v36 analytic geodesic validation — summary
+============================================
+
+A. Distance error vs analytic truth (per surface, solver; mean over sources)
+  sphere_sub3            heat     n=   642 edge=3.77 mm  signed rel err mean -0.0173  p95 |rel| 0.0341  mean |err| 0.52 mm  max |err| 1.27 mm  t=0.000s
+  sphere_sub3            dijkstra n=   642 edge=3.77 mm  signed rel err mean +0.0633  p95 |rel| 0.1273  mean |err| 2.33 mm  max |err| 4.94 mm  t=0.000s
+  sphere_sub3            exact    n=   642 edge=3.77 mm  signed rel err mean -0.0028  p95 |rel| 0.0026  mean |err| 0.09 mm  max |err| 0.22 mm  t=0.003s
+  sphere_sub4            heat     n=  2562 edge=1.89 mm  signed rel err mean -0.0105  p95 |rel| 0.0196  mean |err| 0.34 mm  max |err| 0.83 mm  t=0.001s
+  sphere_sub4            dijkstra n=  2562 edge=1.89 mm  signed rel err mean +0.0652  p95 |rel| 0.1222  mean |err| 2.36 mm  max |err| 5.04 mm  t=0.000s
+  sphere_sub4            exact    n=  2562 edge=1.89 mm  signed rel err mean -0.0007  p95 |rel| 0.0006  mean |err| 0.02 mm  max |err| 0.05 mm  t=0.024s
+  sphere_sub5            heat     n= 10242 edge=0.94 mm  signed rel err mean -0.0072  p95 |rel| 0.0128  mean |err| 0.25 mm  max |err| 0.68 mm  t=0.002s
+  sphere_sub5            dijkstra n= 10242 edge=0.94 mm  signed rel err mean +0.0710  p95 |rel| 0.1327  mean |err| 2.57 mm  max |err| 5.06 mm  t=0.001s
+  sphere_sub5            exact    n= 10242 edge=0.94 mm  signed rel err mean -0.0002  p95 |rel| 0.0002  mean |err| 0.01 mm  max |err| 0.01 mm  t=0.240s
+  cylinder_64x30_j0.0    heat     n=  1920 edge=2.67 mm  signed rel err mean -0.0080  p95 |rel| 0.0415  mean |err| 0.61 mm  max |err| 2.35 mm  t=0.000s
+  cylinder_64x30_j0.0    dijkstra n=  1920 edge=2.67 mm  signed rel err mean +0.1675  p95 |rel| 0.4085  mean |err| 7.47 mm  max |err| 31.67 mm  t=0.000s
+  cylinder_64x30_j0.0    exact    n=  1920 edge=2.67 mm  signed rel err mean -0.0002  p95 |rel| 0.0004  mean |err| 0.01 mm  max |err| 0.03 mm  t=0.009s
+  cylinder_128x50_j0.0   heat     n=  6400 edge=1.44 mm  signed rel err mean -0.0092  p95 |rel| 0.0372  mean |err| 0.44 mm  max |err| 2.14 mm  t=0.001s
+  cylinder_128x50_j0.0   dijkstra n=  6400 edge=1.44 mm  signed rel err mean +0.1776  p95 |rel| 0.4095  mean |err| 7.78 mm  max |err| 32.61 mm  t=0.001s
+  cylinder_128x50_j0.0   exact    n=  6400 edge=1.44 mm  signed rel err mean -0.0001  p95 |rel| 0.0001  mean |err| 0.00 mm  max |err| 0.01 mm  t=0.059s
+  cylinder_128x50_j0.3   heat     n=  6400 edge=1.49 mm  signed rel err mean -0.0056  p95 |rel| 0.0205  mean |err| 0.26 mm  max |err| 1.45 mm  t=0.001s
+  cylinder_128x50_j0.3   dijkstra n=  6400 edge=1.49 mm  signed rel err mean +0.1146  p95 |rel| 0.2554  mean |err| 5.06 mm  max |err| 19.93 mm  t=0.001s
+  cylinder_128x50_j0.3   exact    n=  6400 edge=1.49 mm  signed rel err mean -0.0001  p95 |rel| 0.0001  mean |err| 0.00 mm  max |err| 0.01 mm  t=0.184s
+
+B. Width error sigma_hat - sigma0 (median over sources/trials) by solver, field generated with the ANALYTIC distance
+  sphere_sub3            sigma0= 3.0 noise=0.00  analytic +0.17  exact +0.17  heat +0.12  dijkstra +0.27
+  sphere_sub3            sigma0= 3.0 noise=0.10  analytic -0.55  exact -0.58  heat -0.59  dijkstra -0.26
+  sphere_sub3            sigma0= 5.0 noise=0.00  analytic +0.18  exact +0.18  heat -0.10  dijkstra +0.44
+  sphere_sub3            sigma0= 5.0 noise=0.10  analytic +0.50  exact +0.52  heat -0.06  dijkstra +0.52
+  sphere_sub3            sigma0=10.0 noise=0.00  analytic +0.08  exact +0.05  heat -0.24  dijkstra +0.85
+  sphere_sub3            sigma0=10.0 noise=0.10  analytic +0.46  exact +0.39  heat +0.41  dijkstra +1.39
+  sphere_sub3            sigma0=15.0 noise=0.00  analytic +0.01  exact -0.03  heat -0.19  dijkstra +1.15
+  sphere_sub3            sigma0=15.0 noise=0.10  analytic +0.55  exact +0.57  heat +0.26  dijkstra +1.88
+  sphere_sub4            sigma0= 3.0 noise=0.00  analytic +0.01  exact +0.01  heat -0.06  dijkstra +0.03
+  sphere_sub4            sigma0= 3.0 noise=0.10  analytic +0.02  exact +0.02  heat -0.03  dijkstra +0.05
+  sphere_sub4            sigma0= 5.0 noise=0.00  analytic +0.09  exact +0.09  heat -0.00  dijkstra +0.26
+  sphere_sub4            sigma0= 5.0 noise=0.10  analytic +0.23  exact +0.23  heat +0.22  dijkstra +0.58
+  sphere_sub4            sigma0=10.0 noise=0.00  analytic +0.04  exact +0.03  heat -0.12  dijkstra +0.83
+  sphere_sub4            sigma0=10.0 noise=0.10  analytic +0.39  exact +0.39  heat +0.30  dijkstra +1.33
+  sphere_sub4            sigma0=15.0 noise=0.00  analytic +0.02  exact +0.00  heat -0.15  dijkstra +1.21
+  sphere_sub4            sigma0=15.0 noise=0.10  analytic +0.38  exact +0.37  heat +0.21  dijkstra +1.74
+  sphere_sub5            sigma0= 3.0 noise=0.00  analytic +0.09  exact +0.09  heat +0.01  dijkstra +0.38
+  sphere_sub5            sigma0= 3.0 noise=0.10  analytic +0.10  exact +0.10  heat +0.02  dijkstra +0.43
+  sphere_sub5            sigma0= 5.0 noise=0.00  analytic +0.05  exact +0.05  heat -0.03  dijkstra +0.54
+  sphere_sub5            sigma0= 5.0 noise=0.10  analytic +0.10  exact +0.10  heat +0.06  dijkstra +0.62
+  sphere_sub5            sigma0=10.0 noise=0.00  analytic +0.02  exact +0.02  heat -0.06  dijkstra +0.89
+  sphere_sub5            sigma0=10.0 noise=0.10  analytic +0.30  exact +0.30  heat +0.21  dijkstra +1.16
+  sphere_sub5            sigma0=15.0 noise=0.00  analytic +0.01  exact +0.01  heat -0.10  dijkstra +1.21
+  sphere_sub5            sigma0=15.0 noise=0.10  analytic +0.57  exact +0.57  heat +0.46  dijkstra +1.90
+  cylinder_64x30_j0.0    sigma0= 3.0 noise=0.00  analytic -0.11  exact -0.11  heat -0.14  dijkstra +0.29
+  cylinder_64x30_j0.0    sigma0= 3.0 noise=0.10  analytic -0.11  exact -0.11  heat -0.16  dijkstra +0.27
+  cylinder_64x30_j0.0    sigma0= 5.0 noise=0.00  analytic +0.10  exact +0.10  heat -0.20  dijkstra +0.73
+  cylinder_64x30_j0.0    sigma0= 5.0 noise=0.10  analytic +0.18  exact +0.18  heat -0.12  dijkstra +0.81
+  cylinder_64x30_j0.0    sigma0=10.0 noise=0.00  analytic +0.06  exact +0.06  heat -0.21  dijkstra +1.53
+  cylinder_64x30_j0.0    sigma0=10.0 noise=0.10  analytic +0.65  exact +0.66  heat +0.39  dijkstra +2.28
+  cylinder_64x30_j0.0    sigma0=15.0 noise=0.00  analytic +0.01  exact +0.01  heat -0.14  dijkstra +2.25
+  cylinder_64x30_j0.0    sigma0=15.0 noise=0.10  analytic +0.74  exact +0.73  heat +0.56  dijkstra +2.93
+  cylinder_128x50_j0.0   sigma0= 3.0 noise=0.00  analytic +0.04  exact +0.04  heat -0.01  dijkstra +0.40
+  cylinder_128x50_j0.0   sigma0= 3.0 noise=0.10  analytic +0.06  exact +0.06  heat +0.00  dijkstra +0.42
+  cylinder_128x50_j0.0   sigma0= 5.0 noise=0.00  analytic +0.08  exact +0.08  heat -0.08  dijkstra +0.74
+  cylinder_128x50_j0.0   sigma0= 5.0 noise=0.10  analytic +0.29  exact +0.29  heat +0.12  dijkstra +0.98
+  cylinder_128x50_j0.0   sigma0=10.0 noise=0.00  analytic +0.01  exact +0.01  heat -0.16  dijkstra +1.52
+  cylinder_128x50_j0.0   sigma0=10.0 noise=0.10  analytic +0.82  exact +0.82  heat +0.63  dijkstra +2.46
+  cylinder_128x50_j0.0   sigma0=15.0 noise=0.00  analytic +0.01  exact +0.01  heat -0.18  dijkstra +2.28
+  cylinder_128x50_j0.0   sigma0=15.0 noise=0.10  analytic +1.77  exact +1.77  heat +1.57  dijkstra +4.03
+  cylinder_128x50_j0.3   sigma0= 3.0 noise=0.00  analytic +0.06  exact +0.06  heat -0.02  dijkstra +0.43
+  cylinder_128x50_j0.3   sigma0= 3.0 noise=0.10  analytic +0.17  exact +0.17  heat +0.08  dijkstra +0.58
+  cylinder_128x50_j0.3   sigma0= 5.0 noise=0.00  analytic +0.04  exact +0.04  heat -0.06  dijkstra +0.63
+  cylinder_128x50_j0.3   sigma0= 5.0 noise=0.10  analytic +0.28  exact +0.28  heat +0.19  dijkstra +0.81
+  cylinder_128x50_j0.3   sigma0=10.0 noise=0.00  analytic +0.03  exact +0.03  heat -0.12  dijkstra +1.09
+  cylinder_128x50_j0.3   sigma0=10.0 noise=0.10  analytic +0.74  exact +0.74  heat +0.61  dijkstra +1.96
+  cylinder_128x50_j0.3   sigma0=15.0 noise=0.00  analytic +0.03  exact +0.03  heat -0.13  dijkstra +1.64
+  cylinder_128x50_j0.3   sigma0=15.0 noise=0.10  analytic +2.18  exact +2.18  heat +2.14  dijkstra +4.17

@@ -1,0 +1,69 @@
+v47a origin rule: single maximum vs 3-mm neighbourhood maximum — summary
+========================================================================
+
+A. Clinical, 55 maps (vectorised smoother identical to package function in 54/55)
+  origin shift argmax -> smoothed: median 2.4 mm, > 3 mm in 25, > 10 mm in 12, > 20 mm in 10
+  sigma smooth - argmax: median +0.00 [-0.39; +1.04], |d| > 1 mm in 25, > 3 mm in 10; R2 median 0.872 vs 0.821; n(R2<0.7) 8 vs 13
+  offset to marker (argmax, n=46): median 6.3 [2.6; 23.9]; > 10 mm in 16, > 20 mm in 14; narrow maps (sigma<10, n=30): median 4.1, > 10 mm in 5
+  offset to marker (smooth, n=46): median 10.1 [4.6; 28.1]; > 10 mm in 23, > 20 mm in 15; narrow maps (sigma<10, n=30): median 5.6, > 10 mm in 9
+  maps where the two rules differ by > 3 mm:
+    map  19 double pts  28 shift  99.5 mm | argmax sigma  71.7 R2 0.98 offset - | smooth sigma   5.7 R2 0.10 offset - | score max 82.0, at smooth origin 82.0
+    map  33 single pts   9 shift  74.1 mm | argmax sigma   1.8 R2 0.28 offset 3.4 | smooth sigma  49.2 R2 0.95 offset 75.4 | score max 85.4, at smooth origin 80.0
+    map   2 double pts  69 shift  65.8 mm | argmax sigma  15.9 R2 0.63 offset 28.5 | smooth sigma  13.7 R2 0.88 offset 77.0 | score max 90.4, at smooth origin 90.0
+    map 104 single pts  18 shift  48.7 mm | argmax sigma  36.3 R2 0.65 offset 77.2 | smooth sigma  65.5 R2 0.90 offset 86.4 | score max 85.0, at smooth origin 85.0
+    map  63 single pts  68 shift  35.0 mm | argmax sigma  16.1 R2 0.75 offset 5.7 | smooth sigma  48.3 R2 0.98 offset 40.9 | score max 98.5, at smooth origin 98.0
+    map   1 double pts  73 shift  31.6 mm | argmax sigma   4.8 R2 0.47 offset 1.2 | smooth sigma   6.9 R2 0.30 offset 30.8 | score max 95.7, at smooth origin 93.2
+    map  15 double pts  19 shift  29.0 mm | argmax sigma  27.4 R2 0.94 offset 49.6 | smooth sigma  25.2 R2 0.96 offset 36.2 | score max 85.0, at smooth origin 85.0
+    map  78 single pts  16 shift  22.4 mm | argmax sigma  34.3 R2 0.98 offset 55.1 | smooth sigma  34.3 R2 0.94 offset 60.5 | score max 97.0, at smooth origin 97.0
+    map  14 double pts  33 shift  21.6 mm | argmax sigma  25.5 R2 0.94 offset - | smooth sigma  22.0 R2 0.98 offset - | score max 100.0, at smooth origin 100.0
+    map  64 single pts  66 shift  20.1 mm | argmax sigma  10.0 R2 0.74 offset - | smooth sigma  11.0 R2 0.90 offset - | score max 98.2, at smooth origin 93.7
+    map 139 single pts 100 shift  13.3 mm | argmax sigma  10.4 R2 0.72 offset 5.1 | smooth sigma   4.4 R2 0.50 offset 12.6 | score max 93.7, at smooth origin 93.0
+    map  35 single pts  33 shift  12.5 mm | argmax sigma  11.0 R2 0.77 offset 2.5 | smooth sigma  32.6 R2 0.95 offset 15.2 | score max 98.9, at smooth origin 97.4
+    map  52 single pts  25 shift   9.5 mm | argmax sigma   3.9 R2 0.89 offset - | smooth sigma   5.4 R2 0.91 offset - | score max 97.8, at smooth origin 96.9
+    map  12 double pts  94 shift   8.3 mm | argmax sigma   3.9 R2 0.84 offset 21.7 | smooth sigma   3.8 R2 0.90 offset 14.3 | score max 95.0, at smooth origin 95.0
+    map 117 single pts  53 shift   8.0 mm | argmax sigma   2.4 R2 0.41 offset 6.3 | smooth sigma  55.8 R2 0.72 offset 13.4 | score max 96.0, at smooth origin 94.2
+    map  21 double pts  61 shift   7.6 mm | argmax sigma   6.5 R2 0.91 offset 1.8 | smooth sigma   6.5 R2 0.97 offset 9.1 | score max 97.0, at smooth origin 95.0
+    map  17 double pts 135 shift   6.2 mm | argmax sigma   5.8 R2 0.60 offset 2.8 | smooth sigma   3.9 R2 0.73 offset 3.4 | score max 75.0, at smooth origin 71.0
+    map  25 double pts  87 shift   6.1 mm | argmax sigma   4.6 R2 0.97 offset 2.4 | smooth sigma   3.1 R2 0.92 offset 4.5 | score max 90.1, at smooth origin 84.3
+    map   5 double pts  27 shift   5.6 mm | argmax sigma   2.4 R2 0.85 offset 2.0 | smooth sigma   3.5 R2 0.93 offset 5.0 | score max 95.0, at smooth origin 80.9
+    map  18 double pts  37 shift   5.1 mm | argmax sigma   2.3 R2 0.82 offset 4.2 | smooth sigma   4.9 R2 0.81 offset 3.0 | score max 95.0, at smooth origin 79.2
+    map  10 double pts  58 shift   3.8 mm | argmax sigma   7.6 R2 0.82 offset 0.0 | smooth sigma   7.9 R2 0.86 offset 3.8 | score max 92.7, at smooth origin 87.3
+    map  29 double pts  42 shift   3.7 mm | argmax sigma   5.2 R2 0.84 offset 9.2 | smooth sigma   4.8 R2 0.89 offset 11.1 | score max 93.0, at smooth origin 92.4
+    map   9 double pts   7 shift   3.3 mm | argmax sigma   4.8 R2 0.26 offset 24.6 | smooth sigma   3.1 R2 0.40 offset 27.6 | score max 84.0, at smooth origin 84.0
+    map   4 double pts  48 shift   3.3 mm | argmax sigma  10.6 R2 0.43 offset 71.8 | smooth sigma   9.1 R2 0.39 offset 74.3 | score max 92.1, at smooth origin 92.0
+    map 140 single pts  73 shift   3.1 mm | argmax sigma   4.7 R2 0.48 offset - | smooth sigma   6.6 R2 0.48 offset - | score max 85.9, at smooth origin 84.3
+
+B. Validation on the same 35840 fields (56 meshes): argmax vs 3-mm neighbourhood maximum
+  sigma0 noise     n | argmax: bias(mean/median)   SD   offset | smooth: bias(mean/median)   SD   offset
+    3.0  0.00  1120 |  -0.05 /  -0.06    0.14    0.0 |  +0.02 /  -0.03    0.21    0.0
+    3.0  0.05  1120 |  -0.02 /  -0.03    0.17    0.0 |  +0.02 /  -0.02    0.23    0.0
+    3.0  0.10  1120 |  +0.02 /  +0.01    0.23    0.5 |  +0.03 /  +0.00    0.27    0.0
+    3.0  0.15  1120 |  +0.05 /  +0.03    0.32    0.9 |  +0.05 /  +0.03    0.31    0.0
+    5.0  0.00  1120 |  -0.09 /  -0.09    0.09    0.0 |  -0.04 /  -0.07    0.15    0.0
+    5.0  0.05  1120 |  -0.04 /  -0.05    0.18    0.8 |  -0.03 /  -0.05    0.17    0.0
+    5.0  0.10  1120 |  +0.00 /  -0.01    0.27    1.1 |  +0.00 /  -0.02    0.22    0.0
+    5.0  0.15  1120 |  +0.07 /  +0.04    0.34    1.3 |  +0.05 /  +0.04    0.26    0.9
+    8.0  0.00  1120 |  -0.09 /  -0.11    0.13    0.0 |  -0.06 /  -0.09    0.15    0.0
+    8.0  0.05  1120 |  -0.03 /  -0.05    0.23    1.3 |  -0.03 /  -0.05    0.19    0.6
+    8.0  0.10  1120 |  +0.05 /  +0.03    0.31    1.7 |  +0.04 /  +0.01    0.29    1.2
+    8.0  0.15  1120 |  +0.11 /  +0.08    0.39    1.9 |  +0.09 /  +0.08    0.34    1.7
+   10.0  0.00  1120 |  -0.08 /  -0.12    0.18    0.0 |  -0.06 /  -0.12    0.22    0.0
+   10.0  0.05  1120 |  -0.01 /  -0.04    0.29    1.6 |  -0.01 /  -0.06    0.27    0.9
+   10.0  0.10  1120 |  +0.08 /  +0.05    0.39    1.8 |  +0.07 /  +0.02    0.38    1.7
+   10.0  0.15  1120 |  +0.16 /  +0.13    0.45    2.2 |  +0.17 /  +0.12    0.47    2.0
+   15.0  0.00  1120 |  -0.05 /  -0.15    0.26    0.0 |  -0.06 /  -0.15    0.30    0.0
+   15.0  0.05  1120 |  +0.04 /  -0.03    0.47    1.9 |  +0.03 /  -0.04    0.45    1.7
+   15.0  0.10  1120 |  +0.17 /  +0.10    0.63    2.6 |  +0.15 /  +0.09    0.61    2.7
+   15.0  0.15  1120 |  +0.24 /  +0.23    0.66    3.1 |  +0.31 /  +0.22    0.79    3.3
+   20.0  0.00  1120 |  -0.02 /  -0.17    0.33    0.0 |  -0.03 /  -0.17    0.37    0.0
+   20.0  0.05  1120 |  +0.07 /  -0.03    0.64    2.4 |  +0.11 /  -0.02    0.74    2.4
+   20.0  0.10  1120 |  +0.19 /  +0.16    0.83    3.4 |  +0.22 /  +0.15    0.94    3.6
+   20.0  0.15  1120 |  +0.31 /  +0.35    0.95    3.8 |  +0.50 /  +0.35    1.52    4.2
+   25.0  0.00  1120 |  -0.00 /  -0.19    0.42    0.0 |  -0.03 /  -0.19    0.45    0.0
+   25.0  0.05  1120 |  +0.07 /  -0.00    0.77    2.9 |  +0.11 /  -0.01    0.94    3.1
+   25.0  0.10  1120 |  +0.20 /  +0.22    1.03    3.7 |  +0.41 /  +0.26    1.17    4.3
+   25.0  0.15  1120 |  +0.44 /  +0.48    1.18    4.5 |  +0.82 /  +0.61    1.86    5.4
+   30.0  0.00  1120 |  -0.02 /  -0.23    0.52    0.0 |  -0.04 /  -0.22    0.54    0.0
+   30.0  0.05  1120 |  +0.05 /  -0.00    0.95    3.2 |  +0.12 /  +0.04    1.08    3.7
+   30.0  0.10  1120 |  +0.21 /  +0.31    1.24    4.4 |  +0.50 /  +0.39    1.60    5.0
+   30.0  0.15  1120 |  +0.50 /  +0.65    1.59    5.3 |  +1.48 /  +0.82    7.20    6.5

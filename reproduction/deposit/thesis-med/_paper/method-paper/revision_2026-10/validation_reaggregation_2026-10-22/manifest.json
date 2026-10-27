@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-22",
+  "activity": "reaggregation_only_no_new_simulations",
+  "script_sha256": "0cb71d2cf489d848149fef90f367971b0a4e81a97bee356db9fda9de5b3f48c1",
+  "python": "3.12.13",
+  "numpy": "2.5.2",
+  "pandas": "2.3.3",
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20261022,
+  "bootstrap_unit": "unique geometry, retaining all 20 existing trials",
+  "inputs": [
+    {
+      "path": "thesis-med/_paper/method-paper/supplementary_validation_results/arm1_raw.csv",
+      "sha256": "fcb50e4dc6cd2602b7bcb7128edea70f6f84da8f771c05434c545d8b4c943792"
+    },
+    {
+      "path": "thesis-med/_paper/method-paper/supplementary_validation_results/v37_threshold_focality_2026-10-21/v37_fields.csv",
+      "sha256": "007062848ff0840d1ec69e5e2ad79dbf36a234bdd90657f52414dda10f077e48"
+    }
+  ],
+  "n_maps": 56,
+  "n_unique_geometries": 40,
+  "n_arm1_rows": 35840,
+  "n_unique_geometry_rows": 25600,
+  "max_duplicate_geometry_outcome_difference": 0.0,
+  "n_v37_rows": 1120,
+  "n_v37_threshold_combinations": 896,
+  "outputs": [
+    "geometry_inventory.csv",
+    "arm1_error_summary.csv",
+    "arm1_geometry_means.csv",
+    "v37_threshold_grid.csv",
+    "v37_threshold_070.csv",
+    "SUMMARY.md"
+  ]
+}

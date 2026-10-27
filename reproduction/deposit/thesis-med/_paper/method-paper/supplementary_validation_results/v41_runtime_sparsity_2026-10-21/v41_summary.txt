@@ -1,0 +1,11 @@
+v41 runtime and fill-in of the Heat Method on 59 clinical meshes — summary
+======================================================================
+potpourri3d 1.4.0 (geometry-central), defaults t_coef = 1 (t = h^2), use_robust = True (intrinsic-Delaunay / tufted Laplacian); single core, Linux VM on Apple silicon
+
+  solver construction (assembly + factorisation)   ~ N^1.19  (log-log fit, r = 0.996); range 0.003088 .. 0.1902
+  single-source query                              ~ N^1.11  (log-log fit, r = 0.998); range 0.0001585 .. 0.006905
+  nnz of Cholesky factor                           ~ N^1.28  (log-log fit, r = 0.997); range 1.838e+04 .. 1.552e+06
+  SuperLU symmetric factorisation (reference)      ~ N^1.21  (log-log fit, r = 0.982); range 0.001836 .. 0.1379
+
+  N range 1549 .. 43386; nnz(A)/N median 7.00; nnz(L)/N median 17.7 [11.9; 35.8]; fill ratio nnz(L)/nnz(A) median 2.53 [1.70; 5.11], max 5.11 at N=43386
+  largest mesh (N=43386): construction 0.189 s, query 0.0069 s; smallest (N=1549): 0.0031 s / 0.00016 s

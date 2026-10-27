@@ -1,0 +1,10 @@
+analysis,model,converged,re_var,resid_var,score_max,llf,warnings
+all55_raw,REML full,False,0.00032000284362551943,0.8110580333885105,0.0758427237763859,-72.26289685079165,"Gradient optimization failed, |grad| = 0 | Maximum Likelihood optimization failed to converge | MixedLM optimization failed, trying a different optimizer may help | Retrying MixedLM optimization with cg | Retrying MixedLM optimization with lbfgs | The MLE may be on the boundary of the parameter space"
+all55_raw,ML full,True,0.00343041713199834,0.7341892063997487,2.2275405915005777e-05,-69.67176737009319,The MLE may be on the boundary of the parameter space
+all55_raw,ML reduced,True,0.08767288758098905,0.7351467456645727,0.00041136099616613747,-72.27798098701675,
+all55_clip30,REML full,True,0.0011168737821650953,0.6180096336684092,0.16788113534196442,-65.49992865433573,Maximum Likelihood optimization failed to converge | Retrying MixedLM optimization with lbfgs | The MLE may be on the boundary of the parameter space
+all55_clip30,ML full,True,0.004307358514135602,0.5585539768249187,0.0001990065144850878,-62.23444789689054,The MLE may be on the boundary of the parameter space
+all55_clip30,ML reduced,True,0.07691899501326034,0.5566737884582585,1.2642821709057252e-06,-64.97896030688321,
+r2ge07_raw,REML full,True,0.06993652841657073,0.7085891391632575,2.796223529377966e-06,-53.44327651666522,
+r2ge07_raw,ML full,True,0.045125653994426626,0.6374072319433316,1.8802669989642376e-05,-51.46635380079816,
+r2ge07_raw,ML reduced,True,0.20537840373848923,0.6534359562574059,2.8309262508082346e-06,-55.12982986080746,

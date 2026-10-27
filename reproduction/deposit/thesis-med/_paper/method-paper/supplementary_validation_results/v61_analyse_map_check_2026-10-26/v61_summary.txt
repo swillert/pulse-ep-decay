@@ -1,0 +1,12 @@
+v61 analyse_map vs S12 (n=55 maps)
+  sigma  max |diff| 7.11e-15  (n>1e-6: 0)
+  r2     max |diff| 1.11e-16  (n>1e-6: 0)
+  F      max |diff| 1.11e-16  (n>1e-6: 0)
+  dAIC   max |diff| 1.43e-09  (n>1e-6: 0)
+  A      max |diff| 8.13e-07  (n>1e-6: 0)
+  B      max |diff| 9.05e-07  (n>1e-6: 0)
+  width_class identical in 55 / 55
+  flag_r2     identical in 55 / 55
+  flag_F      identical in 55 / 55
+  n_components identical in 55 / 55
+  status: {'ok': 55}

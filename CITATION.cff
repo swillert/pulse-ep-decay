@@ -1,43 +1,59 @@
 cff-version: 1.2.0
-message: "If you use pulse-ep-decay in your research, please cite it as below."
-title: "pulse-ep-decay: Geodesic spatial-resolution analysis for intracardiac pace-mapping"
+message: "If you use pulse-ep-decay, please cite the method paper (preferred citation) and this software."
+title: "pulse-ep-decay: geodesic decay analysis of pace-mapping score maps"
 abstract: >-
-  Python package for quantifying the spatial resolution of scalar fields
-  (e.g., pace-mapping matching scores) on triangulated atrial surface meshes.
-  Geodesic distances are computed with the Heat Method (Crane et al. 2017),
-  and a Gaussian-decay model is fit to the radial score profile; the resulting
-  width parameter sigma serves as a physical-unit (millimetre) resolution
-  measure. Includes a synthetic validation framework that recovers known
-  sigma from generated score fields and reports bias statistics. The
-  scientific kernel works on any triangulated mesh and scalar field; an
-  optional adapter integrates with the pulse-ep CARTO platform.
+  Python package that measures how fast a pace-mapping score decays with
+  geodesic distance from its maximum on a triangulated atrial surface mesh.
+  Geodesic distances are computed with the Heat Method; a Gaussian fitted to
+  the 2-mm binned radial profile gives the decay width sigma in millimetres,
+  with a width class, an R2 flag for inadequate fits and a focality flag for
+  disconnected high-score regions. A module for pulse-ep; the core works on
+  plain NumPy arrays. The reproduction/ folder holds the scripts and archived
+  result files behind the tables and figures of the method paper.
+type: software
 authors:
   - family-names: Willert
     given-names: Sven
     email: sw@willert.net
-    affiliation: "University Hospital Schleswig-Holstein, Kiel, Germany"
-version: 0.1.0
-date-released: "2026-05-17"
+    orcid: "https://orcid.org/0009-0008-0260-9721"
+    affiliation: "Department of Internal Medicine III, Cardiology and Internal Intensive Care Medicine, University Hospital Schleswig-Holstein, Campus Kiel, Kiel University, Germany"
+version: 1.0.0
+date-released: "2026-10-27"
 license: MIT
-repository-code: "https://gitlab.willert.net/sw/pulse-ep-decay"
+repository-code: "https://github.com/swillert/pulse-ep-decay"
 keywords:
   - electrophysiology
   - pace-mapping
   - geodesic-distance
   - heat-method
-  - mesh-analysis
   - spatial-resolution
-  - cardiology
-  - gaussian-decay
 references:
   - type: software
-    title: "pulse-ep: An open-source platform for programmatic access to CARTO electroanatomical mapping data"
-    repository-code: "https://gitlab.willert.net/sw/pulse-ep"
+    title: "pulse-ep"
+    repository-code: "https://github.com/swillert/pulse-ep"
+    doi: "10.5281/zenodo.20263542"
     authors:
       - family-names: Willert
         given-names: Sven
   - type: article
+    title: "pulse-ep: A Multivendor Database and Analysis Platform for Electroanatomical Mapping Research and AI-Assisted Workflows"
+    year: 2026
+    doi: "10.2139/ssrn.7499672"
+    notes: "SSRN preprint (submitted to SoftwareX)"
+    authors:
+      - family-names: Willert
+        given-names: Sven
+      - family-names: Frank
+        given-names: Derk
+      - family-names: Lian
+        given-names: Evgeny
+  - type: article
     title: "The Heat Method for Distance Computation"
+    journal: "Communications of the ACM"
+    year: 2017
+    volume: "60"
+    issue: "11"
+    doi: "10.1145/3131280"
     authors:
       - family-names: Crane
         given-names: Keenan
@@ -45,19 +61,20 @@ references:
         given-names: Clarisse
       - family-names: Wardetzky
         given-names: Max
-    journal: "Communications of the ACM"
-    year: 2017
-    volume: "60"
-    issue: "11"
-    doi: "10.1145/3131280"
 preferred-citation:
   type: article
-  title: >-
-    A geodesic decay framework for quantifying the spatial resolution of
-    intracardiac pace-mapping scores on atrial surface meshes
+  title: "Geodesic Decay Analysis: Quantifying the Spatial Resolution of Intracardiac Pace-Mapping Score Maps on Triangulated Atrial Surfaces"
+  journal: "Computer Methods and Programs in Biomedicine"
+  year: 2026
+  status: submitted
   authors:
     - family-names: Willert
       given-names: Sven
-  journal: "Computer Methods and Programs in Biomedicine"
-  year: 2026
-  status: "submitted"
+    - family-names: Maslova
+      given-names: Vera
+    - family-names: Zaman
+      given-names: Adrian
+    - family-names: Frank
+      given-names: Derk
+    - family-names: Lian
+      given-names: Evgeny

@@ -1,0 +1,4 @@
+v57 LMM diagnostics (n=55 maps, 16 patients)
+REML converged: False; random-intercept variance 0.00032; warnings: Gradient optimization failed, |grad| = 0.075843; Maximum Likelihood optimization failed to converge. Check mle_retvals; MixedLM optimization failed, trying a different optimizer may help.; Retrying MixedLM optimization with cg; Retrying MixedLM optimization with lbfgs; The MLE may be on the boundary of the parameter space.
+LMM ratio 1.79 [1.11; 2.89]
+OLS, patient-cluster-robust SE: ratio 1.79 [1.10; 2.92], p = 0.019

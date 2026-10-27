@@ -3,6 +3,8 @@
 # Install once: pip install pre-commit && pre-commit install
 # Run on demand: pre-commit run --all-files
 
+exclude: ^reproduction/
+
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.6.9

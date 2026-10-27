@@ -1,0 +1,74 @@
+v46 marked pacing site as origin reference — summary
+=======================================================
+
+A. Clinical (April vertex field): 46 maps with a unique marker of 55; 9 without (6 none, 3 two markers) listed with argmax only
+  sigma_LO median 7.86 [4.57; 20.86]; sigma_argmax (same 46) 7.00 [4.66; 11.68]; LO - argmax median +0.82 [-0.76; +7.51]; |d| > 1 mm in 32, > 3 mm in 25; rho 0.560
+  R2_LO median 0.781 (n < 0.7: 17); R2_argmax 0.820 (n < 0.7: 12)
+  offset argmax -> marked site (geodesic): median 6.3 mm [2.6; 23.9], max 84.7; <= 5 mm in 19, > 10 mm in 16, > 20 mm in 14 of 46; snap distance median 2.1 mm (max 6.1); score at marked site / max: median 0.89, min 0.63
+  offset vs sigma_argmax: Spearman rho 0.515 (p 0.000); offset vs R2_argmax: rho -0.046; offset vs n_points: rho -0.153
+    sigma_argmax < 10 mm n=30: offset median 4.1 mm [2.2; 7.2], > 10 mm in 5, max 26.9
+    10-20 mm             n= 9: offset median 6.7 mm [5.1; 28.5], > 10 mm in 4, max 84.7
+    >= 20 mm             n= 7: offset median 50.3 mm [38.8; 54.4], > 10 mm in 7, max 77.2
+    R2_argmax >= 0.7     n=34: offset median 6.1 mm [2.3; 21.3], > 10 mm in 12, max 84.7
+    R2_argmax < 0.7      n=12: offset median 6.4 mm [3.3; 25.6], > 10 mm in 4, max 77.2
+  double n=26: sigma_LO median 7.10 [4.73; 13.23], sigma_argmax 5.08, offset median 4.8 mm (> 10 mm: 8), n(R2_LO<0.7)=8
+  single n=20: sigma_LO median 12.62 [4.52; 23.92], sigma_argmax 10.59, offset median 6.6 mm (> 10 mm: 8), n(R2_LO<0.7)=9
+  per map (offset > 10 mm):
+    map  27 double RA lateral    pts  56  sigma argmax  11.9 (R2 0.94)  LO   7.6 (R2 0.89)  offset  84.7 mm  score at LO 0.99 of max
+    map 104 single RA posterior  pts  18  sigma argmax  36.3 (R2 0.65)  LO  92.4 (R2 0.86)  offset  77.2 mm  score at LO 0.92 of max
+    map   4 double RA lateral    pts  48  sigma argmax  10.6 (R2 0.43)  LO   2.4 (R2 0.13)  offset  71.8 mm  score at LO 0.82 of max
+    map  78 single RA lateral    pts  16  sigma argmax  34.3 (R2 0.98)  LO  31.2 (R2 0.90)  offset  55.1 mm  score at LO 0.88 of max
+    map 145 single RA lateral    pts  71  sigma argmax  63.9 (R2 0.96)  LO  23.7 (R2 0.82)  offset  53.7 mm  score at LO 1.00 of max
+    map  34 single RA posterior  pts  35  sigma argmax  52.5 (R2 0.82)  LO 200.0 (R2 0.81)  offset  50.3 mm  score at LO 0.77 of max
+    map  15 double LA anterior   pts  19  sigma argmax  27.4 (R2 0.94)  LO  40.8 (R2 0.75)  offset  49.6 mm  score at LO 0.86 of max
+    map   2 double LA posterior  pts  69  sigma argmax  15.9 (R2 0.63)  LO  92.7 (R2 0.87)  offset  28.5 mm  score at LO 0.71 of max
+    map  89 single RA lateral    pts  53  sigma argmax  35.8 (R2 0.81)  LO  24.5 (R2 0.90)  offset  27.9 mm  score at LO 0.98 of max
+    map  53 single RA posterior  pts  79  sigma argmax   9.1 (R2 0.82)  LO  20.0 (R2 0.83)  offset  26.9 mm  score at LO 0.92 of max
+    map  31 single LA posterior  pts  21  sigma argmax   7.6 (R2 0.76)  LO   4.2 (R2 0.15)  offset  25.6 mm  score at LO 0.90 of max
+    map   9 double LA posterior  pts   7  sigma argmax   4.8 (R2 0.26)  LO 200.0 (R2 0.61)  offset  24.6 mm  score at LO 0.76 of max
+    map  12 double RA posterior  pts  94  sigma argmax   3.9 (R2 0.84)  LO  11.5 (R2 0.95)  offset  21.7 mm  score at LO 0.91 of max
+    map   3 double RA posterior  pts  54  sigma argmax   8.4 (R2 0.73)  LO  21.1 (R2 0.51)  offset  20.3 mm  score at LO 0.82 of max
+    map  88 single RA posterior  pts 127  sigma argmax  10.8 (R2 0.93)  LO  39.0 (R2 0.89)  offset  18.9 mm  score at LO 0.88 of max
+    map  20 double RA posterior  pts  82  sigma argmax  35.7 (R2 0.91)  LO   9.7 (R2 0.58)  offset  14.7 mm  score at LO 0.78 of max
+
+B. Validation, known-source mode (origin fixed at v0; exact-geodesic truth; Heat Method from v0): 44800 fits on 56 meshes
+  sigma0   3.0 noise 0.00 n 1120  bias mean  -0.05 median  -0.06  SD   0.13  p5   2.76 p95   3.12  >100 mm 0.000  R2 0.999
+  sigma0   3.0 noise 0.05 n 1120  bias mean  -0.05 median  -0.05  SD   0.15  p5   2.74 p95   3.18  >100 mm 0.000  R2 0.996
+  sigma0   3.0 noise 0.10 n 1120  bias mean  -0.03 median  -0.04  SD   0.19  p5   2.71 p95   3.27  >100 mm 0.000  R2 0.989
+  sigma0   3.0 noise 0.15 n 1120  bias mean  -0.01 median  -0.01  SD   0.25  p5   2.63 p95   3.35  >100 mm 0.000  R2 0.976
+  sigma0   5.0 noise 0.00 n 1120  bias mean  -0.09 median  -0.09  SD   0.09  p5   4.79 p95   5.02  >100 mm 0.000  R2 1.000
+  sigma0   5.0 noise 0.05 n 1120  bias mean  -0.08 median  -0.07  SD   0.11  p5   4.75 p95   5.08  >100 mm 0.000  R2 0.998
+  sigma0   5.0 noise 0.10 n 1120  bias mean  -0.05 median  -0.04  SD   0.15  p5   4.72 p95   5.18  >100 mm 0.000  R2 0.995
+  sigma0   5.0 noise 0.15 n 1120  bias mean  +0.00 median  +0.00  SD   0.19  p5   4.70 p95   5.31  >100 mm 0.000  R2 0.988
+  sigma0   8.0 noise 0.00 n 1120  bias mean  -0.09 median  -0.11  SD   0.12  p5   7.77 p95   8.21  >100 mm 0.000  R2 1.000
+  sigma0   8.0 noise 0.05 n 1120  bias mean  -0.06 median  -0.07  SD   0.14  p5   7.73 p95   8.23  >100 mm 0.000  R2 0.999
+  sigma0   8.0 noise 0.10 n 1120  bias mean  -0.00 median  -0.01  SD   0.18  p5   7.73 p95   8.29  >100 mm 0.000  R2 0.997
+  sigma0   8.0 noise 0.15 n 1120  bias mean  +0.07 median  +0.06  SD   0.22  p5   7.71 p95   8.42  >100 mm 0.000  R2 0.993
+  sigma0  10.0 noise 0.00 n 1120  bias mean  -0.08 median  -0.12  SD   0.16  p5   9.75 p95  10.31  >100 mm 0.000  R2 1.000
+  sigma0  10.0 noise 0.05 n 1120  bias mean  -0.04 median  -0.07  SD   0.17  p5   9.72 p95  10.36  >100 mm 0.000  R2 0.999
+  sigma0  10.0 noise 0.10 n 1120  bias mean  +0.04 median  +0.02  SD   0.20  p5   9.75 p95  10.41  >100 mm 0.000  R2 0.997
+  sigma0  10.0 noise 0.15 n 1120  bias mean  +0.13 median  +0.11  SD   0.26  p5   9.75 p95  10.61  >100 mm 0.000  R2 0.994
+  sigma0  15.0 noise 0.00 n 1120  bias mean  -0.05 median  -0.15  SD   0.24  p5  14.71 p95  15.46  >100 mm 0.000  R2 1.000
+  sigma0  15.0 noise 0.05 n 1120  bias mean  +0.02 median  -0.06  SD   0.26  p5  14.70 p95  15.55  >100 mm 0.000  R2 0.999
+  sigma0  15.0 noise 0.10 n 1120  bias mean  +0.14 median  +0.08  SD   0.28  p5  14.77 p95  15.70  >100 mm 0.000  R2 0.998
+  sigma0  15.0 noise 0.15 n 1120  bias mean  +0.28 median  +0.23  SD   0.33  p5  14.79 p95  15.93  >100 mm 0.000  R2 0.996
+  sigma0  20.0 noise 0.00 n 1120  bias mean  -0.02 median  -0.17  SD   0.32  p5  19.65 p95  20.49  >100 mm 0.000  R2 1.000
+  sigma0  20.0 noise 0.05 n 1120  bias mean  +0.08 median  -0.05  SD   0.34  p5  19.70 p95  20.65  >100 mm 0.000  R2 1.000
+  sigma0  20.0 noise 0.10 n 1120  bias mean  +0.25 median  +0.17  SD   0.36  p5  19.76 p95  20.90  >100 mm 0.000  R2 0.998
+  sigma0  20.0 noise 0.15 n 1120  bias mean  +0.47 median  +0.40  SD   0.39  p5  19.92 p95  21.16  >100 mm 0.000  R2 0.997
+  sigma0  25.0 noise 0.00 n 1120  bias mean  +0.00 median  -0.19  SD   0.41  p5  24.57 p95  25.72  >100 mm 0.000  R2 1.000
+  sigma0  25.0 noise 0.05 n 1120  bias mean  +0.14 median  -0.02  SD   0.42  p5  24.66 p95  25.90  >100 mm 0.000  R2 1.000
+  sigma0  25.0 noise 0.10 n 1120  bias mean  +0.38 median  +0.27  SD   0.44  p5  24.76 p95  26.18  >100 mm 0.000  R2 0.999
+  sigma0  25.0 noise 0.15 n 1120  bias mean  +0.69 median  +0.62  SD   0.49  p5  24.97 p95  26.52  >100 mm 0.000  R2 0.997
+  sigma0  30.0 noise 0.00 n 1120  bias mean  -0.01 median  -0.23  SD   0.51  p5  29.43 p95  30.97  >100 mm 0.000  R2 1.000
+  sigma0  30.0 noise 0.05 n 1120  bias mean  +0.19 median  +0.02  SD   0.50  p5  29.60 p95  31.16  >100 mm 0.000  R2 1.000
+  sigma0  30.0 noise 0.10 n 1120  bias mean  +0.56 median  +0.47  SD   0.52  p5  29.85 p95  31.46  >100 mm 0.000  R2 0.999
+  sigma0  30.0 noise 0.15 n 1120  bias mean  +0.96 median  +0.93  SD   0.62  p5  30.03 p95  31.99  >100 mm 0.000  R2 0.997
+  sigma0  40.0 noise 0.00 n 1120  bias mean  -0.18 median  -0.42  SD   0.81  p5  38.81 p95  41.38  >100 mm 0.000  R2 1.000
+  sigma0  40.0 noise 0.05 n 1120  bias mean  +0.30 median  +0.11  SD   0.70  p5  39.35 p95  41.65  >100 mm 0.000  R2 1.000
+  sigma0  40.0 noise 0.10 n 1120  bias mean  +1.06 median  +1.01  SD   0.87  p5  39.87 p95  42.35  >100 mm 0.000  R2 0.998
+  sigma0  40.0 noise 0.15 n 1120  bias mean  +1.96 median  +1.81  SD   1.67  p5  40.18 p95  43.74  >100 mm 0.000  R2 0.996
+  sigma0  50.0 noise 0.00 n 1120  bias mean  -0.61 median  -0.94  SD   1.29  p5  47.64 p95  51.78  >100 mm 0.000  R2 1.000
+  sigma0  50.0 noise 0.05 n 1120  bias mean  +0.50 median  +0.41  SD   1.18  p5  48.81 p95  52.26  >100 mm 0.000  R2 0.999
+  sigma0  50.0 noise 0.10 n 1120  bias mean  +2.35 median  +1.98  SD   3.16  p5  49.99 p95  54.90  >100 mm 0.001  R2 0.998
+  sigma0  50.0 noise 0.15 n 1120  bias mean  +5.22 median  +3.46  SD  11.80  p5  50.82 p95  60.66  >100 mm 0.007  R2 0.995
