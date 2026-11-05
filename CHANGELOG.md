@@ -2,6 +2,8 @@
 
 ## 1.1.1 — 2026-11-06
 
+Zenodo: <https://doi.org/10.5281/zenodo.23991054>.
+
 Reproduction deposit cleaned for publication; no change to the package.
 
 - `reproduction/deposit/.../paper_rev1.tex` and `supplement_rev1.tex` are now
