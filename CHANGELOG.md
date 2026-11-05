@@ -28,6 +28,8 @@ Code of the revised manuscript (CMPB-D-26-02177 R1).
   `analysis`: the unweighted adjacency used for connected components is now
   private (`_adjacency`); the length-weighted graph remains
   `support.edge_graph`.
+- `examples/`: Python σ-recovery script and the R re-fit (`export_radial_profile.py`,
+  `fit_decay.R`), ported from the May 2026 demos to the 1.x API; covered by tests.
 - `docs/GUIDE.md`: user guide (export → pulse-ep → `widths.csv`, column and
   flag semantics, API reference).
 - Study scripts: `ROOT` honours `GD_ROOT` (deposit and working tree).

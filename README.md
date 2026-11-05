@@ -117,6 +117,13 @@ Figs. S1–S6. See
 score maps are not public (data protection); figures of clinical maps
 (Figs. 1, 3, 4 and S7) cannot be regenerated from this repository.
 
+## Examples
+
+`examples/sigma_recovery.py` recovers an injected width on a synthetic
+icosphere in Python; `examples/r/` exports the geodesic profile and re-fits
+the Gaussian with base-R `nls()` — an independent reproduction of σ in another
+language. See [examples/README.md](examples/README.md).
+
 ## Tests
 
 ```bash
