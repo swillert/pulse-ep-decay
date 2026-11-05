@@ -2,6 +2,8 @@
 
 ## 1.1.0 — 2026-11-05
 
+Zenodo: <https://doi.org/10.5281/zenodo.23990505>. GitHub: <https://github.com/swillert/pulse-ep-decay>.
+
 Code of the revised manuscript (CMPB-D-26-02177 R1).
 
 - pulse-ep adapter reads the score from the vendor-neutral scalar field
