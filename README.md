@@ -146,6 +146,6 @@ The database round trip (`seed-synthetic` → `run`) runs when
 ## Licence
 
 MIT. See [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff);
-archived releases: Zenodo, version 1.1.0 <https://doi.org/10.5281/zenodo.23990505>
+archived releases: Zenodo, version 1.1.0 <https://doi.org/10.5281/zenodo.23990505>, version 1.1.1 (DOI follows the release)
 (concept DOI for all versions <https://doi.org/10.5281/zenodo.23990504>).
 Changes: [CHANGELOG.md](CHANGELOG.md).

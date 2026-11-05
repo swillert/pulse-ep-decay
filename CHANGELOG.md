@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.1 — 2026-11-06
+
+Reproduction deposit cleaned for publication; no change to the package.
+
+- `reproduction/deposit/.../paper_rev1.tex` and `supplement_rev1.tex` are now
+  synced without LaTeX comments (working notes of the authors stayed in the
+  v1.1.0 archive by mistake); `sync_from_worktree.py` strips them.
+- Removed `revision_2026-10/validation_reaggregation_2026-10-22/`, a working
+  note on the superseded pre-correction validation that no deposit script
+  reads.
+- Manuscript source synced with the corrections of 5/6 Nov 2026 (sourced
+  double-chamber widths, SD under correlated deviations also in Supplementary
+  Section S9, S6 range −10 to +1 %, S21 text, PDF metadata); caption of
+  Supplementary Table S2 with typographic minus.
+
 ## 1.1.0 — 2026-11-05
 
 Zenodo: <https://doi.org/10.5281/zenodo.23990505>. GitHub: <https://github.com/swillert/pulse-ep-decay>.

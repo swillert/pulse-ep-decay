@@ -11,9 +11,7 @@ the scripts address files relative to a root directory (`GD_ROOT`):
 - `thesis-med/_paper/method-paper/supplementary_validation_results/`: their
   result files (summaries and per-map results; full raw outputs omitted);
 - `thesis-med/_paper/method-paper/revision_2026-10/`: the manuscript and
-  supplement source (the generators read the table and figure list from it),
-  the hash inventory of the 40 distinct mesh reconstructions and the
-  re-aggregation of the earlier validation;
+  supplement source (the generators read the table and figure list from it);
 - `pulse-ultimate/decay_profiles_heat/decay_summary.csv`: per-map summary of
   the clinical import.
 
