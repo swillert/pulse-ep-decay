@@ -23,7 +23,7 @@ from scipy.sparse import coo_matrix, diags
 from scipy.sparse.linalg import splu
 from pulse_ep_decay.mesh import largest_component, mean_edge_length
 
-ROOT = os.path.expanduser("~/mnt/IdeaProjects")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects"))
 MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 
 

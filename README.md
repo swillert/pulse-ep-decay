@@ -24,16 +24,62 @@ Spatial Resolution of Intracardiac Pace-Mapping Score Maps on Triangulated
 Atrial Surfaces* (Willert, Maslova, Zaman, Frank, Lian; Computer Methods and
 Programs in Biomedicine, under revision).
 
+**Guide:** [docs/GUIDE.md](docs/GUIDE.md) — from export to `widths.csv`, how to read the columns and flags, API reference.
+
 ## Installation
 
 ```bash
 pip install "pulse-ep-decay @ git+https://github.com/swillert/pulse-ep-decay"
-# extras: [exact] pygeodesic, [pulse-ep] database adapter, [repro] reproduction scripts
+# extras: [pulse-ep] database adapter and synthetic maps, [exact] pygeodesic,
+#         [repro] reproduction scripts, [all] everything
 ```
 
-## Usage
+## Use with pulse-ep
 
-The core takes plain NumPy arrays and does not need pulse-ep:
+[pulse-ep](https://github.com/swillert/pulse-ep) imports CARTO 3 and EnSite X
+studies into one database. With the `pulse-ep` extra installed, every pace map
+in that database can be analysed in one command (the database is found through
+pulse-ep's own configuration, `PULSE_EP_DATABASE_URL` or `.env`; `--db`
+overrides it):
+
+```bash
+pip install "pulse-ep-decay[pulse-ep] @ git+https://github.com/swillert/pulse-ep-decay"
+pulse-ep-decay run --out widths.csv                   # all pace maps
+pulse-ep-decay run --map-ids 12 13 --out widths.csv   # selected maps
+```
+
+`widths.csv` has one row per map: width σ and class, R² and its flag, F with
+the number of half-maximum components and its flag, ΔAIC (Gaussian minus
+exponential), fitted amplitude and baseline, number of bins, where the score
+came from, and a status. A map counts as a pace map when it is tagged
+`pacemap` (`pulse-ep-tag-maps`) or carries a scalar field of kind
+`pacemap_score`; `--all` analyses every map with a score field.
+
+The same from Python:
+
+```python
+from pulse_ep.core.database import get_db_session
+from pulse_ep_decay.integration.pulse_ep import analyse_epmap, iter_pacemaps
+
+with get_db_session() as s:
+    for epmap, attrs, arrays in iter_pacemaps(session=s):
+        res = analyse_epmap(epmap)
+        print(epmap.id, res["sigma"], res["width_class"], res["flag_r2"], res["flag_F"])
+```
+
+The adapter reads the score from the vendor-neutral scalar field
+`pacemap_score` that both pulse-ep importers register, and falls back to the
+legacy CARTO array `act_bip` for maps imported by older pulse-ep versions.
+
+**Try it without data.** `pulse-ep-decay demo` builds eight synthetic pace
+maps on pulse-ep's ellipsoidal pseudo-atrium (known widths, two peaks, pure
+noise, unscored holes, a detached mesh fragment, a legacy-format map) and
+analyses them; `pulse-ep-decay seed-synthetic --db …` writes the same maps
+into a pulse-ep database as a test study.
+
+## Use without pulse-ep
+
+The core takes plain NumPy arrays:
 
 ```python
 from pulse_ep_decay import analyse_map, largest_component
@@ -45,9 +91,8 @@ res["sigma"], res["width_class"], res["r2"], res["flag_r2"], res["F"], res["flag
 
 `analyse_map` also returns the fitted amplitude and baseline, ΔAIC against an
 exponential fit, and a `status` string that names any unavailable quantity.
-
-With pulse-ep installed, `pulse_ep_decay.integration.pulse_ep` reads meshes
-and scores from a pulse-ep database (`from_epmap`, `iter_pacemaps`).
+On the command line, `pulse-ep-decay run --npz DIR` analyses `.npz` files with
+arrays `vertices`, `triangles` and `scores`.
 
 ## Modules
 
@@ -56,18 +101,31 @@ and scores from a pulse-ep database (`from_epmap`, `iter_pacemaps`).
 | `mesh` | largest component, Heat-Method and exact geodesic solvers |
 | `profile` | origin rule, 2-mm binning, Gaussian, exponential and generalised fits, synthetic fields |
 | `analysis` | `analyse_map`, `width_class`, `focality_index` |
-| `support` | edge graph, connected components, smoothed maximum |
-| `integration.pulse_ep` | optional pulse-ep adapter |
+| `support` | length-weighted mesh edge graph |
+| `legacy` | superseded estimators, only for the supplement's sensitivity analyses |
+| `cli` | `pulse-ep-decay run | demo | seed-synthetic` |
+| `integration.pulse_ep` | pulse-ep adapter: `from_epmap`, `analyse_epmap`, `iter_pacemaps` |
+| `integration.synthetic` | synthetic pace maps as pulse-ep objects (`make_synthetic_pacemaps`, `seed_database`) |
 
 ## Reproduction
 
 `reproduction/` contains the scripts behind every data-derived table and
 figure of the paper and its supplement, and the archived result files needed
-to regenerate all data-derived tables, Figs. 4 and 7, and Supplementary
+to regenerate all data-derived tables, Figs. 2 and 5, and Supplementary
 Figs. S1–S6. See
 [reproduction/README.md](reproduction/README.md). The clinical meshes and
-score maps are not public (data protection); figures of clinical maps cannot
-be regenerated from this repository.
+score maps are not public (data protection); figures of clinical maps
+(Figs. 1, 3, 4 and S7) cannot be regenerated from this repository.
+
+## Tests
+
+```bash
+pip install -e ".[all]"
+pytest            # synthetic surfaces only; no clinical data needed
+```
+
+The database round trip (`seed-synthetic` → `run`) runs when
+`PULSE_EP_TEST_DATABASE_URL` names a PostgreSQL pulse-ep database.
 
 ## Related
 
@@ -79,3 +137,4 @@ be regenerated from this repository.
 ## Licence
 
 MIT. See [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff).
+Changes: [CHANGELOG.md](CHANGELOG.md).

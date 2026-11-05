@@ -10,7 +10,7 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 from pulse_ep_decay.mesh import HeatSolver, ExactSolver, largest_component, centroid_vertex
 from pulse_ep_decay.profile import bin_profile, fit_gaussian
-ROOT = os.path.expanduser("~/mnt/IdeaProjects"); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects")); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 OUT = os.path.join(ROOT, "thesis-med/_paper/method-paper/supplementary_validation_results/v54_synthetic_ties_2026-10-26")
 FRAGMENTED = {87, 102, 103}; A, B = 35.0, 65.0; SIGMAS = (5, 10, 20, 30); NOISES = (0.05, 0.10, 0.15); TRIALS = 20
 

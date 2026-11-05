@@ -9,7 +9,7 @@ import argparse, glob, os
 import numpy as np, pandas as pd
 from pulse_ep_decay.mesh import HeatSolver, ExactSolver, largest_component, centroid_vertex
 from pulse_ep_decay.profile import bin_profile, fit_gaussian, find_origin
-ROOT = os.path.expanduser("~/mnt/IdeaProjects"); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects")); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 SVR = os.path.join(ROOT, "thesis-med/_paper/method-paper/supplementary_validation_results"); OUT = os.path.join(SVR, "v56_peak_below_clip_2026-10-26")
 FRAGMENTED = {87, 102, 103}; A, B = 35.0, 55.0; SIGMAS = (2, 3, 5, 8, 10, 15, 20, 25, 30, 40, 50); NOISES = (0.05, 0.10, 0.15); TRIALS = 20
 

@@ -123,8 +123,9 @@ widths (exploratory; mixed-model
 ratio 1.8, 95\,\% CI 1.04--3.09).
 %
 \textbf{Conclusions:}
-Geodesic decay analysis provides a reproducible measure of spatial score
-selectivity in millimetres, computed in under a second per map, with
+Geodesic decay analysis measures the spatial resolution of a
+pace-mapping score map, the width of its decay around the maximum,
+reproducibly in millimetres and in under a second per map, with
 fit-quality and focality flags to guide interpretation.
 \end{abstract}
 
@@ -155,7 +156,10 @@ present work turns this reading into a measurement and tests it against
 the pacing sites marked during acquisition.
 
 No established metric quantifies how sharply such a score map falls
-off, in physical units on the mesh surface.  Prior electrophysiological
+off around its maximum, in physical units on the mesh surface.  This is
+the sense in which we use spatial resolution: a property of the score
+map, distinct from the localisation error of the mapping system, which
+we examine separately against the marked pacing sites.  Prior electrophysiological
 studies have treated resolution as a binary property --- whether two
 pacing sites can be distinguished at a given
 separation~\citep{kadish1991, azegami2005} --- and used Euclidean
@@ -191,6 +195,12 @@ This paper makes three contributions:
     16~patients, in which the location of the score maximum is checked
     against the pacing site marked during acquisition.
 \end{enumerate}
+%
+A width in millimetres allows score maps to be compared between regions
+and patients on a stated scale instead of by impression, and at well
+under a second per map it could be computed during the procedure.  The
+flags state when a single radial profile does not describe a map, so
+that such a map is inspected rather than summarised by one number.
 
 \begin{figure*}[pos=!t]
   \centering
@@ -222,35 +232,25 @@ This paper makes three contributions:
 % =============================================================
 \section{Data Representation}\label{sec:data}
 
-\subsection{Triangulated surface mesh}\label{sec:mesh}
-
-The three-dimensional reconstruction of a cardiac chamber surface
-produced by an electroanatomic mapping system is modelled as a
-triangulated two-dimensional manifold
-$\mathcal{M} \subset \mathbb{R}^3$, consisting of $N$~vertices
-$\mathcal{V} = \{v_1, \ldots, v_N\}$ with positions
-$\mathbf{p}_i \in \mathbb{R}^3$ and $M$~triangles
-$\mathcal{T} = \{T_1, \ldots, T_M\}$, each defined by three vertex
-indices, $T_k = (v_{a_k}, v_{b_k}, v_{c_k})$.  Together,
-$(\mathcal{V}, \mathcal{T})$ form a piecewise-linear approximation of the
-smooth anatomic surface.  In the clinical dataset all meshes represent
-left or right atrial surfaces; of the largest connected components of the
-55 analysed meshes, 14 are closed and 41 have a boundary
-(mesh sizes and exclusions in Section~\ref{sec:cohort}).
-
-\subsection{Scalar fields}\label{sec:scalar}
-
-A scalar field assigns a value to each vertex:
+The chamber surface reconstructed by the mapping system is a triangle
+mesh $(\mathcal{V}, \mathcal{T})$ with $N$~vertices
+$\mathcal{V} = \{v_1, \ldots, v_N\}$ at positions
+$\mathbf{p}_i \in \mathbb{R}^3$ and $M$~triangles~$\mathcal{T}$, a
+piecewise-linear approximation of the atrial surface
+$\mathcal{M} \subset \mathbb{R}^3$\label{sec:mesh}; of the largest
+connected components of the 55 analysed meshes, 14 are closed and 41
+have a boundary (Section~\ref{sec:cohort}).  A scalar field assigns a
+value to each vertex\label{sec:scalar}:
 %
 \begin{equation}
   S \colon \mathcal{V} \to [0, 100], \quad v_i \mapsto s_i\,.
   \label{eq:scalar}
 \end{equation}
 %
-In pace mapping, $s_i$ is the matching score displayed by the mapping
-system at the $i$-th vertex: the percentage similarity between the
-signal recorded at the reference catheter during pacing and the template
-beat.  The estimator below is defined for any vertex field with a single
+In pace mapping, $s_i$ is the matching score displayed at the $i$-th
+vertex: the percentage similarity between the signal recorded at the
+reference catheter during pacing and the template beat.  The estimator
+is defined for any vertex field with a single
 dominant maximum; it is characterised here for matching-score maps.
 
 % =============================================================
@@ -277,49 +277,31 @@ $\gamma\colon [0,1] \to \mathcal{M}$ with $\gamma(0)=p$ and
 $\gamma(1)=q$.  Geodesic distance captures the true surface separation
 along folds and curvatures and is in general longer than the Euclidean
 (through-tissue) distance $\|\mathbf{p}_p - \mathbf{p}_q\|$ in
-$\mathbb{R}^3$ (Fig.~\ref{fig:geodesic}).
-
-\begin{figure}[pos=!t]
-  \centering
-  \includegraphics[width=\linewidth]{fig_geodesic.pdf}
-  \caption{Geodesic versus Euclidean distance on a folded surface.
-    Vertices $v^*$ and~$v_i$ are connected by the geodesic path (solid,
-    along the surface) and the Euclidean chord (dashed, through tissue).
-    On curved atrial walls, the geodesic distance can substantially
-    exceed the Euclidean distance.}
-  \label{fig:geodesic}
-\end{figure}
+$\mathbb{R}^3$.
 
 \subsection{Discrete algorithms}\label{sec:discrete_geo}
 
-Four classes of discrete algorithm are commonly used.
 \emph{Dijkstra's algorithm} on the mesh graph~\citep{dijkstra1959} is
-efficient ($\mathcal{O}(N\log N)$) but constrains shortest paths to mesh
-edges and systematically overestimates distances (zigzag artefact; on
-our meshes by \SI{5.7}{\percent} within 30\,mm of the origin, median
-map).  \emph{Fast Marching Methods}~\citep{kimmel1998} solve the Eikonal
-equation on triangle meshes and avoid the zigzag artefact, but require
-careful treatment of obtuse triangles and are first-order accurate.
+efficient ($\mathcal{O}(N\log N)$) but restricts paths to mesh edges and
+overestimates distances (zigzag artefact; on our meshes by
+\SI{5.7}{\percent} within 30\,mm of the origin, median map).
+\emph{Fast Marching Methods}~\citep{kimmel1998} avoid this artefact but
+are first-order accurate and sensitive to obtuse triangles.
 \emph{Exact algorithms} such as MMP~\citep{mitchell1987, surazhsky2005}
-unfold geodesics through the triangle faces and yield exact distances on
-the piecewise-flat surface, at a complexity of
-$\mathcal{O}(N^2 \log N)$ (on our meshes 0.16\,s for one exact
-single-source computation versus 0.03\,s for the Heat Method including
-its factorisation, median); they provide the reference for the
-validation in Section~\ref{sec:validation}.  The \emph{Heat
-Method}~\citep{crane2017} combines accuracy close to the exact solution
-with a cost dominated by one sparse factorisation that is reused for
-every further source, and was adopted for this work.
+give exact distances on the piecewise-flat surface at
+$\mathcal{O}(N^2 \log N)$ (median 0.16\,s per source on our meshes,
+against 0.03\,s for the Heat Method including its factorisation) and
+serve as the reference of the validation (Section~\ref{sec:validation}).
+The \emph{Heat Method}~\citep{crane2017} is close to exact at a cost
+dominated by one sparse factorisation that is reused for every further
+source, and was adopted here.
 
 \subsection{The Heat Method}\label{sec:heat_method}
 
-The Heat Method exploits a connection between heat diffusion and
-distance first formalised by \citet{varadhan1967}: heat released at a
-point propagates along the same shortest paths that define geodesic
-distances, so that in the limit of short diffusion time the normalised
-heat flux points in the direction of the gradient of the geodesic
-distance function.  The method approximates geodesic distances in three
-algebraic steps:
+The Heat Method uses the relation between short-time heat diffusion
+and geodesic distance~\citep{varadhan1967}: the normalised heat flux
+points along the gradient of the distance function.  Distances are
+obtained in three algebraic steps:
 %
 \begin{align}
   \bigl(M_{\mathrm{mass}} - t\,L_C\bigr)\,u &= \delta_{v^*}\,,
@@ -342,9 +324,8 @@ gradient direction of the distance function; and Eq.~\eqref{eq:heat3}
 recovers the scalar distance field~$\phi$ via a Poisson solve, yielding
 the geodesic distances $\hat{d}_i = \phi(v_i)$, with the additive
 constant fixed so that the distance at the source is zero.  The heat
-equation serves only as a mathematical device for distance computation;
-it does not model electrical propagation or any physical diffusion on
-the myocardium.
+equation serves here only as a computational device; it does not model
+electrical propagation.
 
 \paragraph{Computational complexity and parameters.}
 The two linear systems (Eqs.~\ref{eq:heat1} and~\ref{eq:heat3}) share
@@ -420,12 +401,8 @@ weighted equally, and the fit is evaluated at the bin centres
 $d_k = (k + \tfrac12)\,\Delta d$.  The
 bin width of \SI{2}{\milli\metre} matches the mean edge length of the
 analysed meshes (\SIrange{0.95}{2.78}{\milli\metre}) and still resolves
-narrow peaks ($\sigma \le \SI{5}{\milli\metre}$).  With bin widths of
-1\,mm, 4\,mm and $1.5\,\bar{h}$ per map (1.4--4.2\,mm) the median change
-in~$\sigma$ on the clinical maps was $+0.04$, $+0.19$ and $0.00$\,mm
-(Supplementary Table~S17).  A bin width of 1.5 times the mean edge
-length produced similar cohort summaries, with five maps changing by
-more than 1\,mm; 2\,mm is kept as the default.
+narrow peaks ($\sigma \le \SI{5}{\milli\metre}$); its sensitivity is
+reported in Section~\ref{sec:disc_limitations}.
 
 \subsection{Gaussian fit}\label{sec:gauss}
 
@@ -474,9 +451,8 @@ binned profile:
 minimised with \texttt{scipy.optimize.curve\_fit}~\citep{virtanen2020},
 using initial values $A_0 = \max_k \bar{S}_k - \min_k \bar{S}_k$,
 $\sigma_0 = \SI{10}{\milli\metre}$, $B_0 = \min_k \bar{S}_k$, and the bound
-$\sigma \in [0.1,\,200]\,\si{\milli\metre}$.  The generous upper bound
-avoids artificial truncation; how widths above the validated range are
-reported is set out in Section~\ref{sec:validation_range}.
+$\sigma \in [0.1,\,200]\,\si{\milli\metre}$, which avoids artificial
+truncation.
 
 \paragraph{Fit quality flag.}
 The coefficient of determination~$R^2$ of the Gaussian fit to the binned
@@ -487,27 +463,6 @@ threshold is a convention; its error rates on fields of known type are
 given in Section~\ref{sec:validation_flags} and its effect on the
 clinical maps in Section~\ref{sec:clinical_results}.
 
-\begin{figure}[pos=!t]
-  \centering
-  \includegraphics[width=\linewidth,height=0.68\textheight,keepaspectratio]{fig_decay_profile.pdf}
-  \caption{Radial decay profiles of three pace maps (grey: individual
-    vertex scores; the horizontal bands reflect the integer scores
-    reported by the system, which the bin means average out; dots:
-    2-mm bin means; curve: fitted Gaussian, Eq.~\ref{eq:gauss}; dotted
-    vertical line: $\sigma$; the fit uses all bins over the full geodesic
-    range, the panels show its first part).
-    \textbf{A:}~Narrow map (map~25), RA lateral wall, double-chamber reference
-    ($\sigma = 4.6$\,mm, $R^2 = 0.97$); the focality index flags further
-    regions above the half maximum in this map (Fig.~\ref{fig:clinical_example}C).
-    \textbf{B:}~Wider map (map~54; class ``in range''), RA lateral wall, single-chamber reference
-    ($\sigma = 16.0$\,mm, $R^2 = 0.83$).
-    \textbf{C:}~Map flagged by the fit quality (map~32), LA posterior wall,
-    single-chamber reference ($\sigma = 3.5$\,mm, $R^2 = 0.30$; dashed
-    curve): a narrow peak over an irregular far field that a single
-    radial Gaussian does not describe (inset: bin means and fit over the
-    full geodesic range; shaded: within $3\sigma$).}
-  \label{fig:decay_profile}
-\end{figure}
 
 \subsection{Focality index}\label{sec:focality}
 
@@ -545,10 +500,10 @@ range ($\sigma < 2$\,mm), in range ($2 \le \sigma < 30$\,mm), broad
 ($30 \le \sigma < 50$\,mm), diffuse ($50 \le \sigma < 100$\,mm) or not
 identifiable ($\sigma \ge 100$\,mm; Section~\ref{sec:validation_range})---the
 fit quality~$R^2$ with its flag, the focality index~$F$ with its flag
-(only when $R^2 \ge 0.7$), and the difference in AIC between the Gaussian and an exponential fit.
-The public function \texttt{analyse\_map} returns these outputs
-together with an availability status; it returns no per-map interval.
-The study analysis additionally computes an empirical half-maximum width
+(only when $R^2 \ge 0.7$), and the difference in AIC between the
+Gaussian and an exponential fit,
+$\Delta\mathrm{AIC} = \mathrm{AIC}_{\mathrm{Gauss}} - \mathrm{AIC}_{\mathrm{exp}}$
+(positive when the exponential fits better).  The study analysis additionally computes an empirical half-maximum width
 read from the binned profile (Supplementary Table~S12 and
 Section~S20).  A flagged map is kept: the flag asks the reader to
 inspect the profile or the map before using the number.
@@ -634,13 +589,9 @@ levels $\eta$ of 5, 10 and 15\,\% of the amplitude with 20 seeds per
 mesh (36{,}960 fits; Table~\ref{tab:validation}, Fig.~\ref{fig:validation}).
 A saturating sensitivity protocol with $B = 65$ places the noise-free
 peak at the score limit (100), where noisy fields saturate in a plateau
-around the source.  It comprised 35{,}840 detected-origin evaluations on
-the core grid (3--30\,mm, noise 0--15\,\%) and 44{,}800 on a
-range-extension grid (1--80\,mm), including 8{,}960 repeated anchor
-evaluations at 3 and 30\,mm; a further 44{,}800 known-origin evaluations
-covered widths from 3 to 50\,mm (Supplementary Tables~S3, S3b and
-S4).  The plateau-centre tie rule was chosen after simulations with this
-protocol (Supplementary Section~S3).
+around the source; it covers noise-free fields, known origins and widths
+of 1--80\,mm, and the plateau-centre tie rule was chosen with it
+(Supplementary Sections~S3 and~S4).
 
 Independent vertex noise is a reference condition: the within-bin
 scatter of the clinical fields is larger (median 36\,\% of the fitted
@@ -650,13 +601,15 @@ Section~\ref{sec:validation_shape}.
 
 \subsection{Results}\label{sec:validation_results}
 \paragraph{Geodesic distances.}
-On the 56 clinical meshes the Heat-Method distance deviated from the
-exact geodesic by a median of $-1.3$\,\% (IQR $-1.6$ to $-1.1$\,\%)
-between 2 and 30\,mm from the origin, where the width is determined, and
-by $-0.2$\,\% over the whole mesh (Supplementary Table~S2).  On the
-analytic surfaces the Heat Method underestimated the geodesic by
-0.6--1.7\,\% and Dijkstra's algorithm overestimated it by 6--18\,\%
-(Supplementary Table~S1, Fig.~S1).  On Gaussian fields generated with
+On the analytic surfaces, where the geodesic is known in closed form,
+the exact polyhedral solver was within 0.3\,\% of it, the Heat Method
+underestimated it by 0.6--1.7\,\% and Dijkstra's algorithm
+overestimated it by 6--18\,\% (Supplementary Table~S1, Fig.~S1).  On
+the 56 clinical meshes, with the exact solver as reference, the
+Heat-Method distance deviated by a median of $-1.3$\,\% (IQR $-1.6$ to
+$-1.1$\,\%) between 2 and 30\,mm from the origin, where the width is
+determined, and by $-0.2$\,\% over the whole mesh (Supplementary
+Table~S2).  On Gaussian fields generated with
 the analytic distances, Heat-Method distances lowered the recovered
 width by a median of 0.1--0.2\,mm and Dijkstra distances widened it by
 0.6--1.1\,mm (Supplementary Table~S1b).
@@ -674,16 +627,12 @@ between 1.7 and 2.5\,mm, but one runaway fit increased the SD to
 At 40 and 50\,mm and 10\,\% noise, the mean bias remained within
 $\pm 0.4$\,mm, while the SD increased to 6.0 and 12.4\,mm.
 
-Noise-free fields, known origins and the wider range of 1--80\,mm were
-evaluated in the saturating sensitivity protocol (Supplementary
-Tables~S3, S3b and S4).  Without noise, the mean bias was within
-$\pm 0.09$\,mm for $\sigma_0 = 3$--30\,mm.  At 30\,mm and 10\,\%
-noise, fixing the origin reduced the SD from 1.24 to 0.52\,mm, with
-mean biases of $+0.21$\,mm for the detected origin and $+0.56$\,mm for
-the known origin (Table~S3).  With the detected origin at 10\,\% noise,
-the mean bias was between 0.00 and $+0.21$\,mm for 2--30\,mm, with an
-SD of at most 1.24\,mm.  Below 2\,mm the estimator was unstable; at
-60 and 80\,mm the SD reached 13 and 31\,mm, respectively (Table~S4).
+In the saturating sensitivity protocol (Supplementary Tables~S3, S3b
+and S4) the mean bias without noise was within $\pm 0.09$\,mm for
+$\sigma_0 = 3$--30\,mm and, with the detected origin at 10\,\% noise,
+between 0.00 and $+0.21$\,mm for 2--30\,mm (SD at most 1.24\,mm).
+Below 2\,mm the estimator was unstable; at 60 and 80\,mm the SD reached
+13 and 31\,mm.
 
 \input{tables/T1a_validation_iid}
 
@@ -733,15 +682,13 @@ source, the median width bias was within $\pm 0.7$\,mm with an SD of
 Section~S9, Table~S9b).  Structured deviations thus cause two failure
 modes: capture of the origin by a secondary maximum, which the flags
 detect only in part, and a lowered $R^2$ with a more scattered width.
-These simulations illustrate how spatially structured deviations
-increase the within-bin scatter (15--19\,\% of~$A$ at 0.25\,$A$;
-36\,\% in the clinical maps) and can shift the detected maximum
-(Supplementary Table~S10).
+They also raise the within-bin scatter (15--19\,\% of~$A$ at 0.25\,$A$,
+against 36\,\% in the clinical maps; Supplementary Table~S10).
 \paragraph{Origin rule.}
-The vertex with the highest mean score in its 3-mm neighbourhood as origin
-did not reduce the synthetic bias and moved the detected origin further
-from the marked pacing site in the clinical maps (median 10.1 vs 6.3\,mm;
-Supplementary Section~S5); the maximum is retained.
+An alternative origin, the vertex with the highest mean score in its
+3-mm neighbourhood, did not reduce the synthetic bias and lay further
+from the marked pacing site in the clinical maps (median 10.1 vs
+6.3\,mm; Supplementary Section~S5).
 
 \subsection{Classification flags}\label{sec:validation_flags}
 On the sphere, fields of known type (Gaussian, flat, ring-shaped and
@@ -755,8 +702,9 @@ least 25\,mm apart with an amplitude ratio of 0.7 or more in
 amplitude and rings were not detected, and peaks 15\,mm or less apart
 were usually missed (detection 0--15\,\%).  It flagged a
 single peak in at most 2\,\% of the trials under independent noise up to
-15\,\%, and 45--69\,\% of the fields with correlated deviations of
-0.25\,$A$ on the meshes (Supplementary Section~S11, Table~S14b).
+15\,\%, in 90\,\% at 25\,\% noise, and in 45--69\,\% of the fields with
+correlated deviations of 0.25\,$A$ on the meshes (Supplementary
+Section~S11, Tables~S11c and~S14b).
 
 \subsection{Operating range}\label{sec:validation_range}
 For Gaussian fields with independent vertex noise up to 10\,\% the mean
@@ -768,24 +716,21 @@ but the SD reaches 6--12\,mm in the primary protocol (class
 ``broad''), so such widths are
 compared only coarsely.  Widths of 50\,mm and above are reported as
 diffuse and not interpreted, fits at or above 100\,mm as not
-identifiable.  These operating characteristics were evaluated at known true widths
-$\sigma_0$; the class reported for a map is assigned from its estimate
-$\hat\sigma$.  The assigned class need not contain the true width:
-a broad field can yield a small estimate (Supplementary Table~S4).  With correlated deviations of SD 0.25\,$A$, the SD of the width
-estimates ranged from 2.5 to 9.1\,mm across all trials and from 1.8 to
-3.5\,mm among trials with the detected origin within 10\,mm of the true
-source; the detected origin lay beyond 10\,mm in 17--34\,\% of the
-trials.  The range above is therefore a best case.
+identifiable.  The class of a map is assigned from its estimate
+$\hat\sigma$, which need not fall in the class of the true width: a
+broad field can yield a small estimate (Supplementary Table~S4).  Under
+correlated deviations of 0.25\,$A$ the SD of the width rose to
+2.5--9.1\,mm (1.8--3.5\,mm with the origin within 10\,mm of the true
+source; Section~\ref{sec:validation_shape}), so the range above is a
+best case.
 
 For two independent estimates the SD of the difference is
 $\sqrt{s_1^2 + s_2^2}$.  At 10\,\% independent noise a difference
 exceeds the estimator's variability (approximately 95\,\%) when it is
 larger than about 0.8\,mm at 5\,mm, 1.3\,mm at 10\,mm, 1.8\,mm at
 15\,mm, 2.7\,mm at 20\,mm and 4.9\,mm at 30\,mm.  These are illustrative
-difference scales based on SDs pooled across the simulated meshes and
-noise realisations at a given true width, not estimates of the
-repeatability of a particular clinical map, which the present data (in
-general one map per region and patient) cannot provide.
+scales from SDs pooled over meshes and noise realisations, not the
+repeatability of an individual clinical map.
 
 
 % =============================================================
@@ -827,7 +772,7 @@ check (Section~\ref{sec:clinical_localisation}).
 
 Mesh and score data were imported from the CARTO-3 system with
 pulse-ep~\citep{willert2026pulseep}, our open-source platform for
-electroanatomical mapping data (152 electroanatomic maps from 20 studies), and the imported
+electroanatomical mapping data, and the imported
 geometry, scalar fields and colour coding were checked visually against
 the CARTO display for each map.
 
@@ -847,11 +792,11 @@ below the range (Table~\ref{tab:clinical_groups}).  The maximum vertex
 score had a median of 95 and reached the upper limit of 100 in two maps.
 The median~$R^2$ was 0.82, and 13 maps were flagged ($R^2 < 0.7$;
 thresholds of 0.6 and 0.8 flag 7 and 23).  The flagged maps were mostly
-narrow (median width 4.8\,mm) with a smaller amplitude above baseline
+narrow (median width 4.8\,mm; one broad map, $\sigma = 36.3$\,mm) with a smaller amplitude above baseline
 (median 18 vs 26 score points), and a median of 98\,\% of their squared
 residual lay beyond $3\sigma$: a low $R^2$ marked a narrow peak over an
 irregular or secondarily elevated far field
-(Fig.~\ref{fig:clinical_example}B).
+(Fig.~\ref{fig:clinical_example}A).
 
 \begin{figure}[pos=!tp]
   \centering
@@ -866,28 +811,26 @@ irregular or secondarily elevated far field
     \textbf{B:}~Map~78, RA lateral wall, single-chamber reference
     ($\sigma = 34.3$\,mm, $R^2 = 0.98$; broad): the $\sigma$ contour
     encloses most of the visible wall and the marked site lies 55\,mm
-    from the maximum.
-    \textbf{C:}~Map~25, RA lateral wall, double-chamber reference
-    ($\sigma = 4.6$\,mm, $R^2 = 0.97$).}
+    from the maximum.}
   \label{fig:heatmap}
 \end{figure}
 
 \begin{figure*}[pos=!tp]
   \centering
   \includegraphics[width=\textwidth,height=0.66\textheight,keepaspectratio]{fig_clinical_example.pdf}
-  \caption{Three clinical maps with intermediate results.  Columns:
+  \caption{Two flagged clinical maps with intermediate results (the
+    unflagged map~28 is shown in Fig.~\ref{fig:workflow}).  Columns:
     score map with the origin (star), the marked pacing site (triangle)
     and the $\sigma$ and $2\sigma$ contours; geodesic distance from the
     origin; radial profile with 2-mm bin means and Gaussian fit (dashed
-    when $R^2 < 0.7$; fitted over the full range, first 40\,mm shown; inset in B: full range); the half-maximum set of the fitted profile (red:
+    when $R^2 < 0.7$; fitted over the full range, first 40\,mm shown; inset in A: full range); the half-maximum set of the fitted profile (red:
     component containing the origin; blue: other components) with the
-    outputs; map numbers as in Supplementary Table~S12.  \textbf{A:}~Focal map (map~28), LA posterior wall, double-chamber
-    reference ($\sigma = 4.8$\,mm, $R^2 = 0.94$, $F = 1.00$; no flag).
-    \textbf{B:}~Narrow peak over a structured far field (map~1), LA anterior
+    outputs; map numbers as in Supplementary Table~S12.
+    \textbf{A:}~Narrow peak over a structured far field (map~1), LA anterior
     wall, double-chamber reference ($\sigma = 4.8$\,mm, $R^2 = 0.47$):
     the fit is flagged; $F = 0.45$ is not interpreted because the
     half-maximum set depends on the inadequate fit.
-    \textbf{C:}~Second region above the half maximum (map~25), RA lateral wall,
+    \textbf{B:}~Second region above the half maximum (map~25), RA lateral wall,
     double-chamber reference ($\sigma = 4.6$\,mm, $R^2 = 0.97$,
     $F = 0.27$ with six components): the peak at the origin is narrow
     and well fitted, but regions 10--25\,mm away reach 78\,\% of its
@@ -900,20 +843,21 @@ irregular or secondarily elevated far field
 \paragraph{Shape of the decay.}
 On the binned profiles an exponential model had the lower AIC in 29
 maps ($\Delta\mathrm{AIC} > 2$), the Gaussian in 15, and 11 were
-undecided; the full-range and near-peak summaries suggest that the
-differences were more pronounced in the far field (Supplementary
-Section~S20).  Within
-$3\sigma$ of the origin the median RMSEs were similar (1.9 score points
-for each model); over the full fitted range it was 2.3 for the
-exponential and 2.4 for the Gaussian.  Map rankings were strongly
+undecided; the differences lay mainly in the far field (median RMSE
+within $3\sigma$ 1.9 score points for both models; Supplementary
+Section~S20).  Map rankings were strongly
 concordant across the two models (Spearman $\rho = 0.97$ between the
 Gaussian~$\sigma$ and the exponential scale); the widths in millimetres
 depend on the model.
 \paragraph{Distance definition.}
 Recomputing the width from the same origin with exact geodesics changed
 it by a median of $+0.08$\,mm, and Dijkstra distances by $+0.49$\,mm.
-The Euclidean distance changed it by more than 3\,mm in 16 maps, mostly
-broad or folded (8 of the 35 adequately fitted maps with
+Within 30\,mm of the origin the Euclidean chord was shorter than the
+geodesic by a median of 3.8\,\% (95th percentile within maps 11\,\%).
+The Euclidean width differed from the geodesic width by a median of
+$-0.29$\,mm, and the two were strongly rank-correlated (Spearman
+$\rho = 0.94$), but the difference was concentrated in some maps: it
+exceeded 3\,mm in 16, mostly broad or folded (8 of the 35 adequately fitted maps with
 $\sigma < 30$\,mm; e.g.\ 11.0 vs 67.5\,mm in a lateral right-atrial
 map).  The Euclidean fit flagged 17 maps compared with 13 for geodesic
 distances; seven maps gained the flag and three lost it (Supplementary
@@ -922,7 +866,7 @@ Section~S13).
 Of the 42 maps with an adequate fit, four were flagged by $F$ (all
 double-chamber): narrow peaks ($\sigma$ = 2.3--4.6\,mm) with further
 regions above the half maximum, the nearest 6--18\,mm from the origin
-(Fig.~\ref{fig:clinical_example}C).  $F$ had a median of 1.00 (IQR
+(Fig.~\ref{fig:clinical_example}B).  $F$ had a median of 1.00 (IQR
 0.89--1.00); thresholds of 0.5 to 0.9 flagged 3 to 11 of the 42 maps,
 and $F$ was related to~$\sigma$ ($\rho = 0.51$; narrow peaks were more
 often accompanied by comparably high regions elsewhere) and weakly
@@ -936,7 +880,9 @@ to~$R^2$ ($\rho = -0.28$; Supplementary Table~S14).
     pacing site marked during acquisition against the width~$\sigma$
     (46 maps; colour: fit-quality flag; logarithmic width axis, linear
     distance axis; the five narrow maps with a distance above 10\,mm are
-    labelled with their map number).  Dashed: 10-mm distance; dotted:
+    labelled with their map number; top: number of maps within 10\,mm or
+    median distance for widths below 10, from 10 to 20 and from 20\,mm).
+    Dashed: 10-mm distance; dotted:
     $\sigma = 10$\,mm, the model-based reading of
     Section~\ref{sec:disc_comparison}.}
   \label{fig:marker_check}
@@ -961,11 +907,7 @@ to the mesh vertex nearest to the marked position (median distance
 origins were within 5\,mm, whereas larger differences occurred when
 they were more than 10\,mm apart (Supplementary Section~S18).  The
 pipeline keeps the maximum as origin and uses the marked site as an
-external reference.  The
-maximum score was shared by several vertices in 14 maps; with the first
-tied vertex in vertex order instead of the plateau centre as origin, the
-median widths of the cohort and of both reference groups were unchanged
-(Supplementary Section~S19).
+external reference.
 
 \subsection{Reference configuration and region (exploratory)}\label{sec:clinical_reference}
 Widths were larger with a single-chamber than with a double-chamber
@@ -976,7 +918,8 @@ $\log\sigma$ with reference and region as fixed effects and a patient
 random intercept gave a single-/double-chamber width ratio (ratio of
 geometric means) of 1.79 (95\,\% CI 1.04--3.09) and a ratio of 1.73
 (0.85--3.53) for the lateral right-atrial wall relative to the posterior
-left-atrial wall.  At the patient level (8 vs 8) the difference was less
+left-atrial wall; the patient random intercept was small (intraclass
+correlation 0.03).  At the patient level (8 vs 8) the difference was less
 clear: a two-stage analysis gave a ratio of 1.75 (0.93--3.29;
 diagnostics and further estimands in Supplementary Section~S15).  With
 eight patients per configuration, neither configuration nor patients
@@ -996,44 +939,37 @@ the width~$\sigma$ of its decay along the atrial surface, with flags for
 maps that a single radial profile does not describe.  It is simple (one
 geodesic distance field, a binned profile and a three-parameter fit),
 fast (well under a second per map) and read in millimetres.  The
-validation supports three statements about it.  The geodesic distances
-are accurate: the Heat Method reproduces exact geodesics on the clinical
-meshes to about 1\,\% where the fit is determined, and the width differs
-by a median of $+0.08$\,mm between exact and Heat-Method distances.  The
-estimator has a small bias under idealised conditions: for Gaussian
-fields with independent noise up to 10\,\% the mean bias is within
-$\pm 0.25$\,mm for 2--30\,mm, with a single-estimate SD of
-0.2--1.8\,mm for 3--30\,mm; structured deviations of clinical size widen
-the scatter, so these figures are a best case.  And $\sigma$ is a width
-convention: the clinical profiles are on average better described by a
-decay sharper than Gaussian, so absolute widths depend on the model,
-while map rankings were strongly concordant ($\rho = 0.97$).
+validation shows that its distances reproduce exact geodesics to about
+1\,\% where the width is determined (width difference $+0.08$\,mm), that
+its bias is small under independent noise, a best case for clinical
+maps (Section~\ref{sec:validation_range}), and that $\sigma$ is a width
+convention: the clinical profiles decay on average more sharply than a
+Gaussian, so absolute widths depend on the model, while map rankings
+were strongly concordant ($\rho = 0.97$).
 
-The width quantifies spatial score selectivity around the maximum.  Its
+The width quantifies the spatial resolution of the score map in this
+sense.  Its
 association with the distance to the marked pacing site links this map
-property to localisation performance in the present cohort: the rank
-correlation between width and distance was 0.51 (95\,\% interval
-0.23--0.72), and in the maps with $\sigma < 10$\,mm the maximum lay
-within 10\,mm of the marked site in 25 of 30 (median 4\,mm), whereas in
-the maps with $\sigma \ge 20$\,mm it lay a median of 50\,mm away
-(Fig.~\ref{fig:marker_check}).  In five narrow maps the maximum lay
-20--27\,mm away, and each flag caught only one of them.  This supports a
+property to localisation performance in the present cohort: in 25 of
+30 maps with $\sigma < 10$\,mm the maximum lay within 10\,mm of the
+marked site, in the seven maps with $\sigma \ge 20$\,mm a median of
+50\,mm away (Section~\ref{sec:clinical_localisation},
+Fig.~\ref{fig:marker_check}).  In five narrow maps another location
+reached the highest score, and each flag caught only one of them.  This supports a
 cohort-level association between decay width and localisation offset,
 not a calibrated error estimate for an individual map.
 Decay width complements earlier measures of site
 distinguishability~\citep{kadish1991} and of the spatial spread of the
-best pacemaps~\citep{azegami2005}: it describes how sharply the score
-falls off around its maximum, the sense in which spatial resolution has
-been used for pace mapping~\citep{man1996, azegami2005}.
+best pacemaps~\citep{azegami2005} by giving this descriptive notion of
+spatial resolution a continuous value in millimetres along the surface.
 
 \paragraph{Distance definition.}
-The choice of the distance enters the width directly: the Euclidean
-chord changes it by more than 3\,mm in 16 of 55 maps, including 8 of the
-35 adequately fitted maps with $\sigma < 30$\,mm, whereas exact and Heat-Method
-distances agree within 1\,mm in 48 of 55 maps.  Because the synthetic
-fields are generated on exact geodesics and evaluated with the Heat
-Method from the detected origin, the error of the distance computation
-is part of the reported bias rather than hidden by a common metric.
+The distance enters the width directly: the Euclidean chord changed it
+by more than 3\,mm in 16 of 55 maps, whereas exact and Heat-Method
+distances agreed within 1\,mm in 48 (Section~\ref{sec:clinical_results}).
+Because the synthetic fields are generated on exact geodesics and
+evaluated with the Heat Method from the detected origin, the error of
+the distance computation is part of the reported bias.
 
 \paragraph{Practical use.}
 A width is reported with its class and flags.  A flagged map asks for
@@ -1105,16 +1041,15 @@ such maps in the same way.  The
 number of independent measurements of a map is the number of pacing
 sites (7--135), not the number of mesh vertices; the synthetic
 validation with independent noise at every vertex does not represent
-this, and maps with few sites deserve particular caution.
+this, and maps with few sites deserve particular caution.  In the
+present maps the width was only weakly related to the number of pacing
+sites (Spearman $\rho = 0.12$, 55 maps).
 
 The model is isotropic.  Fibrosis, scar, low-voltage regions, prior
 ablation lesions, local conduction abnormalities, the reference-catheter
 configuration and the local anatomy can all make the decay
-direction-dependent.  In the simulated elliptical Gaussian fields,
-the isotropic width approximated the geometric mean of the principal
-widths, while $R^2$ remained high despite substantial anisotropy
-(Section~\ref{sec:validation_shape}).  A high $R^2$ therefore does not
-exclude anisotropy.  An exploratory
+direction-dependent, and a high $R^2$ does not exclude anisotropy
+(Section~\ref{sec:validation_shape}).  An exploratory
 elliptical fit in geodesic polar coordinates (logarithmic map computed
 with the Vector Heat Method~\citep{sharp2019vhm}) suggests that direction
 dependence is common: in 33 maps with an interpretable fit the ratio of
@@ -1123,19 +1058,19 @@ permutation null in 24 (Supplementary Section~S8).  A direction-resolved
 analysis is the subject of separate work.  Because the radial Gaussian
 is a width convention, it overstates the half-maximum width of sharply
 peaked decays by up to 64\,\%; the per-map $\Delta\mathrm{AIC}$ and the
-empirical half-maximum width are reported for this reason.  The 13 maps
-flagged by~$R^2$ have a width that is available but may be unreliable.
+empirical half-maximum width are reported for this reason.
 
 The vertex scatter of the clinical fields is larger and more
 structured than the independent noise of the synthetic validation
 (Section~\ref{sec:validation_shape}).  Mesh reconstruction may lengthen
 geodesic distances where the reconstructed surface is rougher than the
 tissue; Taubin smoothing of the meshes changed the widths by a median of
-0.01\,mm or less (Supplementary Table~S17).  The bin-width and smoothing
-analyses characterise sensitivity on the reconstructed meshes studied
-here; their applicability to other mesh resolutions and their
-relationship to anatomical reconstruction accuracy require further
-evaluation.  The
+0.01\,mm or less.  A bin width scaled to each mesh, 1.5 times the mean
+edge length (1.4--4.2\,mm), gave a median change in~$\sigma$ of
+0.00\,mm, with five maps changing by more than 1\,mm; fixed bins of 1
+and 4\,mm gave $+0.04$ and $+0.19$\,mm (Supplementary Table~S17).  The fixed
+2-mm bin is kept as the default.  These sensitivities were assessed on
+the meshes of this study.  The
 focality index reports regions above the half maximum that are not
 connected to the peak at the origin, but it does not tell a second
 pacing-site response from a structured deviation of the score field.
@@ -1144,23 +1079,22 @@ pacing-site response from a structured deviation of the score field.
 A direction-resolved width can be obtained from geodesic polar
 coordinates around the origin.  The estimator
 applies to any peaked field on a triangulated surface; its behaviour has
-been characterised only for pace-mapping score maps on atrial surfaces.  With a distance
-computation of 30\,ms per map, the width could be computed during a
-procedure to give the operator immediate feedback on how selective the
-current map is.
+been characterised only for pace-mapping score maps on atrial surfaces.  Its use
+during procedures, as immediate feedback on how selective the current
+map is, remains to be evaluated.
 
 
 % =============================================================
 %  8  CONCLUSIONS
 % =============================================================
 \section{Conclusions}\label{sec:conclusions}
-Geodesic decay analysis quantifies spatial score selectivity as a width
-in millimetres, accompanied by fit-quality and focality flags: Heat-Method
+Geodesic decay analysis quantifies the spatial resolution of a score map
+as the width of its decay in millimetres, accompanied by fit-quality and focality flags: Heat-Method
 geodesic distances from the vertex of maximum score, radial binning and a
 Gaussian width convention, computed in under a second per map.  On
 synthetic fields generated on the clinical meshes the mean bias of the
-width is within $\pm 0.1$\,mm for 3--30\,mm under independent noise of
-10\,\%.  Among the 46 maps with a marked pacing site, larger widths were
+width is within $\pm 0.25$\,mm for 2--30\,mm under independent noise of
+10\,\%, with a single-estimate SD of 0.2--1.8\,mm for 3--30\,mm.  Among the 46 maps with a marked pacing site, larger widths were
 associated with larger distances between the score maximum and the
 marked site.
 
@@ -1173,7 +1107,9 @@ marked site.
 \section*{Code and data availability}
 The geodesic decay analysis is implemented in the open-source Python
 package \texttt{pulse-ep-decay}, a module of
-pulse-ep~\citep{willert2026pulseep} that can also be used on its own.
+pulse-ep~\citep{willert2026pulseep} that can also be used on its own;
+its function \texttt{analyse\_map} returns the width with its class,
+$R^2$, $F$, their flags and $\Delta\mathrm{AIC}$.
 It uses the open-source libraries
 \texttt{potpourri3d}~\citep{sharp2021} /
 \texttt{geometry-central}~\citep{sharp2019} for geodesic
@@ -1181,7 +1117,7 @@ computation, \texttt{pygeodesic} for the exact geodesics of the
 validation and \texttt{scipy}~\citep{virtanen2020} for curve fitting.
 The source code, the scripts that produce every table and figure of
 this article and its supplement that is derived from data (all except
-Table~\ref{tab:comparison} and Fig.~\ref{fig:geodesic}), the archived
+Table~\ref{tab:comparison}), the archived
 result files of the validation and the per-map results of
 Supplementary Table~S12 are available at
 \texttt{[URL~redacted~for~review]}.  The clinical mesh and score data are

@@ -3,7 +3,7 @@ run on the 55 clinical maps; every reported per-map quantity compared with Suppl
 (revision_2026-10/tables/S12_per_map.csv, produced by the study scripts).  Output: v61_check.csv, v61_summary.txt."""
 import os, numpy as np, pandas as pd
 from pulse_ep_decay import analyse_map, largest_component
-ROOT = os.path.expanduser("~/mnt/IdeaProjects"); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects")); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 MP = os.path.join(ROOT, "thesis-med/_paper/method-paper"); OUT = os.path.join(MP, "supplementary_validation_results/v61_analyse_map_check_2026-10-26"); os.makedirs(OUT, exist_ok=True)
 S12 = pd.read_csv(os.path.join(MP, "revision_2026-10/tables/S12_per_map.csv")).set_index("map_id"); rows = []
 for mid in S12.index:

@@ -223,19 +223,19 @@ def meta(mid):
     row = META.loc[mid]; return dict(region="%s %s" % (row.atrium, row.region), ref="%s-chamber reference" % row.reference, patient=int(row.patient), sigma=row.sigma, r2=row.r2, F=row.F, n=int(row.n_points))
 
 
-def fig_heatmap(maps=(75, 78, 25)):
+def fig_heatmap(maps=(75, 78)):  # 29 Oct: map 25 dropped (shown in the clinical-example figure)
     NAME = "fig_heatmap"
     """Fig. 4 (revised): vertical stack, single-hue sequential colour map, marker, origin, 1-sigma and 2-sigma geodesic contours."""
     rs = [analyse(m) for m in maps]; [check_against_table(r) for r in rs]
     norm = mcolors.Normalize(50, 100)
-    fig = plt.figure(figsize=(3.4, 8.6)); gs = fig.add_gridspec(len(maps), 1, left=0.02, right=0.80, top=0.965, bottom=0.06, hspace=0.18)  # panels are width-limited (equal aspect); 8.4 in keeps them square
+    fig = plt.figure(figsize=(3.4, 0.6 + 2.8 * len(maps))); gs = fig.add_gridspec(len(maps), 1, left=0.02, right=0.80, top=1 - 0.3 / (0.6 + 2.8 * len(maps)), bottom=0.62 / (0.6 + 2.8 * len(maps)), hspace=0.18)  # panels are width-limited (equal aspect); 8.4 in keeps them square
     lines = []
     for k, (m, r) in enumerate(zip(maps, rs)):
         ax = fig.add_subplot(gs[k, 0]); md = meta(m)
         lab = "%s  %s, %s\n$\sigma$ = %.1f mm, $R^2$ = %.2f%s" % ("ABC"[k], md["region"], md["ref"].replace(" reference", ""), md["sigma"], md["r2"], "  (diffuse)" if md["sigma"] >= 50 else ("  (broad)" if md["sigma"] >= 30 else ""))
         draw_surface(ax, r, "score", norm=norm, label=lab, window=max(WINDOW, min(70.0, 1.6 * md["sigma"])))
         lines.append("Fig. 4 %s: map %d, patient %d, %s, %s, n_points %d, sigma %.2f, R2 %.3f, F %.2f, marker offset %s" % ("ABC"[k], m, md["patient"], md["region"], md["ref"], md["n"], md["sigma"], md["r2"], md["F"], "%.1f mm" % META.loc[m].offset_marker_mm if np.isfinite(META.loc[m].offset_marker_mm) else "none"))
-    cax = fig.add_axes([0.84, 0.30, 0.03, 0.40]); cb = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=CMAP), cax=cax); cb.set_label("matching score (points)", fontsize=7); cb.ax.tick_params(labelsize=7)
+    cax = fig.add_axes([0.84, 0.32, 0.03, 0.36]); cb = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=CMAP), cax=cax); cb.set_label("matching score (points)", fontsize=7); cb.ax.tick_params(labelsize=7)
     h = [plt.Line2D([], [], marker="*", ms=8, mfc="white", mec="black", ls="none", label="vertex of maximum score (origin)"), plt.Line2D([], [], marker="^", ms=6, mfc="white", mec="black", ls="none", label="pacing site marked during acquisition"),
          plt.Line2D([], [], color="black", lw=0.6, label="geodesic distance $\sigma$ and $2\sigma$ from the origin")]
     fig.legend(handles=h, loc="lower left", bbox_to_anchor=(0.01, 0.0), ncol=1, fontsize=6.5, frameon=False)
@@ -256,18 +256,18 @@ def fig_profiles(maps=(25, 54, 32)):
         ax.set_title("%s  %s, %s: %s" % ("ABC"[k], md["region"], md["ref"].replace(" reference", ""), kind), loc="left", fontsize=8)
         if k < len(maps) - 1: ax.set_xlabel("")
         lines.append("Fig. 2 %s: map %d, patient %d, %s, %s, sigma %.2f, R2 %.3f, A %.1f, B %.1f, n_bins %d" % ("ABC"[k], m, md["patient"], md["region"], md["ref"], md["sigma"], md["r2"], float(r["A"]), float(r["B"]), len(r["centres"])))
-    fig.tight_layout(h_pad=1.0); save(fig, "fig_decay_profile"); open(os.path.join(FIGS, "captions_" + NAME + ".txt"), "w").write("\n".join(lines) + "\n")
+    fig.tight_layout(h_pad=1.0); save(fig, "figS_decay_profile"); open(os.path.join(FIGS, "captions_" + NAME + ".txt"), "w").write("\n".join(lines) + "\n")
 
 
-def fig_example(maps=(28, 1, 25)):
+def fig_example(maps=(1, 25)):  # 29 Oct: map 28 dropped (it is the workflow map of Fig. 1)
     NAME = "fig_clinical_example"
     """Clinical example (new): three maps x four columns: score map | geodesic distance | profile with fit | high-score set and F."""
     rs = [analyse(m) for m in maps]; [check_against_table(r) for r in rs]
     norm = mcolors.Normalize(50, 100)
-    fig = plt.figure(figsize=(7.2, 7.6)); gs = fig.add_gridspec(len(maps), 4, width_ratios=[1, 1, 1.25, 1], left=0.01, right=0.99, top=0.93, bottom=0.14, wspace=0.16, hspace=0.22)
+    H = 1.15 + 2.15 * len(maps); fig = plt.figure(figsize=(7.2, H)); gs = fig.add_gridspec(len(maps), 4, width_ratios=[1, 1, 1.25, 1], left=0.01, right=0.99, top=1 - 0.5 / H, bottom=1.05 / H, wspace=0.16, hspace=0.22)
     lines = []
     for j, h in enumerate(["score map", "geodesic distance", "radial profile, Gaussian fit", "half-maximum set, $F$"]):
-        fig.text([0.11, 0.33, 0.60, 0.88][j], 0.955, h, ha="center", va="bottom", fontsize=8, fontweight="bold")
+        fig.text([0.11, 0.33, 0.60, 0.88][j], 1 - 0.36 / H, h, ha="center", va="bottom", fontsize=8, fontweight="bold")
     for k, (m, r) in enumerate(zip(maps, rs)):
         md = meta(m); L = "ABC"[k]
         a0 = fig.add_subplot(gs[k, 0]); draw_surface(a0, r, "score", norm=norm, label="%s  %s, %s" % (L, md["region"], md["ref"].replace(" reference", "")))
@@ -283,8 +283,8 @@ def fig_example(maps=(28, 1, 25)):
         txt = "$\sigma$ = %.1f mm%s\n$R^2$ = %.2f\n%s%s" % (md["sigma"], " (diffuse)" if md["sigma"] >= 50 else (" (broad)" if md["sigma"] >= 30 else ""), md["r2"], ftxt, ("\nflag: " + ", ".join(flag)) if flag else "\nno flag")
         a3.text(0.02, 0.02, txt, transform=a3.transAxes, fontsize=6.5, va="bottom", ha="left", bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#cccccc", lw=0.5), zorder=9)
         lines.append("Fig. example %s: map %d, patient %d, %s, %s, sigma %.2f, R2 %.3f, F %.2f (half-max set, %d comp.; F_pct %.2f), marker offset %s" % (L, m, md["patient"], md["region"], md["ref"], md["sigma"], md["r2"], md["F"], int(META.loc[m].n_components), META.loc[m].F_pct, "%.1f mm" % META.loc[m].offset_marker_mm if np.isfinite(META.loc[m].offset_marker_mm) else "none"))
-    cax = fig.add_axes([0.035, 0.095, 0.16, 0.011]); cb = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=CMAP), cax=cax, orientation="horizontal"); cb.set_label("matching score (points)", fontsize=6.5); cb.ax.tick_params(labelsize=6.5)
-    cax2 = fig.add_axes([0.26, 0.095, 0.16, 0.011]); cb2 = fig.colorbar(cm.ScalarMappable(norm=mcolors.Normalize(0, 50), cmap="Blues"), cax=cax2, orientation="horizontal"); cb2.set_label("geodesic distance (mm)", fontsize=6.5); cb2.ax.tick_params(labelsize=6.5)
+    cax = fig.add_axes([0.035, 0.72 / H, 0.16, 0.085 / H]); cb = fig.colorbar(cm.ScalarMappable(norm=norm, cmap=CMAP), cax=cax, orientation="horizontal"); cb.set_label("matching score (points)", fontsize=6.5); cb.ax.tick_params(labelsize=6.5)
+    cax2 = fig.add_axes([0.26, 0.72 / H, 0.16, 0.085 / H]); cb2 = fig.colorbar(cm.ScalarMappable(norm=mcolors.Normalize(0, 50), cmap="Blues"), cax=cax2, orientation="horizontal"); cb2.set_label("geodesic distance (mm)", fontsize=6.5); cb2.ax.tick_params(labelsize=6.5)
     h = [plt.Line2D([], [], marker="*", ms=8, mfc="white", mec="black", ls="none", label="origin"), plt.Line2D([], [], marker="^", ms=6, mfc="white", mec="black", ls="none", label="marked pacing site"),
          plt.Line2D([], [], color="black", lw=0.6, label="$\sigma$, $2\sigma$ contours"), plt.Line2D([], [], marker="o", ms=3.5, color="#1f4e79", ls="none", label="2-mm bin means"), plt.Line2D([], [], color="#c0392b", lw=1.4, label="Gaussian fit"),
          plt.Rectangle((0, 0), 1, 1, fc=(0.85, 0.20, 0.10), label="half-maximum set, component of the origin"), plt.Rectangle((0, 0), 1, 1, fc=(0.10, 0.35, 0.85), label="other components")]
@@ -397,7 +397,14 @@ def fig_supp():
         g = v46[(v46.r2_argmax < 0.7) == flag]; ax.scatter(g.sigma_argmax, g.offset_geo_mm, s=16, color=c, alpha=0.85, linewidths=0, label=lab, zorder=3, clip_on=False)
     for _, r_ in v46[(v46.sigma_argmax < 10) & (v46.offset_geo_mm > 10)].iterrows(): ax.annotate(str(int(r_.map_id)), (r_.sigma_argmax, r_.offset_geo_mm), fontsize=6, xytext=(3, 2), textcoords="offset points")
     ax.set_xscale("log"); ax.set_xticks([2, 5, 10, 20, 50]); ax.set_xticklabels(["2", "5", "10", "20", "50"]); ax.set_ylim(0, None)
-    ax.set_xlabel("width $\\sigma$ (mm)"); ax.set_ylabel("score maximum to marked pacing site (mm)"); ax.legend(fontsize=6.5, frameon=False, loc="upper left"); fig.tight_layout(); save(fig, "fig_marker_check")
+    # group summaries written into the figure (29 Oct 2026), computed from the same rows as the points
+    import matplotlib.transforms as mtrans; tr = mtrans.blended_transform_factory(ax.transData, ax.transAxes)
+    for lo_, hi_, xc, ha_ in ((0, 10, 3.6, "center"), (10, 20, 14.2, "center"), (20, np.inf, 68.0, "right")):
+        g = v46[(v46.sigma_argmax >= lo_) & (v46.sigma_argmax < hi_)]
+        txt = ("%d of %d\nwithin 10 mm" % (int((g.offset_geo_mm <= 10).sum()), len(g))) if hi_ == 10 else ("%d maps\nmedian %.0f mm" % (len(g), g.offset_geo_mm.median()) if lo_ == 20 else "%d maps\nmedian %.1f mm" % (len(g), g.offset_geo_mm.median()))
+        ax.text(xc, 0.985, txt, transform=tr, ha=ha_, va="top", fontsize=6.2, color="#333333")
+    ax.set_ylim(0, 1.2 * float(v46.offset_geo_mm.max()))
+    ax.set_xlabel("width $\\sigma$ (mm)"); ax.set_ylabel("score maximum to marked pacing site (mm)"); ax.legend(fontsize=6.5, frameon=False, loc="center left", bbox_to_anchor=(0.0, 0.62)); fig.tight_layout(); save(fig, "fig_marker_check")
     # Fig. S2: anisotropy on the sphere
     v44 = pd.read_csv(os.path.join(SVR, "v60_anisotropy_pkgfit_2026-10-26/v60_rows.csv")); A_ = v44[v44.part == "A"]; fig, ax = plt.subplots(figsize=(3.4, 2.8))  # v60 = source of Table S7 (round 6)
     for (gm, eta), g in A_.groupby(["gm", "eta"]):

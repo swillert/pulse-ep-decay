@@ -45,7 +45,9 @@ def width_class(sigma: float) -> str:
     return "below range"
 
 
-def edge_graph(faces: np.ndarray, n: int):
+def _adjacency(faces: np.ndarray, n: int):
+    """Unweighted vertex adjacency of the mesh edges (for connected components);
+    the length-weighted edge graph is :func:`pulse_ep_decay.support.edge_graph`."""
     T = np.asarray(faces, int)
     e = np.unique(np.sort(np.vstack([T[:, [0, 1]], T[:, [1, 2]], T[:, [2, 0]]]), axis=1), axis=0)
     return coo_matrix(
@@ -67,7 +69,7 @@ def focality_index(scores, faces, origin, A, B, graph=None):
         return np.nan, 0, "F unavailable: fit failed"
     if A <= 0:
         return np.nan, 0, "F unavailable: non-positive amplitude"
-    G = edge_graph(faces, len(s)) if graph is None else graph
+    G = _adjacency(faces, len(s)) if graph is None else graph
     H = np.flatnonzero(np.isfinite(s) & (s >= B + 0.5 * A))
     if len(H) < MIN_H_VERTICES:
         return np.nan, 0, "F unavailable: fewer than %d vertices in the half-maximum set" % MIN_H_VERTICES
@@ -114,8 +116,15 @@ def analyse_map(scores, vertices, faces, dist_solver=None, origin: int | None = 
             status.append("fit failed: Gaussian did not converge")
         if not e["converged"]:
             status.append("exponential fit failed: lam_exp and dAIC unavailable")
-    out.update(sigma=float(g["sigma"]), A=float(g["A"]), B=float(g["B"]), r2=float(g["r2"]),
-               aic_gauss=float(g["aic"]), aic_exp=float(e["aic"]), lam_exp=float(e["lam"]))
+    out.update(
+        sigma=float(g["sigma"]),
+        A=float(g["A"]),
+        B=float(g["B"]),
+        r2=float(g["r2"]),
+        aic_gauss=float(g["aic"]),
+        aic_exp=float(e["aic"]),
+        lam_exp=float(e["lam"]),
+    )
     out["dAIC"] = out["aic_gauss"] - out["aic_exp"]
     F, ncomp, fstat = focality_index(s, T, origin, out["A"], out["B"])
     out.update(F=F, n_components=ncomp)

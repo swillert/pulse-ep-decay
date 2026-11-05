@@ -27,7 +27,7 @@ from scipy.stats import spearmanr
 from pulse_ep_decay.mesh import HeatSolver, ExactSolver, largest_component, centroid_vertex, mean_edge_length
 from pulse_ep_decay.profile import bin_profile, fit_gaussian, find_origin
 
-ROOT = os.path.expanduser("~/mnt/IdeaProjects")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects"))
 MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 SVR = os.path.join(ROOT, "thesis-med/_paper/method-paper/supplementary_validation_results")
 SUMMARY = os.path.join(ROOT, "pulse-ultimate/decay_profiles_heat/decay_summary.csv")

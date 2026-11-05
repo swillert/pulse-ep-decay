@@ -23,7 +23,7 @@ import statsmodels.formula.api as smf
 from scipy.stats import mannwhitneyu
 
 warnings.filterwarnings("ignore")
-ROOT = os.path.expanduser("~/mnt/IdeaProjects/thesis-med/_paper/method-paper/supplementary_validation_results")
+ROOT = os.path.join(os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects")), "thesis-med/_paper/method-paper/supplementary_validation_results")
 
 
 def lmm(df, label, L):

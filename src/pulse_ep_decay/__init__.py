@@ -11,10 +11,16 @@ Intracardiac Pace-Mapping Score Maps on Triangulated Atrial Surfaces*
   radial binning (2 mm), Gaussian and alternative fits, synthetic fields;
 - :mod:`pulse_ep_decay.analysis` — :func:`analyse_map` (Algorithm 1 of the
   paper): width, class, R² and focality flags, ΔAIC, availability status;
-- :mod:`pulse_ep_decay.support` — mesh-graph helpers (edge graph, components,
-  smoothed maximum);
+- :mod:`pulse_ep_decay.support` — length-weighted mesh edge graph;
+- :mod:`pulse_ep_decay.legacy` — superseded estimators kept only for the
+  sensitivity analyses of the supplement (first-index tie rule, smoothed
+  maximum, generalised-Gaussian fit);
 - :mod:`pulse_ep_decay.integration.pulse_ep` — optional adapter that reads
-  meshes and score fields from a pulse-ep database.
+  meshes and score fields from a pulse-ep database (``analyse_epmap``,
+  ``iter_pacemaps``);
+- :mod:`pulse_ep_decay.integration.synthetic` — synthetic pace maps as pulse-ep
+  objects with known truth;
+- :mod:`pulse_ep_decay.cli` — ``pulse-ep-decay run | demo | seed-synthetic``.
 
 Usage::
 
@@ -23,64 +29,43 @@ Usage::
     res = analyse_map(scores[idx >= 0], V, T)   # sigma, width_class, r2, flag_r2, F, flag_F, dAIC, status
 """
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
-from pulse_ep_decay.analysis import analyse_map, focality_index, width_class
-from pulse_ep_decay.mesh import (
-    CoreHeatSolver,
-    ExactSolver,
-    HeatSolver,
-    heat_solver,
-    largest_component,
-    mean_edge_length,
-    nearest_vertex,
-)
+from pulse_ep_decay.analysis import F_THRESHOLD, R2_THRESHOLD, analyse_map, focality_index, width_class
+from pulse_ep_decay.mesh import ExactSolver, HeatSolver, heat_solver, largest_component, mean_edge_length
 from pulse_ep_decay.profile import (
     BIN_WIDTH_MM,
+    GAUSS_FWHM_FACTOR,
     SIGMA_BOUNDS_MM,
     bin_profile,
+    find_origin,
     fit_exponential,
     fit_gaussian,
-    fit_gengauss,
     gauss_model,
-    run_pipeline,
     synth_field,
-)
-from pulse_ep_decay.support import (
-    ORIGIN_SMOOTH_RADIUS_MM,
-    SUPPORT_RADIUS_MM,
-    component_areas,
-    masked_scores,
-    smoothed_argmax,
-    support_mask,
-    top_region,
 )
 
 __all__ = [
+    # Algorithm 1 and its parameters
     "analyse_map",
     "focality_index",
     "width_class",
+    "R2_THRESHOLD",
+    "F_THRESHOLD",
     "BIN_WIDTH_MM",
-    "CoreHeatSolver",
-    "ExactSolver",
-    "HeatSolver",
-    "ORIGIN_SMOOTH_RADIUS_MM",
     "SIGMA_BOUNDS_MM",
-    "SUPPORT_RADIUS_MM",
-    "bin_profile",
-    "component_areas",
-    "fit_exponential",
-    "fit_gaussian",
-    "fit_gengauss",
-    "gauss_model",
-    "heat_solver",
+    "GAUSS_FWHM_FACTOR",
+    # steps
     "largest_component",
-    "masked_scores",
     "mean_edge_length",
-    "nearest_vertex",
-    "run_pipeline",
-    "smoothed_argmax",
-    "support_mask",
+    "HeatSolver",
+    "ExactSolver",
+    "heat_solver",
+    "find_origin",
+    "bin_profile",
+    "fit_gaussian",
+    "fit_exponential",
+    "gauss_model",
+    # validation
     "synth_field",
-    "top_region",
 ]

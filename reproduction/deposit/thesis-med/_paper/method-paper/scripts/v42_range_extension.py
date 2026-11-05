@@ -24,7 +24,7 @@ import numpy as np, pandas as pd
 from pulse_ep_decay.mesh import HeatSolver, ExactSolver, largest_component, centroid_vertex, mean_edge_length
 from pulse_ep_decay.profile import bin_profile, fit_gaussian, find_origin
 
-ROOT = os.path.expanduser("~/mnt/IdeaProjects")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects"))
 MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 SIGMAS = [1.0, 1.5, 2.0, 2.5, 3.0, 30.0, 40.0, 50.0, 60.0, 80.0]
 NOISES = [0.0, 0.05, 0.10, 0.15]

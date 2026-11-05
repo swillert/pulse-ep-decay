@@ -25,8 +25,7 @@ SRC = dict(v36d=P("v36_analytic_geodesic_2026-10-21", "v36_distance_errors.csv")
            v45=P("v45_mesh_roughness_binwidth_plateau_2026-10-26", "v45_per_map.csv"), v46c=P("v46_lo_origin_plateau_2026-10-26", "v46_clinical.csv"),
            v46v=P("v46_lo_origin_plateau_2026-10-26", "v46_validation_raw.csv"), v47av=P("v47a_origin_rule_plateau_2026-10-26", "v47a_validation_raw.csv"),
            v47ac=P("v47a_origin_rule_plateau_2026-10-26", "v47a_clinical.csv"), v47b=P("v47b_structured_noise_plateau_2026-10-26", "v47b_raw.csv"),
-           v47c=P("v47c_scatter_sources_plateau_2026-10-26", "v47c_summary.csv"), v48s=P("v48_secondary_region_plateau_2026-10-26", "v48_sphere.csv"),
-           v48c=P("v48_secondary_region_plateau_2026-10-26", "v48_clinical.csv"), arm3=P("arm3_plateau_2026-10-26", "arm3_summary.csv"), study=P("map_study.csv"),
+           v47c=P("v47c_scatter_sources_plateau_2026-10-26", "v47c_summary.csv"), arm3=P("arm3_plateau_2026-10-26", "arm3_summary.csv"), study=P("map_study.csv"),
            v36b=P("v36c_width_plateau_2026-10-26", "v36c_width_raw.csv"), v49=P("v49_aniso_perm_plateau_2026-10-26", "v49_clinical.csv"),
            v50c=P("v62_focality_unified_2026-10-26", "v62_clinical.csv"), v50s=P("v62_focality_unified_2026-10-26", "v62_sphere.csv"), v50m=P("v62_focality_unified_2026-10-26", "v62_meshes.csv"),
            v56all=P("v56_peak_below_clip_all_2026-10-26", "v56_raw.csv"), v51=P("v51_argmax_ties_plateau_2026-10-26", "v51_ties.csv"), v52=P("v52_model_comparison_plateau_2026-10-26", "v52_per_map.csv"),
@@ -154,7 +153,7 @@ def main():
                            F_median=float(M.F.median()), F_iqr=list(map(float, q(M.F))), F_min=float(M.F.min()), F_flagged_maps=[int(x) for x in M[M.flag_F].index], F_pct_median=float(M.F_pct.median()), F_pct_iqr=list(map(float, q(M.F_pct))), n_flag_F_pct=int((M.F_pct < .7).sum()),
                            F_flag_sigma_median=float(M[M.flag_F].sigma.median()), F_flag_sigma_range=[float(M[M.flag_F].sigma.min()), float(M[M.flag_F].sigma.max())], F_flag_other_dist=[float(M[M.flag_F].other_min_dist_mm.min()), float(M[M.flag_F].other_min_dist_mm.max())], F_flag_other_height=[float(M[M.flag_F].other_max_score_rel.min()), float(M[M.flag_F].other_max_score_rel.max())],
                            F_flag_and_r2=int((M.flag_F & M.flag_r2).sum()), F_flag_reference=M[M.flag_F].reference.value_counts().to_dict(), F_threshold={T: int((M.F < T).sum()) for T in (0.5, 0.6, 0.7, 0.8, 0.9)}, F_pct_threshold={T: int((M.F_pct < T).sum()) for T in (0.5, 0.6, 0.7, 0.8, 0.9)},
-                           n_F_eligible=int((M.r2 >= 0.7).sum()), F_low_raw=int(M.F_low.sum()), F_low_ineligible=int((M.F_low & (M.r2 < 0.7)).sum()), F_median_eligible=float(M[M.r2 >= 0.7].F.median()), F_iqr_eligible=list(map(float, q(M[M.r2 >= 0.7].F))), ncomp_1_eligible=int(((M.n_components == 1) & (M.r2 >= 0.7)).sum()), F_threshold_eligible={T: int(((M.F < T) & (M.r2 >= 0.7)).sum()) for T in (0.5, 0.6, 0.7, 0.8, 0.9)}, rho_F_sigma_eligible=float(spearmanr(M[M.r2 >= 0.7].F, M[M.r2 >= 0.7].sigma).correlation), rho_F_r2_eligible=float(spearmanr(M[M.r2 >= 0.7].F, M[M.r2 >= 0.7].r2).correlation), class_counts=M["class"].value_counts().to_dict(), class_below_range_maps=[int(x) for x in M[M["class"] == "below range"].index], n_points_range=[int(M.n_points.min()), int(M.n_points.max())], n_points_median=float(M.n_points.median()), mean_edge_range=None,
+                           n_F_eligible=int((M.r2 >= 0.7).sum()), F_low_raw=int(M.F_low.sum()), F_low_ineligible=int((M.F_low & (M.r2 < 0.7)).sum()), F_median_eligible=float(M[M.r2 >= 0.7].F.median()), F_iqr_eligible=list(map(float, q(M[M.r2 >= 0.7].F))), ncomp_1_eligible=int(((M.n_components == 1) & (M.r2 >= 0.7)).sum()), F_threshold_eligible={T: int(((M.F < T) & (M.r2 >= 0.7)).sum()) for T in (0.5, 0.6, 0.7, 0.8, 0.9)}, rho_F_sigma_eligible=float(spearmanr(M[M.r2 >= 0.7].F, M[M.r2 >= 0.7].sigma).correlation), rho_F_r2_eligible=float(spearmanr(M[M.r2 >= 0.7].F, M[M.r2 >= 0.7].r2).correlation), class_counts=M["class"].value_counts().to_dict(), class_below_range_maps=[int(x) for x in M[M["class"] == "below range"].index], n_points_range=[int(M.n_points.min()), int(M.n_points.max())], n_points_median=float(M.n_points.median()), rho_npoints_sigma=float(spearmanr(M.n_points, M.sigma).correlation), mean_edge_range=None,
                            ncomp_median=float(M.n_components.median()), ncomp_1=int((M.n_components == 1).sum()), rho_F_r2=float(spearmanr(M.F, M.r2).correlation), rho_F_sigma=float(spearmanr(M.F, M.sigma).correlation),
                            dAIC_exp_pref=int((M.dAIC_gauss_minus_exp > 2).sum()), dAIC_gauss_pref=int((M.dAIC_gauss_minus_exp < -2).sum()), dAIC_undecided=int((M.dAIC_gauss_minus_exp.abs() <= 2).sum()),
                            beta_median=float(M.beta.median()), beta_iqr=list(map(float, q(M.beta))), fwhm_ratio_median=float((M.fwhm_modelfree / (2.3548 * M.sigma)).median()),
@@ -416,6 +415,7 @@ def main():
                                  "- low-R2 maps: sigma median %.1f, max %.1f; A median flagged %.1f vs %.1f" % (cl["lowr2_sigma_median"], cl["lowr2_sigma_max"], cl["A_median_flagged"], cl["A_median_unflagged"]), ""]
     md += ["## Clinical extra: %s" % NUM["clinical_extra"], "", "## Validation (detected origin / known origin), eta = 10 %"] + ["- sigma0 %s: bias %+.2f [%+.2f; %+.2f], SD %.2f, offset %.1f | known: bias %+.2f, SD %.2f" % (k.split("/")[0], v["bias"], *v["ci"], v["sd"], v["off"], v["bias_known"], v["sd_known"]) for k, v in NUM["validation"].items() if k.endswith("/0.1")]
     md += ["", "## F, ELIGIBLE MAPS (R2 >= 0.7; as reported in the manuscript): n %d, median %.2f [%.2f; %.2f], flagged %d, by threshold %s, single comp. %d, rho(F,sigma) %.2f, rho(F,R2) %.2f; F<0.70 in maps with R2<0.7 (not interpreted): %d" % (NUM["clinical"]["n_F_eligible"], NUM["clinical"]["F_median_eligible"], *NUM["clinical"]["F_iqr_eligible"], NUM["clinical"]["n_flag_F"], NUM["clinical"]["F_threshold_eligible"], NUM["clinical"]["ncomp_1_eligible"], NUM["clinical"]["rho_F_sigma_eligible"], NUM["clinical"]["rho_F_r2_eligible"], NUM["clinical"]["F_low_ineligible"])]
+    md += ["", "## PACING SITES vs WIDTH (55 maps; added 29 Oct 2026): Spearman rho(n_points, sigma) %.3f" % NUM["clinical"]["rho_npoints_sigma"]]
     md += ["", "## Table 1, primary protocol (v56, peak 90, 10 %% noise; bootstrap CI): %s" % NUM["table1"]]
     md += ["", "## Peak below the score limit (v56): %s" % NUM["v56"], "", "## Clinical maximum vertex score: %s" % NUM["max_score"], "", "## R2 threshold on the clinical maps: %s" % NUM["r2_threshold_clinical"], "", "## Distance definitions, extra: %s" % NUM["distance_extra"]]
     md += ["", "## Ties of the maximum score (v51): %s" % NUM["ties"], "", "## Ties, effect of the plateau origin on classes/flags/summaries: %s" % NUM["ties_effect"]]
@@ -457,11 +457,10 @@ CLIN_FIG = "yes, from the per-map cache of the maps shown (mesh, scores, distanc
 CACHE_F = lambda *ms: [REV + "/figs/_cache/map_%03d.npz" % m for m in ms] + [REV + "/tables/S12_per_map.csv"]
 FIGURE_SRC = {  # figure file -> (generator function of make_revision_figures.py, source files relative to ROOT, reproducible from the deposited result files?)
     "fig_workflow": ("fig_workflow", CACHE_F(28), CLIN_FIG),
-    "fig_geodesic": ("(none)", [REV + "/figs/_ref/fig_geodesic.pdf"], "schematic, unchanged from the submission (file copied); no data"),
-    "fig_decay_profile": ("fig_profiles", CACHE_F(25, 54, 32), CLIN_FIG),
     "fig_validation": ("fig_validation", [SV + "/v56_peak_below_clip_all_2026-10-26/v56_raw.csv"], "yes"),
-    "fig_heatmap": ("fig_heatmap", CACHE_F(75, 78, 25), CLIN_FIG),
-    "fig_clinical_example": ("fig_example", CACHE_F(28, 1, 25), CLIN_FIG),
+    "fig_heatmap": ("fig_heatmap", CACHE_F(75, 78), CLIN_FIG),
+    "fig_clinical_example": ("fig_example", CACHE_F(1, 25), CLIN_FIG),
+    "figS_decay_profile": ("fig_profiles", CACHE_F(25, 54, 32), CLIN_FIG),  # main-text Fig. 3 until 29 Oct 2026
     "figS_boxplot_sigma": ("fig_boxplot", [REV + "/tables/S12_per_map.csv"], "yes"),
     "figS_analytic_surfaces": ("fig_supp", [SV + "/v36_analytic_geodesic_2026-10-21/v36_distance_errors.csv"], "yes"),
     "figS_anisotropy_sphere": ("fig_supp", [SV + "/v60_anisotropy_pkgfit_2026-10-26/v60_rows.csv"], "yes"),

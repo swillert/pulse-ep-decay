@@ -6,7 +6,7 @@ Usage: v49_aniso_perm.py run --budget 160 ; v49_aniso_perm.py assemble
 """
 import sys, os, glob, json, time, ast
 import numpy as np, pandas as pd
-ROOT = os.path.expanduser("~/mnt/IdeaProjects")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects"))
 sys.path.insert(0, os.path.join(ROOT, "geodesic-decay/scripts")); sys.path.insert(0, os.path.join(ROOT, "geodesic-decay/src"))
 import anisotropy as an
 from decay_pipeline import largest_component

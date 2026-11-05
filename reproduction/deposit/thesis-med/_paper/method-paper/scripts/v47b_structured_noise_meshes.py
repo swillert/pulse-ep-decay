@@ -27,7 +27,7 @@ from scipy.sparse.csgraph import connected_components
 from pulse_ep_decay.mesh import HeatSolver, ExactSolver, largest_component, centroid_vertex
 from pulse_ep_decay.profile import bin_profile, fit_gaussian, find_origin
 
-ROOT = os.path.expanduser("~/mnt/IdeaProjects"); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
+ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects")); MESHES = os.path.join(ROOT, "pulse-ep/data/validation_meshes")
 FRAGMENTED = {87, 102, 103}; A, B = 35.0, 65.0; SIGMAS = (5.0, 10.0, 15.0); TRIALS = 10
 CONDS = [("bumps", 0.10), ("bumps", 0.25), ("bumps", 0.50), ("corr5", 0.10), ("corr5", 0.25), ("corr5", 0.40), ("corr10", 0.10), ("corr10", 0.25), ("corr10", 0.40)]
 
