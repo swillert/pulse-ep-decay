@@ -1,6 +1,6 @@
 # pulse-ep-decay
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24022767.svg)](https://doi.org/10.5281/zenodo.24022767)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24022947.svg)](https://doi.org/10.5281/zenodo.24022947)
 
 Geodesic decay analysis of pace-mapping score maps, a module for
 [pulse-ep](https://github.com/swillert/pulse-ep).
@@ -146,6 +146,6 @@ The database round trip (`seed-synthetic` → `run`) runs when
 ## Licence
 
 MIT. See [LICENSE](LICENSE). Citation metadata: [CITATION.cff](CITATION.cff);
-archived releases: Zenodo, version 1.1.0 <https://doi.org/10.5281/zenodo.23990505>, version 1.1.1 <https://doi.org/10.5281/zenodo.23991054>, version 1.1.2 <https://doi.org/10.5281/zenodo.24022767>
+archived releases: Zenodo, version 1.1.0 <https://doi.org/10.5281/zenodo.23990505>, version 1.1.1 <https://doi.org/10.5281/zenodo.23991054>, version 1.1.2 <https://doi.org/10.5281/zenodo.24022767>, version 1.1.3 <https://doi.org/10.5281/zenodo.24022947>
 (concept DOI for all versions <https://doi.org/10.5281/zenodo.23990504>).
 Changes: [CHANGELOG.md](CHANGELOG.md).

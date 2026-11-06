@@ -21,8 +21,11 @@ version: 1.1.3
 date-released: "2026-11-06"
 license: MIT
 repository-code: "https://github.com/swillert/pulse-ep-decay"
-doi: 10.5281/zenodo.24022767
+doi: 10.5281/zenodo.24022947
 identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24022947
+    description: "Zenodo archive of version 1.1.3"
   - type: doi
     value: 10.5281/zenodo.24022767
     description: "Zenodo archive of version 1.1.2"

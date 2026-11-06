@@ -2,6 +2,8 @@
 
 ## 1.1.3 — 2026-11-06
 
+Zenodo: <https://doi.org/10.5281/zenodo.24022947>.
+
 Analytic sphere distance in the benchmark computed in a well-conditioned
 form; no change to the package.
 
