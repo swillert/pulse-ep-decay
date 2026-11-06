@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.3 — 2026-11-06
+
+Analytic sphere distance in the benchmark computed in a well-conditioned
+form; no change to the package.
+
+- `v36_analytic_geodesic.py`: great-circle distance as
+  `R·atan2(|u × u_src|, u · u_src)` instead of `R·arccos(u · u_src)`, which
+  loses ~8 digits where the dot product rounds to ±1 (the source itself and
+  exact antipodes of the icosphere); the source is masked by index in the
+  error statistics. Rerun archived as
+  `supplementary_validation_results/v36_analytic_geodesic_2026-11-06b/`
+  (replaces the 1.1.2 folder `…_2026-11-06`, which is kept in that release);
+  Table S1 is unchanged against 1.1.2 (differences ≤ 8e-12 in the means), the
+  manifest hashes change.
+
 ## 1.1.2 — 2026-11-06
 
 Zenodo: <https://doi.org/10.5281/zenodo.24022767>.

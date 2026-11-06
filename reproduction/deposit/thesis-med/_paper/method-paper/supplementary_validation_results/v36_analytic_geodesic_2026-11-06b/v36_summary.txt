@@ -10,16 +10,16 @@ A. Distance error vs analytic truth (per surface, solver; mean over sources)
   sphere_sub4            exact    n=  2562 edge=1.89 mm  signed rel err mean -0.0006  p95 |rel| 0.0006  mean |err| 0.02 mm  max |err| 0.05 mm  t=0.025s
   sphere_sub5            heat     n= 10242 edge=0.94 mm  signed rel err mean -0.0072  p95 |rel| 0.0128  mean |err| 0.25 mm  max |err| 0.68 mm  t=0.003s
   sphere_sub5            dijkstra n= 10242 edge=0.94 mm  signed rel err mean +0.0710  p95 |rel| 0.1327  mean |err| 2.57 mm  max |err| 5.06 mm  t=0.001s
-  sphere_sub5            exact    n= 10242 edge=0.94 mm  signed rel err mean -0.0001  p95 |rel| 0.0002  mean |err| 0.01 mm  max |err| 0.01 mm  t=0.257s
+  sphere_sub5            exact    n= 10242 edge=0.94 mm  signed rel err mean -0.0001  p95 |rel| 0.0002  mean |err| 0.01 mm  max |err| 0.01 mm  t=0.259s
   cylinder_64x30_j0.0    heat     n=  1920 edge=2.67 mm  signed rel err mean -0.0080  p95 |rel| 0.0415  mean |err| 0.61 mm  max |err| 2.35 mm  t=0.000s
   cylinder_64x30_j0.0    dijkstra n=  1920 edge=2.67 mm  signed rel err mean +0.1675  p95 |rel| 0.4085  mean |err| 7.47 mm  max |err| 31.67 mm  t=0.000s
-  cylinder_64x30_j0.0    exact    n=  1920 edge=2.67 mm  signed rel err mean -0.0002  p95 |rel| 0.0004  mean |err| 0.01 mm  max |err| 0.03 mm  t=0.009s
+  cylinder_64x30_j0.0    exact    n=  1920 edge=2.67 mm  signed rel err mean -0.0002  p95 |rel| 0.0004  mean |err| 0.01 mm  max |err| 0.03 mm  t=0.010s
   cylinder_128x50_j0.0   heat     n=  6400 edge=1.44 mm  signed rel err mean -0.0092  p95 |rel| 0.0372  mean |err| 0.44 mm  max |err| 2.14 mm  t=0.001s
   cylinder_128x50_j0.0   dijkstra n=  6400 edge=1.44 mm  signed rel err mean +0.1776  p95 |rel| 0.4095  mean |err| 7.78 mm  max |err| 32.61 mm  t=0.001s
   cylinder_128x50_j0.0   exact    n=  6400 edge=1.44 mm  signed rel err mean -0.0001  p95 |rel| 0.0001  mean |err| 0.00 mm  max |err| 0.01 mm  t=0.066s
   cylinder_128x50_j0.3   heat     n=  6400 edge=1.49 mm  signed rel err mean -0.0056  p95 |rel| 0.0205  mean |err| 0.26 mm  max |err| 1.45 mm  t=0.001s
   cylinder_128x50_j0.3   dijkstra n=  6400 edge=1.49 mm  signed rel err mean +0.1146  p95 |rel| 0.2554  mean |err| 5.06 mm  max |err| 19.93 mm  t=0.001s
-  cylinder_128x50_j0.3   exact    n=  6400 edge=1.49 mm  signed rel err mean -0.0001  p95 |rel| 0.0001  mean |err| 0.00 mm  max |err| 0.01 mm  t=0.200s
+  cylinder_128x50_j0.3   exact    n=  6400 edge=1.49 mm  signed rel err mean -0.0001  p95 |rel| 0.0001  mean |err| 0.00 mm  max |err| 0.01 mm  t=0.198s
 
 B. Width error sigma_hat - sigma0 (median over sources/trials) by solver, field generated with the ANALYTIC distance
   sphere_sub3            sigma0= 3.0 noise=0.00  analytic +0.17  exact +0.17  heat +0.12  dijkstra +0.27

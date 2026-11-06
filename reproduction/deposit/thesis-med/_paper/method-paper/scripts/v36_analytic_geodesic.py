@@ -64,10 +64,12 @@ def cylinder(radius_mm, height_mm, n_theta, n_z, jitter=0.0):
 
 
 def analytic_sphere(V, src, R):
+    """Great-circle distance R*theta with theta = atan2(|u x u_src|, u . u_src): well conditioned
+    at theta = 0 and theta = pi, where arccos(u . u_src) loses ~8 digits (the dot product rounds
+    to 1 - eps or -1 + eps; 6/7 Nov 2026).  The source is at distance 0 by definition."""
     u = V / np.linalg.norm(V, axis=1, keepdims=True)
-    c = np.clip(u @ u[src], -1, 1)
-    d = R * np.arccos(c)
-    d[src] = 0.0  # u[src].u[src] rounds to 1 - eps for some vertices (arccos -> ~1e-8, i.e. ~4e-7 mm); the source is at distance 0 by definition
+    d = R * np.arctan2(np.linalg.norm(np.cross(u, u[src]), axis=1), u @ u[src])
+    d[src] = 0.0
     return d
 
 
@@ -103,10 +105,11 @@ def exact(V, F, src):
     return d, time.perf_counter() - t0
 
 
-def errs(d, truth, src=None):
-    m = truth > 1e-9
-    if src is not None:
-        m[src] = False  # the source itself has no relative error (6 Nov 2026: before this fix, a rounded analytic self-distance of ~4e-7 mm on 5 of the 15 sphere sources passed the 1e-9 mask and entered the mean as -100 %)
+def errs(d, truth, src):
+    m = np.ones(len(truth), dtype=bool); m[src] = False  # the source has no relative error; masked by index, not by a threshold on
+    # the truth (6 Nov 2026: a rounded analytic self-distance of ~4e-7 mm on 5 of the 15 sphere sources passed the former
+    # `truth > 1e-9` mask and entered the signed mean as -100 %)
+    assert truth[m].min() > 0
     rel = (d[m] - truth[m]) / truth[m]
     return dict(rel_err_mean=float(rel.mean()), rel_err_median=float(np.median(rel)),
                 rel_err_p95=float(np.percentile(np.abs(rel), 95)),

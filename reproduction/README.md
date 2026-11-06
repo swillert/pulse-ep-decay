@@ -44,15 +44,19 @@ column of two entries whose scripts are in
 [geodesic-decay](https://github.com/swillert/geodesic-decay) (`arm3`,
 anisotropy) reads "(see folder README)".
 
-Correction of 6 Nov 2026 (version 1.1.2): in `v36_analytic_geodesic.py` the
-analytic self-distance of the source vertex could round to ~4e-7 mm instead
-of 0 and then entered the signed relative error as −100 % for 5 of the 15
-sphere sources. The script now sets the source distance to zero and excludes
-the source from the error; the rerun is in
-`supplementary_validation_results/v36_analytic_geodesic_2026-11-06/` (README
-and check output there), which Table S1 and Fig. S1 now use. Seven cells of
-Table S1 moved by 0.01–0.07 percentage points; no other table, figure or
-sentence is affected. The folder of 21 Oct is kept for the record.
+Correction of 6 Nov 2026 (versions 1.1.2 and 1.1.3): in `v36_analytic_geodesic.py`
+the analytic self-distance of the source vertex could round to ~4e-7 mm
+instead of 0 and then entered the signed relative error as −100 % for 5 of the
+15 sphere sources. Since 1.1.3 the great-circle distance is computed as
+`R·atan2(|u × u_src|, u · u_src)` (well conditioned at θ = 0 and θ = π, where
+`arccos` of the dot product loses digits), the source distance is zero by
+definition and the source is masked by index. The rerun is in
+`supplementary_validation_results/v36_analytic_geodesic_2026-11-06b/` (README
+there), which Table S1 and Fig. S1 use. Seven cells of Table S1 moved by
+0.01–0.07 percentage points against the 21 Oct results; no other table, figure
+or sentence is affected. The folder of 21 Oct is kept for the record; the
+intermediate rerun of 1.1.2 (`arccos` with the source set to zero, identical at
+reporting precision) is archived in that release.
 
 ## Your own maps
 

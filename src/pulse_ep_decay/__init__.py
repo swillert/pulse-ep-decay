@@ -29,7 +29,7 @@ Usage::
     res = analyse_map(scores[idx >= 0], V, T)   # sigma, width_class, r2, flag_r2, F, flag_F, dAIC, status
 """
 
-__version__ = "1.1.2"
+__version__ = "1.1.3"
 
 from pulse_ep_decay.analysis import F_THRESHOLD, R2_THRESHOLD, analyse_map, focality_index, width_class
 from pulse_ep_decay.mesh import ExactSolver, HeatSolver, heat_solver, largest_component, mean_edge_length

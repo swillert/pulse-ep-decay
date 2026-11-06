@@ -370,7 +370,7 @@ def fig_boxplot():
 
 def fig_supp():
     # Fig. S1: analytic surfaces
-    d = pd.read_csv(os.path.join(SVR, "v36_analytic_geodesic_2026-11-06/v36_distance_errors.csv")); surf = sorted(d.surface.unique(), key=lambda x: (x.startswith("cyl"), x))
+    d = pd.read_csv(os.path.join(SVR, "v36_analytic_geodesic_2026-11-06b/v36_distance_errors.csv")); surf = sorted(d.surface.unique(), key=lambda x: (x.startswith("cyl"), x))
     fig, ax = plt.subplots(1, 2, figsize=(7.2, 2.8)); col = {"heat": "#d95f02", "exact": "#1b9e77", "dijkstra": "#7570b3"}
     for j, (metric, lab) in enumerate((("rel_err_mean", "signed relative error (%)"), ("rel_err_p95", "95th percentile of |relative error| (%)"))):
         for k, sv in enumerate(("heat", "exact", "dijkstra")):
