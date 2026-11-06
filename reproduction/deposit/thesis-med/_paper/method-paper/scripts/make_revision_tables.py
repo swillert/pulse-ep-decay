@@ -17,7 +17,7 @@ ROOT = os.environ.get("GD_ROOT", os.path.expanduser("~/mnt/IdeaProjects"))  # GD
 MP = os.path.join(ROOT, "thesis-med/_paper/method-paper"); SVR = os.path.join(MP, "supplementary_validation_results")
 SUMMARY = os.path.join(ROOT, "pulse-ultimate/decay_profiles_heat/decay_summary.csv")
 P = lambda *a: os.path.join(SVR, *a)
-SRC = dict(v36d=P("v36_analytic_geodesic_2026-10-21", "v36_distance_errors.csv"), v36w=P("v36_analytic_geodesic_2026-10-21", "v36_width_by_solver.csv"),
+SRC = dict(v36d=P("v36_analytic_geodesic_2026-11-06", "v36_distance_errors.csv"), v36w=P("v36_analytic_geodesic_2026-11-06", "v36_width_by_solver.csv"),
            v37=P("v59_r2_threshold_plateau_2026-10-26", "v59_fields.csv"), v38=P("v38_clinical_solvers_plateau_2026-10-26", "v38_per_map.csv"),
            v39=P("v39_focality_clinical_plateau_2026-10-26", "v39_per_map.csv"), v40=P("v40_mixed_model_plateau_2026-10-26", "v40_summary.txt"),
            v41=P("v41_runtime_sparsity_2026-10-21", "v41_per_mesh.csv"), v42=P("v42_range_extension_plateau_2026-10-26", "v42_summary.csv"),
@@ -467,7 +467,7 @@ FIGURE_SRC = {  # figure file -> (generator function of make_revision_figures.py
     "fig_clinical_example": ("fig_example", CACHE_F(1, 25), CLIN_FIG),
     "figS_decay_profile": ("fig_profiles", CACHE_F(25, 54, 32), CLIN_FIG),  # main-text Fig. 3 until 29 Oct 2026
     "figS_boxplot_sigma": ("fig_boxplot", [REV + "/tables/S12_per_map.csv"], "yes"),
-    "figS_analytic_surfaces": ("fig_supp", [SV + "/v36_analytic_geodesic_2026-10-21/v36_distance_errors.csv"], "yes"),
+    "figS_analytic_surfaces": ("fig_supp", [SV + "/v36_analytic_geodesic_2026-11-06/v36_distance_errors.csv"], "yes"),
     "figS_anisotropy_sphere": ("fig_supp", [SV + "/v60_anisotropy_pkgfit_2026-10-26/v60_rows.csv"], "yes"),
     "figS_structured_deviations": ("fig_supp", [SV + "/v47b_structured_noise_plateau_2026-10-26/v47b_summary.csv"], "yes"),
     "figS_focality_synthetic": ("fig_supp", [SV + "/v62_focality_unified_2026-10-26/v62_sphere.csv"], "yes"),

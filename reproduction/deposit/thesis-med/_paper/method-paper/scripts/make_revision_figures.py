@@ -61,7 +61,7 @@ def analyse(mid):
     V, F, idx = largest_component(V0, F0); S = S0[idx >= 0]
     o = find_origin(S, V, F); d = HeatSolver(V, F)(o); c, m, n = bin_profile(d, S); g = fit_gaussian(c, m)
     Fv, ncomp, labels, main = focality(S, F, d)
-    sel = {int(s["map_id"]): s for s in json.load(open(SELECTION))}
+    sel = {int(s["map_id"]): s for s in json.load(open(SELECTION))} if os.path.exists(SELECTION) else {}  # no marker file (e.g. a map of one's own in the deposit layout): no marker drawn
     mk = -1; snap = np.nan
     if mid in sel and sel[mid]["route"] == "unique_lo_reference_candidate":
         xyz = np.asarray(sel[mid]["selected_xyz_mm"], float); mk = int(np.argmin(np.linalg.norm(V - xyz, axis=1))); snap = float(np.linalg.norm(V[mk] - xyz))
@@ -370,7 +370,7 @@ def fig_boxplot():
 
 def fig_supp():
     # Fig. S1: analytic surfaces
-    d = pd.read_csv(os.path.join(SVR, "v36_analytic_geodesic_2026-10-21/v36_distance_errors.csv")); surf = sorted(d.surface.unique(), key=lambda x: (x.startswith("cyl"), x))
+    d = pd.read_csv(os.path.join(SVR, "v36_analytic_geodesic_2026-11-06/v36_distance_errors.csv")); surf = sorted(d.surface.unique(), key=lambda x: (x.startswith("cyl"), x))
     fig, ax = plt.subplots(1, 2, figsize=(7.2, 2.8)); col = {"heat": "#d95f02", "exact": "#1b9e77", "dijkstra": "#7570b3"}
     for j, (metric, lab) in enumerate((("rel_err_mean", "signed relative error (%)"), ("rel_err_p95", "95th percentile of |relative error| (%)"))):
         for k, sv in enumerate(("heat", "exact", "dijkstra")):

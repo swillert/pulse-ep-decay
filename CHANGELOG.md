@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.1.2 — 2026-11-06
+
+Correction of the analytic sphere benchmark in the reproduction deposit; no
+change to the package.
+
+- `v36_analytic_geodesic.py`: the analytic self-distance of the source vertex
+  could round to ~4e-7 mm instead of 0 (`arccos` of a dot product that rounds
+  to 1 − ε) and then passed the `truth > 1e-9` mask, so the solvers' exact 0
+  entered the signed relative error as −100 % for 5 of the 15 sphere sources.
+  The source distance is now set to zero and the source is excluded from the
+  relative error. Rerun archived as
+  `supplementary_validation_results/v36_analytic_geodesic_2026-11-06/`; Table
+  S1 and Fig. S1 are generated from it (seven cells of Table S1 move by
+  0.01–0.07 percentage points; nothing else changes). The folder of 21 Oct is
+  kept for the record.
+- `make_revision_figures.py` no longer requires the pacing-site selection file
+  when it builds a per-map cache from a mesh file (no marker is drawn without
+  it); `reproduction/README.md` describes how to draw the per-map panels for a
+  map of your own.
+- Clean-room check repeated (6 Nov 2026): 38/38 tables and number files and
+  16/16 figure files byte-identical to the manuscript build.
+
 ## 1.1.1 — 2026-11-06
 
 Zenodo: <https://doi.org/10.5281/zenodo.23991054>.

@@ -66,7 +66,9 @@ def cylinder(radius_mm, height_mm, n_theta, n_z, jitter=0.0):
 def analytic_sphere(V, src, R):
     u = V / np.linalg.norm(V, axis=1, keepdims=True)
     c = np.clip(u @ u[src], -1, 1)
-    return R * np.arccos(c)
+    d = R * np.arccos(c)
+    d[src] = 0.0  # u[src].u[src] rounds to 1 - eps for some vertices (arccos -> ~1e-8, i.e. ~4e-7 mm); the source is at distance 0 by definition
+    return d
 
 
 def analytic_cylinder(th, z, src, R):
@@ -101,8 +103,10 @@ def exact(V, F, src):
     return d, time.perf_counter() - t0
 
 
-def errs(d, truth):
+def errs(d, truth, src=None):
     m = truth > 1e-9
+    if src is not None:
+        m[src] = False  # the source itself has no relative error (6 Nov 2026: before this fix, a rounded analytic self-distance of ~4e-7 mm on 5 of the 15 sphere sources passed the 1e-9 mask and entered the mean as -100 %)
     rel = (d[m] - truth[m]) / truth[m]
     return dict(rel_err_mean=float(rel.mean()), rel_err_median=float(np.median(rel)),
                 rel_err_p95=float(np.percentile(np.abs(rel), 95)),
@@ -181,7 +185,7 @@ def main():
             truth = tf(src)
             dh, t_fac, t_q = heat(V, F, src); dd, t_d = dijk(V, F, src); de, t_e = exact(V, F, src)
             for sname, d, tt in (("heat", dh, t_q), ("dijkstra", dd, t_d), ("exact", de, t_e)):
-                r = errs(d, truth); r.update(surface=name, n_vertices=n, mean_edge_mm=float(el), src=int(src), solver=sname, time_s=tt)
+                r = errs(d, truth, src); r.update(surface=name, n_vertices=n, mean_edge_mm=float(el), src=int(src), solver=sname, time_s=tt)
                 if sname == "heat": r["factor_time_s"] = t_fac
                 dist_rows.append(r)
         # width study on a subset of sources (cost: exact solver per detected origin)

@@ -35,14 +35,43 @@ The first command writes every generated table, `numbers.md/json` and
 second draws every figure that can be built from result files alone: Fig. 2
 (validation), Fig. 5 (marker check) and Supplementary Figs. S1–S6.
 
-Check (5 Nov 2026, manuscript state of 29 Oct 2026; Linux arm64, Python 3.10,
-versions of `requirements.txt`): all 38 LaTeX tables and number files were
-byte-identical to the manuscript build, and all 16 figure files (8 PDF, 8 PNG)
-byte-identical. `MANIFEST.md` differs only where it must: the clinical
+Check (6 Nov 2026, manuscript state of the R1 upload set; Linux arm64, Python
+3.10, versions of `requirements.txt`): all 38 LaTeX tables and number files
+were byte-identical to the manuscript build, and all 16 figure files (8 PDF,
+8 PNG) byte-identical. `MANIFEST.md` differs only where it must: the clinical
 per-map caches of Figs. 1, 3, 4 and S7 are marked `MISSING`, and the script
 column of two entries whose scripts are in
 [geodesic-decay](https://github.com/swillert/geodesic-decay) (`arm3`,
 anisotropy) reads "(see folder README)".
+
+Correction of 6 Nov 2026 (version 1.1.2): in `v36_analytic_geodesic.py` the
+analytic self-distance of the source vertex could round to ~4e-7 mm instead
+of 0 and then entered the signed relative error as −100 % for 5 of the 15
+sphere sources. The script now sets the source distance to zero and excludes
+the source from the error; the rerun is in
+`supplementary_validation_results/v36_analytic_geodesic_2026-11-06/` (README
+and check output there), which Table S1 and Fig. S1 now use. Seven cells of
+Table S1 moved by 0.01–0.07 percentage points; no other table, figure or
+sentence is affected. The folder of 21 Oct is kept for the record.
+
+## Your own maps
+
+`make_revision_figures.py` draws the per-map panels of the clinical figures
+(score surface with the origin, geodesic distance, radial profile with the
+Gaussian fit) from a mesh file in the same `.npz` layout that `pulse-ep-decay
+run --npz` reads (`vertices`, `triangles`, `scores`). To draw them for a map of
+your own, save it as `pulse-ep/data/validation_meshes/map_<id>.npz` under
+`GD_ROOT` and run
+
+```bash
+python $M/scripts/make_revision_figures.py test <id>
+```
+
+which writes `revision_2026-10/figs/_test_map<id>.pdf/.png`. The marked pacing
+site of the clinical maps is read from a selection file that is not part of
+the deposit; without it no marker is drawn. The panels are laid out for atrial
+maps (42-mm window, contours at 1 and 2 mm); adjust `WINDOW` and the contour
+levels in the script for other geometries.
 
 ## Not reproducible from this folder
 
