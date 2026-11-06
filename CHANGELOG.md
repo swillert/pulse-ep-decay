@@ -2,6 +2,8 @@
 
 ## 1.1.2 — 2026-11-06
 
+Zenodo: <https://doi.org/10.5281/zenodo.24022767>.
+
 Correction of the analytic sphere benchmark in the reproduction deposit; no
 change to the package.
 
